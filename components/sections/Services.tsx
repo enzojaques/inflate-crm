@@ -20,16 +20,16 @@ export function Services({ config }: ServicesProps) {
 
   return (
     <div id="services" className="relative z-10 -mt-16 px-4 md:-mt-20 md:px-8">
-      <StaggerGrid className="mx-auto grid max-w-6xl grid-cols-2 gap-px md:grid-cols-4">
+      <StaggerGrid className="mx-auto grid max-w-6xl grid-cols-2 gap-3 md:grid-cols-4">
         {featured.map((service) => {
           const Icon = resolveIcon(service.icon)
           return (
             <StaggerItem key={service.title}>
               <div
-                className="flex h-full flex-col items-center gap-3 px-4 py-8 text-center transition-transform hover:-translate-y-1"
+                className="flex h-full flex-col items-center gap-3 px-4 py-8 text-center shadow-lg transition-transform hover:-translate-y-1"
                 style={{ backgroundColor: "var(--color-primary)" }}
               >
-                <Icon size={32} strokeWidth={1.5} className="text-white" />
+                <Icon size={32} strokeWidth={1.75} className="text-white" />
                 <p className="text-sm font-bold uppercase tracking-wide text-white">
                   {service.title}
                 </p>

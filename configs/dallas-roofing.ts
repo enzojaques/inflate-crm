@@ -61,13 +61,13 @@ export const dallasRoofing: ThemeConfig = {
       title: "Roof Replacement",
       description:
         "Full tear-off and installation using premium shingles and materials built for Texas weather.",
-      icon: "Home",
+      icon: "Layers",
     },
     {
       title: "Installation",
       description:
         "New construction and full roofing system installation from the ground up.",
-      icon: "Wrench",
+      icon: "HardHat",
     },
     {
       title: "Roof Inspection",
