@@ -122,7 +122,10 @@ export const dallasRoofing: ThemeConfig = {
           "Community is at the heart of everything we do. As proud Dallas natives, we take an active role in uplifting and improving the neighborhoods we serve.",
       },
     ],
-    images: ["/images/dallas-roofing/house.jpg", "/images/dallas-roofing/roof.jpg"],
+    images: [
+      "/images/dallas-roofing/pexels-clement-proust-363898785-31771166.jpg",
+      "/images/dallas-roofing/pexels-clement-proust-363898785-31771166.jpg",
+    ],
   },
   process: {
     headline: "Roofing Process",

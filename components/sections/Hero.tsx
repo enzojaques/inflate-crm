@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { motion } from "framer-motion"
-import { Mail, Phone } from "lucide-react"
+import { Phone } from "lucide-react"
 
 import { ThemeConfig } from "@/lib/theme"
 import { Input } from "@/components/ui/input"
@@ -152,17 +152,14 @@ export function Hero({ config }: HeroProps) {
                   onChange={(e) => setPhone(e.target.value)}
                   className="bg-white"
                 />
-                <div className="relative">
-                  <Mail size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--color-text-muted)]" />
-                  <Input
-                    type="email"
-                    placeholder="Email *"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="bg-white pl-9"
-                  />
-                </div>
+                <Input
+                  type="email"
+                  placeholder="Email *"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="bg-white"
+                />
               </div>
               <Input
                 placeholder="Address"
