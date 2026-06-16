@@ -1,0 +1,317 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e5]:
+        - link "S Summit Roofing Co." [ref=e6] [cursor=pointer]:
+          - /url: "#"
+          - generic [ref=e7]: S
+          - generic [ref=e8]: Summit Roofing Co.
+        - navigation [ref=e9]:
+          - link "Services" [ref=e10] [cursor=pointer]:
+            - /url: "#services"
+          - link "Why Us" [ref=e11] [cursor=pointer]:
+            - /url: "#why-us"
+          - link "Process" [ref=e12] [cursor=pointer]:
+            - /url: "#process"
+          - link "Reviews" [ref=e13] [cursor=pointer]:
+            - /url: "#testimonials"
+          - link "Contact" [ref=e14] [cursor=pointer]:
+            - /url: "#contact"
+        - link "(214) 555-0192" [ref=e16] [cursor=pointer]:
+          - /url: tel:2145550192
+          - img
+          - text: (214) 555-0192
+    - main [ref=e17]:
+      - generic [ref=e22]:
+        - generic [ref=e23]:
+          - generic [ref=e24]: Dallas–Fort Worth's Most Trusted Roofer
+          - heading "Your Dallas Roofing Company" [level=1] [ref=e25]
+          - paragraph [ref=e26]: Summit Roofing Co. has protected DFW homes and businesses since 2009. Free inspections. Same-day estimates. No pressure.
+          - generic [ref=e27]:
+            - link "(214) 555-0192" [ref=e28] [cursor=pointer]:
+              - /url: tel:2145550192
+              - img [ref=e29]
+              - text: (214) 555-0192
+            - link "See Our Work" [ref=e31] [cursor=pointer]:
+              - /url: "#services"
+        - generic [ref=e32]:
+          - paragraph [ref=e33]: Free Inspection
+          - heading "Get a Free Estimate" [level=3] [ref=e34]
+          - generic [ref=e35]:
+            - textbox "Name" [ref=e36]
+            - generic [ref=e37]:
+              - textbox "Phone *" [ref=e38]
+              - generic [ref=e39]:
+                - img [ref=e40]
+                - textbox "Email *" [ref=e43]
+            - textbox "Address" [ref=e44]
+            - textbox "Message" [ref=e45]
+            - button "Get Free Estimate" [ref=e46] [cursor=pointer]
+      - generic [ref=e48]:
+        - generic [ref=e50]:
+          - img [ref=e51]
+          - paragraph [ref=e55]: Roof Repair
+        - generic [ref=e57]:
+          - img [ref=e58]
+          - paragraph [ref=e61]: Roof Replacement
+        - generic [ref=e63]:
+          - img [ref=e64]
+          - paragraph [ref=e66]: Installation
+        - generic [ref=e68]:
+          - img [ref=e69]
+          - paragraph [ref=e72]: Roof Inspection
+      - generic [ref=e76]:
+        - generic [ref=e77]:
+          - paragraph [ref=e79]: Welcome to Summit Roofing Co.
+          - heading "Your Local Roofing Company" [level=2] [ref=e80]
+          - paragraph [ref=e81]: Summit Roofing Co. has protected DFW homes and businesses since 2009. Free inspections. Same-day estimates. No pressure.
+        - generic [ref=e82]:
+          - generic [ref=e84]:
+            - generic [ref=e85]: 100+
+            - generic [ref=e86]: 5 Star Reviews
+          - generic [ref=e88]:
+            - generic [ref=e89]: 15+
+            - generic [ref=e90]: Years of Experience
+          - generic [ref=e92]:
+            - generic [ref=e93]: 1,200+
+            - generic [ref=e94]: Projects Complete
+      - generic [ref=e97]:
+        - heading "Highly Rated Roofers in Dallas" [level=2] [ref=e98]
+        - link "Schedule an Appointment Today" [ref=e99] [cursor=pointer]:
+          - /url: "#contact"
+      - generic [ref=e101]:
+        - generic [ref=e102]:
+          - generic: "01"
+          - generic [ref=e105]:
+            - paragraph [ref=e107]: Your Local Roofing Company
+            - heading "What Sets Us Apart" [level=2] [ref=e108]
+            - generic [ref=e109]:
+              - generic [ref=e110]:
+                - term [ref=e111]: "Expert Craftsmanship:"
+                - definition [ref=e112]: With years of hands-on experience, our team provides high-quality solutions tailored to your specific needs.
+              - generic [ref=e113]:
+                - term [ref=e114]: "Premium Products:"
+                - definition [ref=e115]: We partner with trusted local suppliers to offer top materials like Owens Corning, GAF Timberline Shingles, Tile Decking, and more.
+              - generic [ref=e116]:
+                - term [ref=e117]: "Customer-First Service:"
+                - definition [ref=e118]: Rooted in integrity and shared by everyone on our team, we put your goals ahead of the sale on every single job.
+            - link "About Us" [ref=e119] [cursor=pointer]:
+              - /url: "#contact"
+        - generic [ref=e120]:
+          - generic: "02"
+          - generic [ref=e123]:
+            - paragraph [ref=e125]: Your Local Roofing Company
+            - heading "Core Values" [level=2] [ref=e126]
+            - generic [ref=e127]:
+              - generic [ref=e128]:
+                - term [ref=e129]: "Attitude:"
+                - definition [ref=e130]: At Summit Roofing Co., we bring our A-game with an unwavering positive attitude for every customer, every time.
+              - generic [ref=e131]:
+                - term [ref=e132]: "Honor:"
+                - definition [ref=e133]: Honor means consistently adhering to the highest moral and ethical standards. We value honesty, reliability, fairness, and transparency in all our actions and interactions.
+              - generic [ref=e134]:
+                - term [ref=e135]: "Community:"
+                - definition [ref=e136]: Community is at the heart of everything we do. As proud Dallas natives, we take an active role in uplifting and improving the neighborhoods we serve.
+            - link "About Us" [ref=e137] [cursor=pointer]:
+              - /url: "#contact"
+      - generic [ref=e139]:
+        - generic [ref=e140]:
+          - paragraph [ref=e141]: Areas We Serve
+          - heading "Areas We Serve in Dallas–Fort Worth" [level=2] [ref=e142]
+        - generic [ref=e143]:
+          - generic [ref=e145]:
+            - img [ref=e146]
+            - generic [ref=e149]: Dallas, TX
+          - generic [ref=e151]:
+            - img [ref=e152]
+            - generic [ref=e155]: Plano, TX
+          - generic [ref=e157]:
+            - img [ref=e158]
+            - generic [ref=e161]: Frisco, TX
+          - generic [ref=e163]:
+            - img [ref=e164]
+            - generic [ref=e167]: Allen, TX
+          - generic [ref=e169]:
+            - img [ref=e170]
+            - generic [ref=e173]: McKinney, TX
+          - generic [ref=e175]:
+            - img [ref=e176]
+            - generic [ref=e179]: Garland, TX
+          - generic [ref=e181]:
+            - img [ref=e182]
+            - generic [ref=e185]: Mesquite, TX
+          - generic [ref=e187]:
+            - img [ref=e188]
+            - generic [ref=e191]: Irving, TX
+          - generic [ref=e193]:
+            - img [ref=e194]
+            - generic [ref=e197]: Arlington, TX
+          - generic [ref=e199]:
+            - img [ref=e200]
+            - generic [ref=e203]: Fort Worth, TX
+          - generic [ref=e205]:
+            - img [ref=e206]
+            - generic [ref=e209]: Denton, TX
+          - generic [ref=e211]:
+            - img [ref=e212]
+            - generic [ref=e215]: Lewisville, TX
+          - generic [ref=e217]:
+            - img [ref=e218]
+            - generic [ref=e221]: Richardson, TX
+          - generic [ref=e223]:
+            - img [ref=e224]
+            - generic [ref=e227]: Carrollton, TX
+          - generic [ref=e229]:
+            - img [ref=e230]
+            - generic [ref=e233]: Rockwall, TX
+          - generic [ref=e235]:
+            - img [ref=e236]
+            - generic [ref=e239]: Wylie, TX
+          - generic [ref=e241]:
+            - img [ref=e242]
+            - generic [ref=e245]: Prosper, TX
+      - generic [ref=e247]:
+        - generic [ref=e248]:
+          - paragraph [ref=e249]: Impressive Words
+          - heading "From Happy Customers" [level=2] [ref=e250]
+        - generic [ref=e251]:
+          - generic [ref=e253]:
+            - generic [ref=e254]:
+              - img [ref=e255]
+              - img [ref=e257]
+              - img [ref=e259]
+              - img [ref=e261]
+              - img [ref=e263]
+            - paragraph [ref=e265]: “Summit found damage I didn't even know I had after the April hail storm. They handled everything with my insurance. New roof in 3 days. Highly recommend.”
+            - generic [ref=e266]:
+              - paragraph [ref=e267]: Marcus T.
+              - paragraph [ref=e268]: Frisco, TX
+          - generic [ref=e270]:
+            - generic [ref=e271]:
+              - img [ref=e272]
+              - img [ref=e274]
+              - img [ref=e276]
+              - img [ref=e278]
+              - img [ref=e280]
+            - paragraph [ref=e282]: “Professional, fast, and honest. Got 3 quotes and Summit was the only one who actually showed me the damage with photos instead of just trying to upsell me.”
+            - generic [ref=e283]:
+              - paragraph [ref=e284]: Jennifer R.
+              - paragraph [ref=e285]: Plano, TX
+          - generic [ref=e287]:
+            - generic [ref=e288]:
+              - img [ref=e289]
+              - img [ref=e291]
+              - img [ref=e293]
+              - img [ref=e295]
+              - img [ref=e297]
+            - paragraph [ref=e299]: “We've used them twice now. The first job was so clean we called them back when our rental property needed work. They treat every house like it's their own.”
+            - generic [ref=e300]:
+              - paragraph [ref=e301]: David & Karen M.
+              - paragraph [ref=e302]: Allen, TX
+      - generic [ref=e304]:
+        - generic [ref=e305]:
+          - paragraph [ref=e306]: View
+          - heading "Roofing Process" [level=2] [ref=e307]
+        - generic [ref=e308]:
+          - generic [ref=e311]:
+            - generic [ref=e313]:
+              - generic [ref=e315]: "01"
+              - paragraph [ref=e316]: First Contact
+              - paragraph [ref=e317]: Reach out and tell us what's going on with your roof.
+            - generic [ref=e319]:
+              - generic [ref=e321]: "02"
+              - paragraph [ref=e322]: Property Inspection
+              - paragraph [ref=e323]: We come to you and assess the roof in full detail.
+            - generic [ref=e325]:
+              - generic [ref=e327]: "03"
+              - paragraph [ref=e328]: Review
+              - paragraph [ref=e329]: We walk you through findings and your options.
+            - generic [ref=e331]:
+              - generic [ref=e333]: "04"
+              - paragraph [ref=e334]: Solution
+              - paragraph [ref=e335]: You get a clear, itemized estimate built around your needs.
+          - generic [ref=e338]:
+            - generic [ref=e340]:
+              - generic [ref=e342]: "05"
+              - paragraph [ref=e343]: Roof Ready
+              - paragraph [ref=e344]: Materials are ordered and your crew is scheduled.
+            - generic [ref=e346]:
+              - generic [ref=e348]: "06"
+              - paragraph [ref=e349]: Transformation Day
+              - paragraph [ref=e350]: Crew arrives on time and gets to work on your new roof.
+            - generic [ref=e352]:
+              - generic [ref=e354]: "07"
+              - paragraph [ref=e355]: Closing Day
+              - paragraph [ref=e356]: Final walkthrough, cleanup, and photo report.
+            - generic [ref=e358]:
+              - generic [ref=e360]: "08"
+              - paragraph [ref=e361]: Final Ask
+              - paragraph [ref=e362]: We make sure you're thrilled — and ask for your review.
+      - generic [ref=e364]:
+        - generic [ref=e365]:
+          - paragraph [ref=e366]: View
+          - heading "Our Partners" [level=2] [ref=e367]
+        - generic [ref=e368]:
+          - button "Previous" [ref=e369] [cursor=pointer]:
+            - img [ref=e370]
+          - generic [ref=e372]:
+            - generic [ref=e374]: GAF
+            - generic [ref=e376]: Owens Corning
+            - generic [ref=e378]: CertainTeed
+            - generic [ref=e380]: Malarkey
+            - generic [ref=e382]: IKO
+          - button "Next" [ref=e383] [cursor=pointer]:
+            - img [ref=e384]
+      - generic [ref=e387]:
+        - heading "Get Your Roofing Project Started Today!" [level=2] [ref=e388]
+        - paragraph [ref=e389]: Free inspections. No pressure. Same-day estimates. Serving DFW since 2009.
+        - generic [ref=e390]:
+          - link "(214) 555-0192" [ref=e391] [cursor=pointer]:
+            - /url: tel:2145550192
+            - img [ref=e392]
+            - text: (214) 555-0192
+          - link "Get a Free Consult" [ref=e394] [cursor=pointer]:
+            - /url: "#contact"
+    - contentinfo [ref=e395]:
+      - generic [ref=e396]:
+        - generic [ref=e397]:
+          - generic [ref=e398]:
+            - generic [ref=e399]: S
+            - paragraph [ref=e400]: Summit Roofing Co.
+          - paragraph [ref=e401]: Summit Roofing Co. — Protecting DFW Homes Since 2009.
+        - generic [ref=e402]:
+          - paragraph [ref=e403]: Services
+          - navigation [ref=e404]:
+            - link "Roof Repair" [ref=e405] [cursor=pointer]:
+              - /url: "#services"
+            - link "Roof Replacement" [ref=e406] [cursor=pointer]:
+              - /url: "#services"
+            - link "Installation" [ref=e407] [cursor=pointer]:
+              - /url: "#services"
+            - link "Roof Inspection" [ref=e408] [cursor=pointer]:
+              - /url: "#services"
+            - link "Gutters & Drainage" [ref=e409] [cursor=pointer]:
+              - /url: "#services"
+            - link "Commercial Roofing" [ref=e410] [cursor=pointer]:
+              - /url: "#services"
+        - generic [ref=e411]:
+          - paragraph [ref=e412]: Useful Links
+          - navigation [ref=e413]:
+            - link "Services" [ref=e414] [cursor=pointer]:
+              - /url: "#services"
+            - link "Why Us" [ref=e415] [cursor=pointer]:
+              - /url: "#why-us"
+            - link "Process" [ref=e416] [cursor=pointer]:
+              - /url: "#process"
+            - link "Reviews" [ref=e417] [cursor=pointer]:
+              - /url: "#testimonials"
+            - link "Contact" [ref=e418] [cursor=pointer]:
+              - /url: "#contact"
+          - generic [ref=e419]:
+            - link "(214) 555-0192" [ref=e420] [cursor=pointer]:
+              - /url: tel:2145550192
+            - link "hello@summitroofingco.com" [ref=e421] [cursor=pointer]:
+              - /url: mailto:hello@summitroofingco.com
+            - paragraph [ref=e422]: Dallas, TX
+      - paragraph [ref=e424]: Summit Roofing Co. 2026©
+  - alert [ref=e425]
