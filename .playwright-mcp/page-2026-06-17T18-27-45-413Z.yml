@@ -1,0 +1,8 @@
+- generic [ref=e1]:
+  - generic [ref=e4]:
+    - paragraph [ref=e5]: Titan Landscape & Tree
+    - paragraph [ref=e6]: Private Preview
+    - generic [ref=e7]:
+      - textbox "Enter password" [active] [ref=e9]
+      - button "Enter" [ref=e10] [cursor=pointer]
+  - alert [ref=e11]

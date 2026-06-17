@@ -64,7 +64,7 @@ export function Welcome({ config }: WelcomeProps) {
 
         <FadeUp delay={0.1}>
           <img
-            src="/images/dallas-roofing/pexels-clement-proust-363898785-31771166.jpg"
+            src={config.whyUs.images?.[0] ?? "/images/industries/landscaping/why-us-1.jpg"}
             alt=""
             className="size-full max-h-[480px] w-full border object-cover"
             style={{ borderColor: "var(--color-border)" }}
