@@ -31,7 +31,6 @@ export const craftBarberStudio: ThemeConfig = {
       "Craft Barber Studio brings old-school precision and modern style together in the heart of San Antonio. Expert barbers, relaxed atmosphere, and cuts that speak for themselves.",
     cta: "Book Your Appointment",
     ctaSecondary: "Our Services",
-    backgroundImage: "/images/craft-barber-studio/hero.jpg",
     bullets: [
       "Master Barbers — Not Just Stylists",
       "Walk-Ins Welcome",
@@ -90,15 +89,11 @@ export const craftBarberStudio: ThemeConfig = {
   ],
   whyUs: {
     headline: "Why San Antonio Chooses Craft",
-    images: [
-      "/images/craft-barber-studio/why-us-1.jpg",
-      "/images/craft-barber-studio/why-us-2.jpg",
-    ],
     points: [
       {
         title: "Barbers, Not Just Stylists",
         description:
-          "Every barber at Craft is trained in both traditional barbering techniques and modern styles. You're in skilled hands from the first snip to the final razor pass.",
+          "Every barber at Craft is trained in traditional barbering techniques and modern styles. You're in skilled hands from the first snip to the final razor pass.",
       },
       {
         title: "Walk In Friendly, Appointment First",
@@ -129,13 +124,6 @@ export const craftBarberStudio: ThemeConfig = {
   },
   process: {
     headline: "Your Craft Experience",
-    images: [
-      "/images/craft-barber-studio/process-1.jpg",
-      "/images/craft-barber-studio/process-2.jpg",
-      "/images/craft-barber-studio/process-3.jpg",
-      "/images/craft-barber-studio/process-4.jpg",
-      "/images/craft-barber-studio/process-5.jpg",
-    ],
     steps: [
       {
         number: "01",
