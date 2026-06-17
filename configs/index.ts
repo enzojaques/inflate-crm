@@ -1,8 +1,10 @@
 import { dallasRoofing } from "./dallas-roofing"
+import { bossDLandscaping } from "./boss-d-landscaping"
 import { ThemeConfig } from "@/lib/theme"
 
 export const configs: Record<string, ThemeConfig> = {
   "dallas-roofing": dallasRoofing,
+  "boss-d-landscaping": bossDLandscaping,
 }
 
 export function getConfig(slug: string): ThemeConfig | undefined {

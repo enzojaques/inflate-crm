@@ -1,0 +1,480 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e6]:
+        - link "NA Web Services Logo" [ref=e7] [cursor=pointer]:
+          - /url: /
+          - img "NA Web Services Logo" [ref=e8]
+        - navigation [ref=e9]:
+          - link "Home" [ref=e10] [cursor=pointer]:
+            - /url: /
+          - generic [ref=e11]:
+            - button "Services" [ref=e12]:
+              - text: Services
+              - img [ref=e13]
+            - generic:
+              - generic:
+                - link "Web Design":
+                  - /url: /web-design-services
+                - link "SEO":
+                  - /url: /seo
+          - link "Projects" [ref=e15] [cursor=pointer]:
+            - /url: /projects
+          - link "How It Works" [ref=e16] [cursor=pointer]:
+            - /url: /how-it-works
+        - generic [ref=e17]:
+          - button "Language" [ref=e19]:
+            - img [ref=e20]
+            - generic [ref=e21]: EN
+            - generic [ref=e22]: ▾
+          - link "Get In Touch" [ref=e23] [cursor=pointer]:
+            - /url: /contact
+    - main [ref=e24]:
+      - generic [ref=e25]:
+        - region "Websites Built for Small Businesses" [ref=e26]:
+          - generic [ref=e28]:
+            - generic [ref=e29]:
+              - button [ref=e34]:
+                - img [ref=e35]
+              - button [ref=e39]:
+                - img [ref=e40]
+              - button [ref=e42]:
+                - img [ref=e43]
+              - generic [ref=e45]:
+                - img [ref=e46]
+                - generic [ref=e48]: nawebservices.com
+              - button [ref=e49]:
+                - img [ref=e50]
+              - generic [ref=e53]:
+                - button [ref=e54]:
+                  - img [ref=e55]
+                - button [ref=e57]:
+                  - img [ref=e58]
+                - button [ref=e60]:
+                  - img [ref=e61]
+            - generic [ref=e66]:
+              - generic [ref=e68]:
+                - generic [ref=e69]:
+                  - generic [ref=e70]:
+                    - img "Next.js" [ref=e71]
+                    - text: Custom Next.js Sites
+                  - generic [ref=e73]: SEO Optimized
+                - heading "Websites Built for Small Businesses" [level=1] [ref=e74]:
+                  - text: Websites Built for
+                  - generic [ref=e76]: Small Businesses
+                - paragraph [ref=e77]: Custom Websites and Search Engine Optimization (SEO) that bring your business more clients.
+                - generic [ref=e78]:
+                  - link "Get Started" [ref=e79] [cursor=pointer]:
+                    - /url: /contact
+                  - generic [ref=e80]:
+                    - generic [ref=e81]:
+                      - generic [ref=e82]: "5.0"
+                      - img [ref=e83]
+                      - img [ref=e85]
+                      - img [ref=e87]
+                      - img [ref=e89]
+                      - img [ref=e91]
+                    - generic [ref=e93]: 30+ Websites Built
+              - generic [ref=e94]:
+                - generic [ref=e96]:
+                  - button "View TBC-Training by Cushing" [ref=e98] [cursor=pointer]:
+                    - generic [ref=e99]:
+                      - img "TBC-Training by Cushing" [ref=e100]
+                      - generic [ref=e102]:
+                        - paragraph [ref=e103]: TBC-Training by Cushing
+                        - paragraph [ref=e104]: Website for TBC- Training by Cushing. The website showcases a fully custom brand experience with sharp visuals, mobile optimization, and results-driven copy. We delivered a fast-loading, modern site with animated CTAs, CMS integration , and a clean section layout designed to convert athletes and parents. Every element was crafted to reflect TBC’s elite coaching standard and scale his online presence.
+                        - generic [ref=e105]:
+                          - text: View Project
+                          - img [ref=e106]
+                  - button "View Borderless Athletes" [ref=e109] [cursor=pointer]:
+                    - generic [ref=e110]:
+                      - img "Borderless Athletes" [ref=e111]
+                      - generic [ref=e113]:
+                        - paragraph [ref=e114]: Borderless Athletes
+                        - paragraph [ref=e115]: A custom-built site for an agency that connects soccer and track athletes with scholarship opportunities across the U.S. Built to communicate trust, streamline contact, and showcase value.
+                        - generic [ref=e116]:
+                          - text: View Project
+                          - img [ref=e117]
+                  - button "View All American Chic" [ref=e120] [cursor=pointer]:
+                    - generic [ref=e121]:
+                      - img "All American Chic" [ref=e122]
+                      - generic [ref=e124]:
+                        - paragraph [ref=e125]: All American Chic
+                        - paragraph [ref=e126]: All American Chic is the intersection of elite softball performance, intentional living, and female athlete mentorship . We built a high performing website to boost our client Mia's bookings and grow her business.
+                        - generic [ref=e127]:
+                          - text: View Project
+                          - img [ref=e128]
+                  - button "View SitePilot DMV" [ref=e131] [cursor=pointer]:
+                    - generic [ref=e132]:
+                      - img "SitePilot DMV" [ref=e133]
+                      - generic [ref=e135]:
+                        - paragraph [ref=e136]: SitePilot DMV
+                        - paragraph [ref=e137]: Custom website built for a construction management and owner's representative firm serving the DMV region. Featuring a premium corporate design, clear service positioning, and conversion-focused user experience, the site helps establish credibility and generate qualified leads across Virginia, Maryland, and Washington DC.
+                        - generic [ref=e138]:
+                          - text: View Project
+                          - img [ref=e139]
+                  - button "View Solebury Soccer" [ref=e142] [cursor=pointer]:
+                    - generic [ref=e143]:
+                      - img "Solebury Soccer" [ref=e144]
+                      - generic [ref=e146]:
+                        - paragraph [ref=e147]: Solebury Soccer
+                        - paragraph [ref=e148]: Solebury Soccer Club is a youth soccer club based out of Solebury and New Hope, PA . They wanted to get a high-quality website that could properly represent their club, but also drive growth and more sign-ups. We were able to accomplish exactly that with this custom next.js website build.
+                        - generic [ref=e149]:
+                          - text: View Project
+                          - img [ref=e150]
+                  - button "View Lasa Homes" [ref=e153] [cursor=pointer]:
+                    - generic [ref=e154]:
+                      - img "Lasa Homes" [ref=e155]
+                      - generic [ref=e157]:
+                        - paragraph [ref=e158]: Lasa Homes
+                        - paragraph [ref=e159]: Lasa Homes is a Washington, D.C. Based home remodeler that now has a website that takes their game to the next level!
+                        - generic [ref=e160]:
+                          - text: View Project
+                          - img [ref=e161]
+                  - button "View Unity Active LLC" [ref=e164] [cursor=pointer]:
+                    - generic [ref=e165]:
+                      - img "Unity Active LLC" [ref=e166]
+                      - generic [ref=e168]:
+                        - paragraph [ref=e169]: Unity Active LLC
+                        - paragraph [ref=e170]: Unity Active LLC is a modern enrichment program website designed to help schools and families easily explore after-school opportunities for children. The site highlights Unity Active’s safe, engaging, and fully compliant programs through a clean, professional layout focused on trust, accessibility, and clear communication. Built to support growth and credibility, the platform makes it easy for schools and parents to learn about programs, partnerships, and enrollment opportunities.
+                        - generic [ref=e171]:
+                          - text: View Project
+                          - img [ref=e172]
+                  - button "View Zona Futbol LLC" [ref=e175] [cursor=pointer]:
+                    - generic [ref=e176]:
+                      - img "Zona Futbol LLC" [ref=e177]
+                      - generic [ref=e179]:
+                        - paragraph [ref=e180]: Zona Futbol LLC
+                        - paragraph [ref=e181]: Zona Futbol LLC is a modern soccer coaching website built to support both in-person training bookings and online coaching conversions. The project included a high-converting landing page for online programs alongside a streamlined in-person booking experience, all designed with a clean sports-focused layout, strong calls to action, and mobile-first performance.
+                        - generic [ref=e182]:
+                          - text: View Project
+                          - img [ref=e183]
+                  - button "View CP3 Family Legacy Foundation" [ref=e186] [cursor=pointer]:
+                    - generic [ref=e187]:
+                      - img "CP3 Family Legacy Foundation" [ref=e188]
+                      - generic [ref=e190]:
+                        - paragraph [ref=e191]: CP3 Family Legacy Foundation
+                        - paragraph [ref=e192]: CP3 Family Legacy Foundation is a modern nonprofit website designed to showcase the organization’s mission, community initiatives, and long-term impact. We created a clean, professional platform focused on storytelling, accessibility, and making it easy for visitors to learn more and get involved.
+                        - generic [ref=e193]:
+                          - text: View Project
+                          - img [ref=e194]
+                  - button "View Universal Towing" [ref=e197] [cursor=pointer]:
+                    - generic [ref=e198]:
+                      - img "Universal Towing" [ref=e199]
+                      - generic [ref=e201]:
+                        - paragraph [ref=e202]: Universal Towing
+                        - paragraph [ref=e203]: Universal Towing is a Baltimore-based towing company with a sharp, professional website built for speed and trust. Featuring a background video, click-to-call functionality, and location-based SEO, the site is clean, mobile-optimized, and designed to convert clients fast.
+                        - generic [ref=e204]:
+                          - text: View Project
+                          - img [ref=e205]
+                  - button "View Tana Ethiopian Cuisine" [ref=e208] [cursor=pointer]:
+                    - generic [ref=e209]:
+                      - img "Tana Ethiopian Cuisine" [ref=e210]
+                      - generic [ref=e212]:
+                        - paragraph [ref=e213]: Tana Ethiopian Cuisine
+                        - paragraph [ref=e214]: This modern, high-quality website features vibrant food visuals, seamless online ordering, clear hours and location info, and a mobile-friendly layout designed to boost reservations and foot traffic. Built to reflect the warmth and tradition of the restaurant while delivering a smooth digital experience.
+                        - generic [ref=e215]:
+                          - text: View Project
+                          - img [ref=e216]
+                  - button "View Pacella Performance" [ref=e219] [cursor=pointer]:
+                    - generic [ref=e220]:
+                      - img "Pacella Performance" [ref=e221]
+                      - generic [ref=e223]:
+                        - paragraph [ref=e224]: Pacella Performance
+                        - paragraph [ref=e225]: Pacella Performance is a high-performance athletic training brand based in Montreal. This custom-built site showcases their elite-level programs, coaching philosophy, and testimonials, with video backgrounds and modern UI designed for credibility, SEO, and mobile responsiveness.
+                        - generic [ref=e226]:
+                          - text: View Project
+                          - img [ref=e227]
+                  - button "View Allez Allez Soccer" [ref=e230] [cursor=pointer]:
+                    - generic [ref=e231]:
+                      - img "Allez Allez Soccer" [ref=e232]
+                      - generic [ref=e234]:
+                        - paragraph [ref=e235]: Allez Allez Soccer
+                        - paragraph [ref=e236]: Custom Business Growth Website for Professional Soccer Player and Coach Antoine Hoppenot's coaching brand, Allez Allez Soccer. This website doesn't just look good, it's a tool to get more clients for Allez Allez Soccer.
+                        - generic [ref=e237]:
+                          - text: View Project
+                          - img [ref=e238]
+                  - button "View Angel Gomez Landscaping LLC" [ref=e241] [cursor=pointer]:
+                    - generic [ref=e242]:
+                      - img "Angel Gomez Landscaping LLC" [ref=e243]
+                      - generic [ref=e245]:
+                        - paragraph [ref=e246]: Angel Gomez Landscaping LLC
+                        - paragraph [ref=e247]: "Our client needed a high quality website to reflect the quality that they've been producing, as the #1 Landscaping company in Palm Beach County. Our client was very happy with his new website, and was a pleasure to work with"
+                        - generic [ref=e248]:
+                          - text: View Project
+                          - img [ref=e249]
+                - button "Previous slide" [ref=e251]:
+                  - img [ref=e252]
+                - button "Next slide" [ref=e254]:
+                  - img [ref=e255]
+        - paragraph [ref=e262]: Your business is unique. Your website should be too.
+        - region "Create a Website That Gets You Clients" [ref=e263]:
+          - generic [ref=e265]:
+            - generic [ref=e266]:
+              - generic [ref=e267]: What We Do
+              - heading "Create a Website That Gets You Clients" [level=2] [ref=e269]:
+                - text: Create a Website
+                - text: That Gets You Clients
+              - paragraph [ref=e270]: We handle design, development, search visibility, and ongoing support so your website works as hard as the rest of your business.
+              - link "Get In Touch" [ref=e271] [cursor=pointer]:
+                - /url: /contact
+            - generic [ref=e272]:
+              - generic [ref=e273]:
+                - generic [ref=e274]:
+                  - img [ref=e276]
+                  - heading "Design" [level=3] [ref=e281]
+                - paragraph [ref=e283]: We design sites that convert. Every layout is shaped around trust, clarity, and the actions you want visitors to take.
+              - generic [ref=e284]:
+                - generic [ref=e285]:
+                  - img [ref=e287]
+                  - heading "Development" [level=3] [ref=e289]
+                - paragraph [ref=e291]: Fast load times, clean code, and mobile-first execution. Your site is built to feel smooth, rank better, and work for every visitor.
+              - generic [ref=e292]:
+                - generic [ref=e293]:
+                  - img [ref=e295]
+                  - heading "SEO" [level=3] [ref=e298]
+                - paragraph [ref=e300]: Search should bring people who are already looking for what you offer. We build the structure, pages, and technical foundation to help that happen.
+              - generic [ref=e301]:
+                - generic [ref=e302]:
+                  - img [ref=e304]
+                  - heading "Support" [level=3] [ref=e308]
+                - paragraph [ref=e310]: Every site includes a hosting and maintenance plan with quality infrastructure, uptime monitoring, updates, and ongoing care to keep your website fast, secure, and reliable.
+        - paragraph [ref=e314]: Is your website working for you or against you?
+        - region "What Our Clients Say" [ref=e315]:
+          - generic [ref=e316]:
+            - generic [ref=e317]:
+              - generic [ref=e318]:
+                - generic [ref=e319]: Client Testimonials
+                - heading "What Our Clients Say" [level=2] [ref=e320]:
+                  - text: What Our
+                  - text: Clients Say
+              - generic [ref=e321]:
+                - button "Previous testimonials" [ref=e322]:
+                  - img [ref=e323]
+                - generic [ref=e325]: 1 / 3
+                - button "Next testimonials" [ref=e326]:
+                  - img [ref=e327]
+            - generic [ref=e329]:
+              - article [ref=e330]:
+                - generic [ref=e331]:
+                  - img [ref=e332]
+                  - img [ref=e334]
+                  - img [ref=e336]
+                  - img [ref=e338]
+                  - img [ref=e340]
+                - blockquote [ref=e342]: “Nako was phenomenal. Very professional throughout the process and very responsive whenever I need updates!”
+                - generic [ref=e344]:
+                  - generic [ref=e345]:
+                    - generic [ref=e346]: AH
+                    - img "Antoine Hoppenot" [ref=e347]
+                  - generic [ref=e348]:
+                    - paragraph [ref=e349]: Antoine Hoppenot
+                    - paragraph [ref=e350]: Allez Allez Soccer
+              - article [ref=e351]:
+                - generic [ref=e352]:
+                  - img [ref=e353]
+                  - img [ref=e355]
+                  - img [ref=e357]
+                  - img [ref=e359]
+                  - img [ref=e361]
+                - blockquote [ref=e363]: “NA web services LLC. They help me with my business website I highly recommend them. Very Professional!”
+                - generic [ref=e365]:
+                  - generic [ref=e366]:
+                    - generic [ref=e367]: EO
+                    - img "Erick Ordonez" [ref=e368]
+                  - generic [ref=e369]:
+                    - paragraph [ref=e370]: Erick Ordonez
+                    - paragraph [ref=e371]: 4Brothers Home Remodeling LLC
+              - article [ref=e372]:
+                - generic [ref=e373]:
+                  - img [ref=e374]
+                  - img [ref=e376]
+                  - img [ref=e378]
+                  - img [ref=e380]
+                  - img [ref=e382]
+                - blockquote [ref=e384]: “I’m so grateful I found Nako. He made the entire process of building my website feel so simple!”
+                - generic [ref=e386]:
+                  - generic [ref=e387]:
+                    - generic [ref=e388]: MW
+                    - img "Mia Weckel" [ref=e389]
+                  - generic [ref=e390]:
+                    - paragraph [ref=e391]: Mia Weckel
+                    - paragraph [ref=e392]: All American Chic
+            - generic [ref=e393]:
+              - button "Page 1" [ref=e394]
+              - button "Page 2" [ref=e395]
+              - button "Page 3" [ref=e396]
+        - paragraph [ref=e400]: Your site can be more than a brochure. Let's turn it into a growth engine.
+        - region "A Structured Website Build Process from Call to Launch" [ref=e401]:
+          - generic [ref=e402]:
+            - generic [ref=e403]:
+              - generic [ref=e404]: How It Works
+              - heading "A Structured Website Build Process from Call to Launch" [level=2] [ref=e406]
+              - paragraph [ref=e407]: Most projects go from consultation to launch in about 7-14 business days depending on project scope.
+            - list [ref=e408]:
+              - listitem [ref=e409]:
+                - generic [ref=e411]: "01"
+                - generic [ref=e414]:
+                  - img [ref=e416]
+                  - generic [ref=e418]:
+                    - heading "Consultation Call" [level=3] [ref=e419]
+                    - paragraph [ref=e420]: We start with a quick 15-20 minute call to understand your business, goals, and what you want your website to accomplish. This helps us determine the best structure, features, and design for your site.
+              - listitem [ref=e421]:
+                - generic [ref=e423]: "02"
+                - generic [ref=e426]:
+                  - img [ref=e428]
+                  - generic [ref=e432]:
+                    - heading "Project Intake" [level=3] [ref=e433]
+                    - paragraph [ref=e434]: After the call, you complete a short intake form where you can share your business information, services, photos, branding, and any inspiration you have for the website.
+              - listitem [ref=e435]:
+                - generic [ref=e437]: "03"
+                - generic [ref=e440]:
+                  - img [ref=e442]
+                  - generic [ref=e446]:
+                    - heading "First Draft Build" [level=3] [ref=e447]
+                    - paragraph [ref=e448]: Using the information provided, we design and build the first version of your website. This initial draft gives you a clear look at the layout, structure, and overall direction of the project.
+              - listitem [ref=e449]:
+                - generic [ref=e451]: "04"
+                - generic [ref=e454]:
+                  - img [ref=e456]
+                  - generic [ref=e461]:
+                    - heading "Review & Revisions" [level=3] [ref=e462]
+                    - paragraph [ref=e463]: You review the draft and request any adjustments. We refine the design, content, and layout until everything looks and functions the way you want.
+              - listitem [ref=e464]:
+                - generic [ref=e466]: "05"
+                - generic [ref=e469]:
+                  - img [ref=e471]
+                  - generic [ref=e476]:
+                    - heading "Launch & Ongoing Support" [level=3] [ref=e477]
+                    - paragraph [ref=e478]: Once approved, your website is published and hosted by NA Web Services. We continue managing hosting, security, performance, and technical upkeep so your site stays fast, secure, and online.
+            - link "View Full Process" [ref=e480] [cursor=pointer]:
+              - /url: /how-it-works
+              - text: View Full Process
+              - img [ref=e481]
+        - region "Latest Blogs" [ref=e483]:
+          - generic [ref=e484]:
+            - generic [ref=e485]:
+              - generic [ref=e486]:
+                - generic [ref=e487]: Insights
+                - heading "Latest Blogs" [level=2] [ref=e489]
+              - generic [ref=e490]:
+                - button "Previous blog posts" [ref=e491]: ←
+                - button "Next blog posts" [ref=e492]: →
+            - generic [ref=e493]:
+              - link [ref=e494] [cursor=pointer]:
+                - /url: /blog/how-to-build-website-online-coaching
+                - article [ref=e495]:
+                  - 'img "How to Build a Website for Online Coaching in 2026: The Complete Guide" [ref=e497]'
+                  - generic [ref=e499]:
+                    - generic [ref=e500]: Strategy
+                    - generic [ref=e501]: May 26, 2026
+                  - 'heading "How to Build a Website for Online Coaching in 2026: The Complete Guide" [level=3] [ref=e502]'
+                  - paragraph [ref=e503]: Learn how to build a high-converting website for online coaching. Features, landing page strategies, and platforms that actually bring clients.
+              - link [ref=e504] [cursor=pointer]:
+                - /url: /blog/how-to-redesign-your-small-business-website-for-maximum-conversions
+                - article [ref=e505]:
+                  - img "How to Redesign Your Small Business Website for Maximum Conversions" [ref=e507]
+                  - generic [ref=e509]:
+                    - generic [ref=e510]: Strategy
+                    - generic [ref=e511]: May 24, 2026
+                  - heading "How to Redesign Your Small Business Website for Maximum Conversions" [level=3] [ref=e512]
+                  - paragraph [ref=e513]: A small business website redesign is not just about aesthetics. It's about fundamentally improving how your customers interact with your brand online. Let's dive into the strategies for a successful website upgrade.
+              - link [ref=e514] [cursor=pointer]:
+                - /url: /blog/small-business-web-design-why-your-local-company-needs-a-digital-upgrade
+                - article [ref=e515]:
+                  - img "Small Business Web Design | Why Your Local Company Needs a Digital Upgrade" [ref=e517]
+                  - generic [ref=e519]:
+                    - generic [ref=e520]: Strategy
+                    - generic [ref=e521]: May 24, 2026
+                  - heading "Small Business Web Design | Why Your Local Company Needs a Digital Upgrade" [level=3] [ref=e522]
+                  - paragraph [ref=e523]: If your digital storefront does not match the quality of your physical storefront, you are actively losing revenue to your competitors down the street.
+              - link [ref=e524] [cursor=pointer]:
+                - /url: /blog/how-to-get-sponsorships-for-your-youth-soccer-club-a-complete-guide
+                - article [ref=e525]:
+                  - 'img "How to Get Sponsorships for Your Youth Soccer Club: A Complete Guide" [ref=e527]'
+                  - generic [ref=e529]:
+                    - generic [ref=e530]: Strategy
+                    - generic [ref=e531]: Apr 3, 2026
+                  - 'heading "How to Get Sponsorships for Your Youth Soccer Club: A Complete Guide" [level=3] [ref=e532]'
+                  - paragraph [ref=e533]: Running a youth soccer club takes a massive amount of dedication, late nights, and endless volunteer hours. However, passion alone cannot pay for field permits, referee fees, new equipment, and professional coaching.
+            - link "View All Insights" [ref=e535] [cursor=pointer]:
+              - /url: /blog
+        - region "Turn Your Website Into a Client Growth Engine" [ref=e536]:
+          - generic [ref=e540]:
+            - heading "Turn Your Website Into a Client Growth Engine" [level=2] [ref=e542]
+            - generic [ref=e543]:
+              - paragraph [ref=e544]: We'll review your current website, lead flow, and goals, then recommend practical next steps to increase bookings, leads, and revenue.
+              - link "Get Started" [ref=e545] [cursor=pointer]:
+                - /url: /contact
+    - contentinfo [ref=e546]:
+      - generic [ref=e548]:
+        - generic [ref=e549]:
+          - generic [ref=e550]:
+            - img "NA Web Services Logo" [ref=e551]
+            - paragraph [ref=e552]: High-performance web design and SEO for small businesses, service businesses, and local brands.
+            - paragraph [ref=e553]: Custom websites built to look credible, rank better, and convert more visitors.
+          - generic [ref=e554]:
+            - heading "Navigation" [level=2] [ref=e555]
+            - list [ref=e556]:
+              - listitem [ref=e557]:
+                - link "Home" [ref=e558] [cursor=pointer]:
+                  - /url: /
+              - listitem [ref=e559]:
+                - link "Web Design Services" [ref=e560] [cursor=pointer]:
+                  - /url: /web-design-services
+              - listitem [ref=e561]:
+                - link "SEO" [ref=e562] [cursor=pointer]:
+                  - /url: /seo
+              - listitem [ref=e563]:
+                - link "Projects" [ref=e564] [cursor=pointer]:
+                  - /url: /projects
+              - listitem [ref=e565]:
+                - link "Locations" [ref=e566] [cursor=pointer]:
+                  - /url: /locations
+              - listitem [ref=e567]:
+                - link "How It Works" [ref=e568] [cursor=pointer]:
+                  - /url: /how-it-works
+              - listitem [ref=e569]:
+                - link "Contact" [ref=e570] [cursor=pointer]:
+                  - /url: /contact
+              - listitem [ref=e571]:
+                - link "Blog" [ref=e572] [cursor=pointer]:
+                  - /url: /blog
+          - generic [ref=e573]:
+            - heading "What We Help With" [level=2] [ref=e574]
+            - list [ref=e575]:
+              - listitem [ref=e576]: High-performance website design
+              - listitem [ref=e577]: Search visibility with conversion-focused SEO
+              - listitem [ref=e578]:
+                - link "SEO for Small Businesses" [ref=e579] [cursor=pointer]:
+                  - /url: /seo/coaches
+              - listitem [ref=e580]:
+                - link "SEO for Service Businesses" [ref=e581] [cursor=pointer]:
+                  - /url: /seo/academies
+              - listitem [ref=e582]:
+                - link "SEO for Local Businesses" [ref=e583] [cursor=pointer]:
+                  - /url: /seo/local-service-businesses
+          - generic [ref=e584]:
+            - heading "Ready to Build a Better Website?" [level=2] [ref=e585]
+            - paragraph [ref=e586]: Tell us about your goals and we'll map practical next steps.
+            - link "Book a Call" [ref=e587] [cursor=pointer]:
+              - /url: /contact
+        - generic [ref=e588]:
+          - paragraph [ref=e589]: © 2026 NA Web Services LLC. All rights reserved.
+          - generic [ref=e590]:
+            - link "Privacy Policy" [ref=e591] [cursor=pointer]:
+              - /url: /privacy-policy
+            - link "Contract" [ref=e592] [cursor=pointer]:
+              - /url: /contract
+            - link "Accessibility" [ref=e593] [cursor=pointer]:
+              - /url: /accessibility
+            - link "Sitemap" [ref=e594] [cursor=pointer]:
+              - /url: /sitemap.xml
+    - dialog "Cookie notice" [ref=e595]:
+      - generic [ref=e597]:
+        - paragraph [ref=e598]:
+          - text: We use cookies and similar technologies to improve website performance and user experience. By continuing to use this site, you agree to our cookie use.
+          - link "Learn more" [ref=e600] [cursor=pointer]:
+            - /url: /privacy-policy
+        - button "Got It" [ref=e601]
+  - alert [ref=e602]

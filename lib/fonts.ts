@@ -11,6 +11,7 @@ import {
   Lato,
   Work_Sans,
   Roboto_Slab,
+  Plus_Jakarta_Sans,
 } from "next/font/google"
 
 const playfairDisplay = Playfair_Display({
@@ -97,6 +98,13 @@ const robotoSlab = Roboto_Slab({
   display: "swap",
 })
 
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-plus-jakarta-sans",
+  display: "swap",
+})
+
 /**
  * Maps a Google Font name (as used in ThemeConfig.fonts) to its loaded next/font
  * instance and the literal CSS custom property name passed to its `variable` option.
@@ -117,6 +125,7 @@ export const fontRegistry = {
   Lato: { font: lato, cssVar: "--font-lato" },
   "Work Sans": { font: workSans, cssVar: "--font-work-sans" },
   "Roboto Slab": { font: robotoSlab, cssVar: "--font-roboto-slab" },
+  "Plus Jakarta Sans": { font: plusJakartaSans, cssVar: "--font-plus-jakarta-sans" },
 } as const
 
 export type RegisteredFontName = keyof typeof fontRegistry

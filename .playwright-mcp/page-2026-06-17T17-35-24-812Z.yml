@@ -1,0 +1,24 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - link "N NA Web Services" [ref=e4] [cursor=pointer]:
+        - /url: https://nawebservices.com
+        - generic [ref=e5]: "N"
+        - generic [ref=e6]:
+          - generic [ref=e7]: NA
+          - generic [ref=e8]: Web Services
+      - link "nawebservices.com" [ref=e9] [cursor=pointer]:
+        - /url: https://nawebservices.com
+    - main [ref=e10]:
+      - generic [ref=e11]: Client Preview System
+      - heading "Private Previews Built for You" [level=1] [ref=e13]:
+        - text: Private Previews
+        - text: Built for You
+      - paragraph [ref=e14]: Each client preview lives at its own private link. There is no public directory — ask your NA Web Services contact for your link.
+      - generic [ref=e15]:
+        - link "Visit Our Website" [ref=e16] [cursor=pointer]:
+          - /url: https://nawebservices.com
+        - link "Get in Touch" [ref=e17] [cursor=pointer]:
+          - /url: mailto:hello@nawebservices.com
+    - contentinfo [ref=e18]: © 2026 NA Web Services. All rights reserved.
+  - alert [ref=e19]

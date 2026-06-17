@@ -1,0 +1,11 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - img "NA Web Services" [ref=e4]
+    - main [ref=e5]:
+      - heading "Client Website Previews" [level=1] [ref=e6]:
+        - text: Client Website
+        - text: Previews
+      - paragraph [ref=e7]:
+        - link "nawebservices.com" [ref=e8] [cursor=pointer]:
+          - /url: https://nawebservices.com
+  - alert [ref=e9]
