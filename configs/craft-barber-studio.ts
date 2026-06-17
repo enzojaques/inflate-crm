@@ -96,7 +96,7 @@ export const craftBarberStudio: ThemeConfig = {
           "Every barber at Craft is trained in both traditional barbering techniques and modern styles. You're in skilled hands from the first snip to the final razor pass.",
       },
       {
-        title: "Walk-In Friendly, Appointment First",
+        title: "Walk In Friendly, Appointment First",
         description:
           "We respect your time. Book ahead for guaranteed slots, or walk in when the schedule allows — either way, we'll take care of you.",
       },
