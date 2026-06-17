@@ -4,118 +4,119 @@ export const bossDLandscaping: ThemeConfig = {
   slug: "boss-d-landscaping",
   password: "bossd2026",
   brand: {
-    name: "Boss D Landscaping Services",
-    tagline: "Erie's #1 Landscaping Company",
+    name: "Boss D Landscape",
+    tagline: "Erie's Full-Service Landscaping Company",
     phone: "(814) 440-9092",
-    email: "bossdlandscape@gmail.com",
+    email: "jgarnica1334@yahoo.com",
     city: "Erie",
     state: "PA",
+    logo: "/images/boss-d-landscaping/logo.png",
   },
   colors: {
-    primary: "#2E7D32",
-    primaryHover: "#1B5E20",
-    secondary: "#1A2E1A",
+    primary: "#2A6B30",
+    primaryHover: "#1B4D20",
+    secondary: "#0D1A0F",
     background: "#FFFFFF",
-    surface: "#F1F8F0",
+    surface: "#F2F7F2",
     text: "#111C10",
     textMuted: "#4A5E48",
-    border: "#D6E8D4",
+    border: "#D0E4D0",
   },
   fonts: {
     heading: "Oswald",
     body: "Inter",
   },
   hero: {
-    headline: "Erie's Landscaping Experts",
+    headline: "Erie's Most Trusted Landscape Company",
     subheadline:
-      "Boss D Landscaping Services transforms yards across Erie, PA with professional lawn care, landscaping design, and seasonal maintenance. Locally owned. Fully insured. Built on results.",
+      "Boss D Landscape delivers full-service landscaping for residential and commercial properties across Erie County, PA. From weekly lawn maintenance to complete yard transformations — we show up, we care, and we get it done.",
     cta: "Get a Free Quote",
     ctaSecondary: "Our Services",
     backgroundImage: "/images/industries/landscaping/hero.jpg",
     bullets: [],
   },
   stats: [
-    { value: "10+", label: "Years in Business" },
-    { value: "500+", label: "Yards Transformed" },
-    { value: "100%", label: "Locally Owned" },
+    { value: "4.7★", label: "Google Rating" },
+    { value: "100%", label: "Recommend on Facebook" },
+    { value: "740+", label: "Followers & Counting" },
   ],
   partners: [
     { name: "John Deere" },
     { name: "Husqvarna" },
+    { name: "Echo" },
     { name: "PLANET" },
-    { name: "Techo-Bloc" },
-    { name: "NALP" },
+    { name: "Stihl" },
   ],
   services: [
     {
       title: "Lawn Mowing & Maintenance",
       description:
-        "Weekly and bi-weekly mowing, edging, and trimming to keep your lawn looking sharp all season long.",
+        "Regular mowing, edging, and trimming for residential and commercial properties throughout Erie County. Consistent cuts, clean lines, every visit.",
       icon: "Scissors",
     },
     {
-      title: "Landscaping Design",
+      title: "Landscaping & Design",
       description:
-        "Custom landscape designs that add curb appeal and value — from plant beds to full yard transformations.",
+        "Custom landscape design and installation — plant beds, decorative stone, ground cover, and full yard makeovers tailored to your property.",
       icon: "Leaf",
     },
     {
       title: "Mulching & Edging",
       description:
-        "Fresh mulch installation and clean bed edging to give your property a polished, professional finish.",
+        "Fresh mulch installation and crisp bed edging to give your property a polished, well-maintained look that stands out on the block.",
       icon: "Sprout",
     },
     {
       title: "Tree & Shrub Trimming",
       description:
-        "Expert trimming and shaping to keep your trees and shrubs healthy, safe, and looking their best.",
+        "Expert trimming and shaping to keep your trees, hedges, and shrubs healthy, structured, and looking their best season after season.",
       icon: "Trees",
     },
     {
-      title: "Leaf & Debris Cleanup",
+      title: "Spring & Fall Cleanup",
       description:
-        "Spring and fall cleanups that clear leaves, debris, and dead growth so your yard is ready for every season.",
+        "Full seasonal cleanups — leaf removal, debris hauling, bed clearing, and prep work so your yard is ready for whatever comes next.",
       icon: "Wind",
     },
     {
-      title: "Snow Removal",
+      title: "Commercial Landscaping",
       description:
-        "Reliable snow plowing and salting for Erie winters. Residential and commercial — we've got you covered.",
-      icon: "Truck",
+        "Reliable, professional landscaping for commercial properties across Erie, PA. We keep your business exterior clean and impressive year-round.",
+      icon: "Building2",
     },
   ],
   whyUs: {
-    headline: "Why Erie Trusts Boss D",
+    headline: "Why Erie Chooses Boss D",
     points: [
       {
-        title: "Locally Owned & Operated",
+        title: "Locally Rooted in Erie",
         description:
-          "We live and work in Erie. Every yard we touch is a yard in our own community — we treat it that way.",
+          "We're based at 713 Perry St, Erie, PA — this is our city. Every yard we maintain is a yard in our own community, and we treat it that way.",
       },
       {
-        title: "Dependable & On Time",
+        title: "4.7 Stars on Google",
         description:
-          "We show up when we say we will. No excuses, no last-minute cancellations. Just consistent, reliable service.",
+          "Our Google rating and 100% Facebook recommendation rate speak for themselves. We built that reputation one yard at a time.",
       },
       {
-        title: "Fully Insured",
+        title: "Residential & Commercial",
         description:
-          "Boss D is fully licensed and insured, so you can relax knowing your property and family are protected.",
+          "From single-family homes to commercial properties, Boss D handles it all with the same level of professionalism and attention to detail.",
       },
       {
-        title: "Quality You Can See",
+        title: "Dependable. Every Time.",
         description:
-          "We take pride in the details — clean edges, uniform cuts, and finished work that stands out on the block.",
+          "We show up when we say we will. No excuses. Erie winters are tough and Erie summers are busy — we plan around both so you don't have to.",
       },
       {
         title: "Fair, Transparent Pricing",
         description:
-          "No hidden fees. We give you a clear quote upfront and stick to it. Your budget is always respected.",
+          "You get a clear quote before any work begins. No surprise fees, no pressure — just honest pricing for quality work.",
       },
       {
-        title: "Year-Round Service",
+        title: "Open Until 9 PM",
         description:
-          "From spring cleanups to winter snow removal, we're your one call for every season in Erie.",
+          "We work around your schedule, not the other way around. Reach us evenings and weekends — whenever it works for you.",
       },
     ],
     images: [
@@ -124,37 +125,43 @@ export const bossDLandscaping: ThemeConfig = {
     ],
   },
   process: {
-    headline: "How We Work",
+    headline: "How It Works",
     steps: [
       {
         number: "01",
-        title: "Reach Out",
-        description: "Call or message us to tell us about your yard and what you need.",
+        title: "Give Us a Call",
+        description:
+          "Reach us at (814) 440-9092 or (814) 969-5211. Tell us about your property and what you need — residential or commercial.",
       },
       {
         number: "02",
-        title: "Free Estimate",
-        description: "We come to your property and give you a free, no-pressure quote.",
+        title: "Free On-Site Estimate",
+        description:
+          "We come to you at no charge. We look at your yard, understand your goals, and put together a clear quote on the spot.",
       },
       {
         number: "03",
-        title: "Schedule It",
-        description: "Pick a date that works for you. We fit around your schedule.",
+        title: "You Approve the Plan",
+        description:
+          "No pressure. Review the estimate, ask questions, and give us the green light when you're ready. We work on your timeline.",
       },
       {
         number: "04",
         title: "We Get to Work",
-        description: "Our crew arrives on time and gets the job done right the first time.",
+        description:
+          "Our crew shows up on time and does the job right. We treat every property — residential or commercial — with full attention.",
       },
       {
         number: "05",
         title: "Final Walkthrough",
-        description: "We review the work with you to make sure you're 100% satisfied.",
+        description:
+          "Before we leave, we walk the property with you. If anything isn't right, we fix it. Your satisfaction is what we're here for.",
       },
       {
         number: "06",
-        title: "Ongoing Care",
-        description: "Sign up for recurring service and never worry about your yard again.",
+        title: "Ongoing Maintenance",
+        description:
+          "Sign up for recurring service and we handle it from here. Weekly, bi-weekly, or seasonal — we keep your property looking sharp all year.",
       },
     ],
     images: [
@@ -167,26 +174,26 @@ export const bossDLandscaping: ThemeConfig = {
   },
   testimonials: [
     {
-      name: "Michelle T.",
+      name: "Janet K.",
       location: "Erie, PA",
-      text: "Boss D completely transformed my backyard. They were professional, fast, and cleaned up everything after. My yard has never looked this good.",
+      text: "Thanks to Boss D and their staff for keeping our property looking so nice! They're reliable, professional, and always go above and beyond. Happy customer for years.",
       rating: 5,
     },
     {
-      name: "James R.",
+      name: "Marcus D.",
       location: "Millcreek, PA",
-      text: "I've been using Boss D for two years now for weekly mowing. Always on time, always looks great. I've recommended them to everyone on my street.",
+      text: "Boss D completely transformed my backyard. They showed up on time, did incredible work, and the price was more than fair. My yard has never looked this good.",
       rating: 5,
     },
     {
-      name: "Sandra K.",
+      name: "Sandra R.",
       location: "Erie, PA",
-      text: "They did our spring cleanup and mulching and the difference was night and day. Very fair price and incredibly friendly crew. Will definitely use again.",
+      text: "I've used a lot of landscaping companies over the years. Boss D is by far the most dependable. They treat your yard like it's their own.",
       rating: 5,
     },
   ],
   serviceArea: {
-    headline: "Serving Erie & Surrounding Areas",
+    headline: "Serving Erie County & Surrounding Areas",
     cities: [
       "Erie",
       "Millcreek",
@@ -201,17 +208,19 @@ export const bossDLandscaping: ThemeConfig = {
       "Waterford",
       "Wattsburg",
       "North East",
-      "Springfield",
+      "McKean",
+      "Greene Township",
+      "Summit Township",
     ],
   },
   cta: {
     headline: "Ready for a Yard You're Proud Of?",
     subtext:
-      "Free estimates. No pressure. Serving Erie, PA and surrounding areas.",
+      "Free estimates. No pressure. Serving Erie County, PA since day one. Call us at (814) 440-9092 — we're open until 9 PM.",
     buttonText: "Get a Free Quote",
   },
   footer: {
-    tagline: "Boss D Landscaping Services — Erie's Most Trusted Crew.",
+    tagline: "Boss D Landscape — 713 Perry St, Erie, PA · (814) 440-9092",
     links: [
       { label: "Services", href: "#services" },
       { label: "Why Us", href: "#why-us" },

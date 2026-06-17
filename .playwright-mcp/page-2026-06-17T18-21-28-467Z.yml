@@ -1,0 +1,303 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e5]:
+        - link "Boss D Landscape":
+          - /url: "#"
+          - img "Boss D Landscape"
+        - navigation [ref=e6]:
+          - link "Services" [ref=e7] [cursor=pointer]:
+            - /url: "#services"
+          - link "Why Us" [ref=e8] [cursor=pointer]:
+            - /url: "#why-us"
+          - link "Process" [ref=e9] [cursor=pointer]:
+            - /url: "#process"
+          - link "Reviews" [ref=e10] [cursor=pointer]:
+            - /url: "#testimonials"
+          - link "Contact" [ref=e11] [cursor=pointer]:
+            - /url: "#contact"
+        - link "(814) 440-9092" [ref=e13] [cursor=pointer]:
+          - /url: tel:8144409092
+          - img
+          - text: (814) 440-9092
+    - main [ref=e14]:
+      - generic [ref=e18]:
+        - generic [ref=e19]:
+          - generic [ref=e20]: Erie's Full-Service Landscaping Company
+          - heading "Erie's Most Trusted Landscape Company" [level=1] [ref=e21]
+          - paragraph [ref=e22]: Boss D Landscape delivers full-service landscaping for residential and commercial properties across Erie County, PA. From weekly lawn maintenance to complete yard transformations — we show up, we care, and we get it done.
+          - generic [ref=e23]:
+            - link "(814) 440-9092" [ref=e24] [cursor=pointer]:
+              - /url: tel:8144409092
+              - img [ref=e25]
+              - text: (814) 440-9092
+            - link "Our Services" [ref=e27] [cursor=pointer]:
+              - /url: "#services"
+        - generic [ref=e28]:
+          - paragraph [ref=e29]: Free Inspection
+          - heading "Get a Free Estimate" [level=3] [ref=e30]
+          - generic [ref=e31]:
+            - textbox "Name" [ref=e32]
+            - generic [ref=e33]:
+              - textbox "Phone *" [ref=e34]
+              - textbox "Email *" [ref=e35]
+            - textbox "Address" [ref=e36]
+            - textbox "Message" [ref=e37]
+            - button "Get Free Estimate" [ref=e38] [cursor=pointer]
+      - generic [ref=e40]:
+        - generic [ref=e42]:
+          - img [ref=e43]
+          - paragraph [ref=e49]: Lawn Mowing & Maintenance
+        - generic [ref=e51]:
+          - img [ref=e52]
+          - paragraph [ref=e55]: Landscaping & Design
+        - generic [ref=e57]:
+          - img [ref=e58]
+          - paragraph [ref=e61]: Mulching & Edging
+        - generic [ref=e63]:
+          - img [ref=e64]
+          - paragraph [ref=e67]: Tree & Shrub Trimming
+      - generic [ref=e71]:
+        - generic [ref=e72]:
+          - paragraph [ref=e74]: Welcome to Boss D Landscape
+          - heading "Why Erie Chooses Boss D" [level=2] [ref=e75]
+          - paragraph [ref=e76]: Boss D Landscape delivers full-service landscaping for residential and commercial properties across Erie County, PA. From weekly lawn maintenance to complete yard transformations — we show up, we care, and we get it done.
+        - generic [ref=e77]:
+          - generic [ref=e79]:
+            - generic [ref=e80]: 4.7★
+            - generic [ref=e81]: Google Rating
+          - generic [ref=e83]:
+            - generic [ref=e84]: 100%
+            - generic [ref=e85]: Recommend on Facebook
+          - generic [ref=e87]:
+            - generic [ref=e88]: 740+
+            - generic [ref=e89]: Followers & Counting
+      - generic [ref=e92]:
+        - heading "Highly Rated Roofers in Erie" [level=2] [ref=e93]
+        - link "Schedule an Appointment Today" [ref=e94] [cursor=pointer]:
+          - /url: "#contact"
+      - generic [ref=e96]:
+        - generic [ref=e97]:
+          - generic: "01"
+          - generic [ref=e100]:
+            - paragraph [ref=e102]: Why Erie Chooses Boss D
+            - heading "What Sets Us Apart" [level=2] [ref=e103]
+            - generic [ref=e104]:
+              - generic [ref=e105]:
+                - term [ref=e106]: "Locally Rooted in Erie:"
+                - definition [ref=e107]: We're based at 713 Perry St, Erie, PA — this is our city. Every yard we maintain is a yard in our own community, and we treat it that way.
+              - generic [ref=e108]:
+                - term [ref=e109]: "4.7 Stars on Google:"
+                - definition [ref=e110]: Our Google rating and 100% Facebook recommendation rate speak for themselves. We built that reputation one yard at a time.
+              - generic [ref=e111]:
+                - term [ref=e112]: "Residential & Commercial:"
+                - definition [ref=e113]: From single-family homes to commercial properties, Boss D handles it all with the same level of professionalism and attention to detail.
+            - link "About Us" [ref=e114] [cursor=pointer]:
+              - /url: "#contact"
+        - generic [ref=e115]:
+          - generic: "02"
+          - generic [ref=e118]:
+            - paragraph [ref=e120]: Why Erie Chooses Boss D
+            - heading "Core Values" [level=2] [ref=e121]
+            - generic [ref=e122]:
+              - generic [ref=e123]:
+                - term [ref=e124]: "Dependable. Every Time.:"
+                - definition [ref=e125]: We show up when we say we will. No excuses. Erie winters are tough and Erie summers are busy — we plan around both so you don't have to.
+              - generic [ref=e126]:
+                - term [ref=e127]: "Fair, Transparent Pricing:"
+                - definition [ref=e128]: You get a clear quote before any work begins. No surprise fees, no pressure — just honest pricing for quality work.
+              - generic [ref=e129]:
+                - term [ref=e130]: "Open Until 9 PM:"
+                - definition [ref=e131]: We work around your schedule, not the other way around. Reach us evenings and weekends — whenever it works for you.
+            - link "About Us" [ref=e132] [cursor=pointer]:
+              - /url: "#contact"
+      - generic [ref=e134]:
+        - generic [ref=e135]:
+          - paragraph [ref=e136]: Areas We Serve
+          - heading "Serving Erie County & Surrounding Areas" [level=2] [ref=e137]
+        - generic [ref=e138]:
+          - generic [ref=e140]:
+            - img [ref=e141]
+            - generic [ref=e144]: Erie, PA
+          - generic [ref=e146]:
+            - img [ref=e147]
+            - generic [ref=e150]: Millcreek, PA
+          - generic [ref=e152]:
+            - img [ref=e153]
+            - generic [ref=e156]: Fairview, PA
+          - generic [ref=e158]:
+            - img [ref=e159]
+            - generic [ref=e162]: Harborcreek, PA
+          - generic [ref=e164]:
+            - img [ref=e165]
+            - generic [ref=e168]: Wesleyville, PA
+          - generic [ref=e170]:
+            - img [ref=e171]
+            - generic [ref=e174]: Lawrence Park, PA
+          - generic [ref=e176]:
+            - img [ref=e177]
+            - generic [ref=e180]: Girard, PA
+          - generic [ref=e182]:
+            - img [ref=e183]
+            - generic [ref=e186]: Edinboro, PA
+          - generic [ref=e188]:
+            - img [ref=e189]
+            - generic [ref=e192]: Corry, PA
+          - generic [ref=e194]:
+            - img [ref=e195]
+            - generic [ref=e198]: Union City, PA
+          - generic [ref=e200]:
+            - img [ref=e201]
+            - generic [ref=e204]: Waterford, PA
+          - generic [ref=e206]:
+            - img [ref=e207]
+            - generic [ref=e210]: Wattsburg, PA
+          - generic [ref=e212]:
+            - img [ref=e213]
+            - generic [ref=e216]: North East, PA
+          - generic [ref=e218]:
+            - img [ref=e219]
+            - generic [ref=e222]: McKean, PA
+          - generic [ref=e224]:
+            - img [ref=e225]
+            - generic [ref=e228]: Greene Township, PA
+          - generic [ref=e230]:
+            - img [ref=e231]
+            - generic [ref=e234]: Summit Township, PA
+      - generic [ref=e236]:
+        - generic [ref=e237]:
+          - paragraph [ref=e238]: Impressive Words
+          - heading "From Happy Customers" [level=2] [ref=e239]
+        - generic [ref=e240]:
+          - generic [ref=e242]:
+            - generic [ref=e243]:
+              - img [ref=e244]
+              - img [ref=e246]
+              - img [ref=e248]
+              - img [ref=e250]
+              - img [ref=e252]
+            - paragraph [ref=e254]: “Thanks to Boss D and their staff for keeping our property looking so nice! They're reliable, professional, and always go above and beyond. Happy customer for years.”
+            - generic [ref=e255]:
+              - paragraph [ref=e256]: Janet K.
+              - paragraph [ref=e257]: Erie, PA
+          - generic [ref=e259]:
+            - generic [ref=e260]:
+              - img [ref=e261]
+              - img [ref=e263]
+              - img [ref=e265]
+              - img [ref=e267]
+              - img [ref=e269]
+            - paragraph [ref=e271]: “Boss D completely transformed my backyard. They showed up on time, did incredible work, and the price was more than fair. My yard has never looked this good.”
+            - generic [ref=e272]:
+              - paragraph [ref=e273]: Marcus D.
+              - paragraph [ref=e274]: Millcreek, PA
+          - generic [ref=e276]:
+            - generic [ref=e277]:
+              - img [ref=e278]
+              - img [ref=e280]
+              - img [ref=e282]
+              - img [ref=e284]
+              - img [ref=e286]
+            - paragraph [ref=e288]: “I've used a lot of landscaping companies over the years. Boss D is by far the most dependable. They treat your yard like it's their own.”
+            - generic [ref=e289]:
+              - paragraph [ref=e290]: Sandra R.
+              - paragraph [ref=e291]: Erie, PA
+      - generic [ref=e293]:
+        - generic [ref=e294]:
+          - paragraph [ref=e295]: View
+          - heading "How It Works" [level=2] [ref=e296]
+        - generic [ref=e297]:
+          - generic [ref=e300]:
+            - generic [ref=e302]:
+              - generic [ref=e304]: "01"
+              - paragraph [ref=e305]: Give Us a Call
+              - paragraph [ref=e306]: Reach us at (814) 440-9092 or (814) 969-5211. Tell us about your property and what you need — residential or commercial.
+            - generic [ref=e308]:
+              - generic [ref=e310]: "02"
+              - paragraph [ref=e311]: Free On-Site Estimate
+              - paragraph [ref=e312]: We come to you at no charge. We look at your yard, understand your goals, and put together a clear quote on the spot.
+            - generic [ref=e314]:
+              - generic [ref=e316]: "03"
+              - paragraph [ref=e317]: You Approve the Plan
+              - paragraph [ref=e318]: No pressure. Review the estimate, ask questions, and give us the green light when you're ready. We work on your timeline.
+            - generic [ref=e320]:
+              - generic [ref=e322]: "04"
+              - paragraph [ref=e323]: We Get to Work
+              - paragraph [ref=e324]: Our crew shows up on time and does the job right. We treat every property — residential or commercial — with full attention.
+          - generic [ref=e327]:
+            - generic [ref=e329]:
+              - generic [ref=e331]: "05"
+              - paragraph [ref=e332]: Final Walkthrough
+              - paragraph [ref=e333]: Before we leave, we walk the property with you. If anything isn't right, we fix it. Your satisfaction is what we're here for.
+            - generic [ref=e335]:
+              - generic [ref=e337]: "06"
+              - paragraph [ref=e338]: Ongoing Maintenance
+              - paragraph [ref=e339]: Sign up for recurring service and we handle it from here. Weekly, bi-weekly, or seasonal — we keep your property looking sharp all year.
+      - generic [ref=e341]:
+        - generic [ref=e342]:
+          - paragraph [ref=e343]: View
+          - heading "Our Partners" [level=2] [ref=e344]
+        - generic [ref=e345]:
+          - button "Previous" [ref=e346] [cursor=pointer]:
+            - img [ref=e347]
+          - generic [ref=e349]:
+            - generic [ref=e351]: John Deere
+            - generic [ref=e353]: Husqvarna
+            - generic [ref=e355]: Echo
+            - generic [ref=e357]: PLANET
+            - generic [ref=e359]: Stihl
+          - button "Next" [ref=e360] [cursor=pointer]:
+            - img [ref=e361]
+      - generic [ref=e364]:
+        - heading "Ready for a Yard You're Proud Of?" [level=2] [ref=e365]
+        - paragraph [ref=e366]: Free estimates. No pressure. Serving Erie County, PA since day one. Call us at (814) 440-9092 — we're open until 9 PM.
+        - generic [ref=e367]:
+          - link "(814) 440-9092" [ref=e368] [cursor=pointer]:
+            - /url: tel:8144409092
+            - img [ref=e369]
+            - text: (814) 440-9092
+          - link "Get a Free Quote" [ref=e371] [cursor=pointer]:
+            - /url: "#contact"
+    - contentinfo [ref=e372]:
+      - generic [ref=e373]:
+        - generic [ref=e374]:
+          - generic [ref=e375]:
+            - generic [ref=e376]: B
+            - paragraph [ref=e377]: Boss D Landscape
+          - paragraph [ref=e378]: Boss D Landscape — 713 Perry St, Erie, PA · (814) 440-9092
+        - generic [ref=e379]:
+          - paragraph [ref=e380]: Services
+          - navigation [ref=e381]:
+            - link "Lawn Mowing & Maintenance" [ref=e382] [cursor=pointer]:
+              - /url: "#services"
+            - link "Landscaping & Design" [ref=e383] [cursor=pointer]:
+              - /url: "#services"
+            - link "Mulching & Edging" [ref=e384] [cursor=pointer]:
+              - /url: "#services"
+            - link "Tree & Shrub Trimming" [ref=e385] [cursor=pointer]:
+              - /url: "#services"
+            - link "Spring & Fall Cleanup" [ref=e386] [cursor=pointer]:
+              - /url: "#services"
+            - link "Commercial Landscaping" [ref=e387] [cursor=pointer]:
+              - /url: "#services"
+        - generic [ref=e388]:
+          - paragraph [ref=e389]: Useful Links
+          - navigation [ref=e390]:
+            - link "Services" [ref=e391] [cursor=pointer]:
+              - /url: "#services"
+            - link "Why Us" [ref=e392] [cursor=pointer]:
+              - /url: "#why-us"
+            - link "Process" [ref=e393] [cursor=pointer]:
+              - /url: "#process"
+            - link "Reviews" [ref=e394] [cursor=pointer]:
+              - /url: "#testimonials"
+            - link "Contact" [ref=e395] [cursor=pointer]:
+              - /url: "#contact"
+          - generic [ref=e396]:
+            - link "(814) 440-9092" [ref=e397] [cursor=pointer]:
+              - /url: tel:8144409092
+            - link "jgarnica1334@yahoo.com" [ref=e398] [cursor=pointer]:
+              - /url: mailto:jgarnica1334@yahoo.com
+            - paragraph [ref=e399]: Erie, PA
+      - paragraph [ref=e401]: Boss D Landscape 2026©
+  - alert [ref=e402]

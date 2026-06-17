@@ -39,21 +39,31 @@ export function NavBar({ config }: NavBarProps) {
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 md:px-8">
         <a href="#" className="flex items-center gap-2.5">
-          <span
-            className="flex size-9 shrink-0 items-center justify-center text-base font-bold text-white"
-            style={{ backgroundColor: "var(--color-primary)" }}
-          >
-            {config.brand.name.charAt(0)}
-          </span>
-          <span
-            className="font-heading text-base font-bold uppercase tracking-wide leading-tight transition-colors"
-            style={{
-              color: scrolled ? "var(--color-text)" : "#FFFFFF",
-              textShadow: scrolled ? "none" : "0 1px 3px rgba(0,0,0,0.6)",
-            }}
-          >
-            {config.brand.name}
-          </span>
+          {config.brand.logo ? (
+            <img
+              src={config.brand.logo}
+              alt={config.brand.name}
+              className="h-10 w-auto object-contain"
+            />
+          ) : (
+            <>
+              <span
+                className="flex size-9 shrink-0 items-center justify-center text-base font-bold text-white"
+                style={{ backgroundColor: "var(--color-primary)" }}
+              >
+                {config.brand.name.charAt(0)}
+              </span>
+              <span
+                className="font-heading text-base font-bold uppercase tracking-wide leading-tight transition-colors"
+                style={{
+                  color: scrolled ? "var(--color-text)" : "#FFFFFF",
+                  textShadow: scrolled ? "none" : "0 1px 3px rgba(0,0,0,0.6)",
+                }}
+              >
+                {config.brand.name}
+              </span>
+            </>
+          )}
         </a>
 
         <nav className="hidden items-center gap-8 lg:flex">
