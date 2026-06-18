@@ -26,6 +26,7 @@ export const craftBarberStudio: ThemeConfig = {
     body: "Inter",
   },
   hero: {
+    backgroundImage: "/images/craft-barber-studio/hero.jpg",
     headline: "Where Every Cut Is a Craft",
     subheadline:
       "Craft Barber Studio brings old-school precision and modern style together in the heart of San Antonio. Expert barbers, relaxed atmosphere, and cuts that speak for themselves.",
@@ -89,6 +90,11 @@ export const craftBarberStudio: ThemeConfig = {
   ],
   whyUs: {
     headline: "Why San Antonio Chooses Craft",
+    images: [
+      "/images/craft-barber-studio/why-us-1.jpg",
+      "/images/craft-barber-studio/barbersho-hatfield.jpeg",
+      
+    ],
     points: [
       {
         title: "Barbers, Not Just Stylists",
@@ -124,6 +130,13 @@ export const craftBarberStudio: ThemeConfig = {
   },
   process: {
     headline: "Your Craft Experience",
+    images: [
+      "/images/craft-barber-studio/process-1.jpg",
+      "/images/craft-barber-studio/process-2.jpg",
+      "/images/craft-barber-studio/process-3.jpg",
+      "/images/craft-barber-studio/process-4.jpg",
+      "/images/craft-barber-studio/process-5.jpg",
+    ],
     steps: [
       {
         number: "01",
