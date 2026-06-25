@@ -2,7 +2,6 @@ import { ThemeConfig } from "@/lib/theme"
 
 export const oneStopRepair: ThemeConfig = {
   slug: "1-stop-repair",
-  password: "1stop123",
   brand: {
     name: "1 Stop Repair",
     tagline: "San Antonio's Cellphone Repair Experts",

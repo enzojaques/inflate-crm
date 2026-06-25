@@ -3,7 +3,6 @@ import type { Metadata } from "next"
 
 import { getConfig } from "@/configs"
 import { getFontCssVariable } from "@/lib/fonts"
-import { PasswordGate } from "@/components/ui/PasswordGate"
 import { NavBar } from "@/components/ui/NavBar"
 import { Footer } from "@/components/sections/Footer"
 import { ServiceArea } from "@/components/sections/ServiceArea"
@@ -38,7 +37,7 @@ export default function OneStopRepairPage() {
     "--font-body": getFontCssVariable(config.fonts.body),
   } as CSSProperties
 
-  const site = (
+  return (
     <div style={{ ...themeStyle, backgroundColor: "#0A0A0A" }} className="font-body">
       <NavBar config={config} />
       <main>
@@ -52,12 +51,6 @@ export default function OneStopRepairPage() {
         <RepairCTA config={config} />
       </main>
       <Footer config={config} />
-    </div>
-  )
-
-  return (
-    <div style={themeStyle}>
-      <PasswordGate config={config}>{site}</PasswordGate>
     </div>
   )
 }
