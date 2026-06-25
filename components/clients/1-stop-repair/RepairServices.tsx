@@ -1,14 +1,31 @@
 "use client"
 
 import * as React from "react"
-import * as LucideIcons from "lucide-react"
-import { LucideIcon, HelpCircle, ArrowUpRight } from "lucide-react"
+import {
+  Smartphone,
+  BatteryCharging,
+  Droplets,
+  Plug,
+  Camera,
+  ShoppingBag,
+  HelpCircle,
+  ArrowUpRight,
+  type LucideIcon,
+} from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ThemeConfig } from "@/lib/theme"
 
+const ICON_MAP: Record<string, LucideIcon> = {
+  Smartphone,
+  BatteryCharging,
+  Droplets,
+  Plug,
+  Camera,
+  ShoppingBag,
+}
+
 function resolveIcon(name: string): LucideIcon {
-  const icons = LucideIcons as unknown as Record<string, LucideIcon>
-  return icons[name] ?? HelpCircle
+  return ICON_MAP[name] ?? HelpCircle
 }
 
 const spring = { type: "spring", stiffness: 300, damping: 28 } as const
