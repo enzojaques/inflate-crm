@@ -1,6 +1,6 @@
 "use client"
 
-import * as React from "react"
+import React from "react"
 import { motion } from "framer-motion"
 import { Phone, Clock, Shield, Wrench } from "lucide-react"
 import { ThemeConfig } from "@/lib/theme"
