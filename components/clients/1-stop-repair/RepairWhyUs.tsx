@@ -4,6 +4,9 @@ import { motion } from "framer-motion"
 import { CheckCircle2, Phone } from "lucide-react"
 import { ThemeConfig } from "@/lib/theme"
 
+const spring = { type: "spring", stiffness: 60, damping: 18 } as const
+const snapSpring = { type: "spring", stiffness: 400, damping: 30 } as const
+
 const TECH_IMG =
   "https://images.unsplash.com/photo-1539331586018-346b53b2aaa4?w=1200&auto=format&fit=crop&q=80"
 
@@ -15,10 +18,10 @@ export function RepairWhyUs({ config }: { config: ThemeConfig }) {
 
           {/* Image column */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ ...spring }}
             className="relative"
           >
             <img
@@ -39,10 +42,10 @@ export function RepairWhyUs({ config }: { config: ThemeConfig }) {
 
           {/* Content column */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ ...spring, delay: 0.1 }}
           >
             <div className="mb-4 flex items-center gap-3">
               <div className="h-px w-8 bg-[#D42B2B]" />
@@ -61,7 +64,7 @@ export function RepairWhyUs({ config }: { config: ThemeConfig }) {
                   initial={{ opacity: 0, x: 16 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.07 }}
+                  transition={{ ...spring, delay: i * 0.07 }}
                   className="flex gap-4"
                 >
                   <CheckCircle2
@@ -78,13 +81,16 @@ export function RepairWhyUs({ config }: { config: ThemeConfig }) {
             </div>
 
             <div className="mt-10 flex items-center gap-5 border-t border-white/10 pt-8">
-              <a
+              <motion.a
                 href={`tel:${config.brand.phone.replace(/[^\d+]/g, "")}`}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.97 }}
+                transition={snapSpring}
                 className="inline-flex items-center gap-2.5 bg-[#D42B2B] px-7 py-4 text-sm font-bold uppercase tracking-widest text-white transition-colors hover:bg-[#B02222]"
               >
                 <Phone size={15} strokeWidth={2.5} />
                 Call Now
-              </a>
+              </motion.a>
               <span className="text-sm text-white/35">{config.brand.phone}</span>
             </div>
           </motion.div>
