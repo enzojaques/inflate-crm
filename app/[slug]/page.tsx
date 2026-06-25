@@ -22,8 +22,13 @@ interface PageProps {
   params: { slug: string }
 }
 
+// Slugs with dedicated static routes are excluded so they don't collide
+const DEDICATED_ROUTES = new Set(["1-stop-repair"])
+
 export function generateStaticParams() {
-  return Object.keys(configs).map((slug) => ({ slug }))
+  return Object.keys(configs)
+    .filter((slug) => !DEDICATED_ROUTES.has(slug))
+    .map((slug) => ({ slug }))
 }
 
 export function generateMetadata({ params }: PageProps): Metadata {
