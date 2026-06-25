@@ -1,0 +1,337 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e5]:
+        - link "1 Stop Repair":
+          - /url: "#"
+          - img "1 Stop Repair"
+        - navigation [ref=e6]:
+          - link "Services" [ref=e7] [cursor=pointer]:
+            - /url: "#services"
+          - link "Why Us" [ref=e8] [cursor=pointer]:
+            - /url: "#why-us"
+          - link "How It Works" [ref=e9] [cursor=pointer]:
+            - /url: "#process"
+          - link "Reviews" [ref=e10] [cursor=pointer]:
+            - /url: "#testimonials"
+          - link "Contact" [ref=e11] [cursor=pointer]:
+            - /url: "#contact"
+        - link "(210) 946-9188" [ref=e13] [cursor=pointer]:
+          - /url: tel:2109469188
+          - img
+          - text: (210) 946-9188
+    - main [ref=e14]:
+      - generic [ref=e15]:
+        - generic [ref=e22]:
+          - generic [ref=e25]: "San Antonio's #1 Phone Repair Shop"
+          - heading "CRACKED SCREEN?" [level=1] [ref=e26]:
+            - generic [ref=e27]: CRACKED
+            - generic [ref=e28]: SCREEN?
+          - paragraph [ref=e29]: Cracked screen? Dead battery? Water damage? 1 Stop Repair fixes it all — most repairs done same-day while you wait. Serving San Antonio's west side since day one.
+          - generic [ref=e30]:
+            - generic [ref=e31]:
+              - img [ref=e32]
+              - generic [ref=e35]: Same-Day Service
+            - generic [ref=e36]:
+              - img [ref=e37]
+              - generic [ref=e39]: No Fix, No Fee
+            - generic [ref=e40]:
+              - img [ref=e41]
+              - generic [ref=e43]: All Major Brands
+          - generic [ref=e44]:
+            - link "(210) 946-9188" [ref=e45] [cursor=pointer]:
+              - /url: tel:2109469188
+              - img [ref=e46]
+              - text: (210) 946-9188
+            - link "Our Services →" [ref=e48] [cursor=pointer]:
+              - /url: "#services"
+              - text: Our Services
+              - generic [ref=e49]: →
+        - generic [ref=e51]:
+          - generic [ref=e52]: 1618 Bandera Rd · San Antonio, TX 78228
+          - generic [ref=e53]: Walk-Ins Welcome
+      - generic [ref=e55]:
+        - link "Screen Replacement" [ref=e56] [cursor=pointer]:
+          - /url: "#services"
+          - img [ref=e57]
+          - generic [ref=e59]: Screen Replacement
+        - link "Battery Replacement" [ref=e60] [cursor=pointer]:
+          - /url: "#services"
+          - img [ref=e61]
+          - generic [ref=e65]: Battery Replacement
+        - link "Water Damage Repair" [ref=e66] [cursor=pointer]:
+          - /url: "#services"
+          - img [ref=e67]
+          - generic [ref=e70]: Water Damage Repair
+        - link "Charging Port Repair" [ref=e71] [cursor=pointer]:
+          - /url: "#services"
+          - img [ref=e72]
+          - generic [ref=e74]: Charging Port Repair
+        - link "Camera Repair" [ref=e75] [cursor=pointer]:
+          - /url: "#services"
+          - img [ref=e76]
+          - generic [ref=e79]: Camera Repair
+        - link "Accessories & Cases" [ref=e80] [cursor=pointer]:
+          - /url: "#services"
+          - img [ref=e81]
+          - generic [ref=e84]: Accessories & Cases
+      - generic [ref=e87]:
+        - generic [ref=e88]:
+          - generic [ref=e90]: 10K+
+          - generic [ref=e91]: Devices Repaired
+        - generic [ref=e92]:
+          - generic [ref=e94]: Same Day
+          - generic [ref=e95]: Turnaround
+        - generic [ref=e96]:
+          - generic [ref=e97]: 5★
+          - generic [ref=e98]: Customer Rating
+      - generic [ref=e100]:
+        - generic [ref=e101]:
+          - generic [ref=e102]:
+            - generic [ref=e105]: What We Do
+            - heading "WHAT WE FIX" [level=2] [ref=e106]:
+              - text: WHAT WE
+              - text: FIX
+          - paragraph [ref=e107]: Every major brand, every major issue. If it has a screen, we can fix it.
+        - generic [ref=e108]:
+          - generic [ref=e109]:
+            - generic [ref=e110]:
+              - img [ref=e112]
+              - generic [ref=e114]: "01"
+            - heading "Screen Replacement" [level=3] [ref=e115]
+            - paragraph [ref=e116]: Shattered or cracked display? We replace screens on iPhones, Samsung Galaxy, and virtually every other major device — fast, clean, and guaranteed.
+          - generic [ref=e117]:
+            - generic [ref=e118]:
+              - img [ref=e120]
+              - generic [ref=e124]: "02"
+            - heading "Battery Replacement" [level=3] [ref=e125]
+            - paragraph [ref=e126]: If your phone dies before the day does, it's time for a new battery. We swap out worn batteries on-site so you're back at 100% without the wait.
+          - generic [ref=e127]:
+            - generic [ref=e128]:
+              - img [ref=e130]
+              - generic [ref=e133]: "03"
+            - heading "Water Damage Repair" [level=3] [ref=e134]
+            - paragraph [ref=e135]: Dropped your phone in water? Don't wait — bring it in immediately. Our technicians diagnose and clean water-damaged devices to recover as much as possible.
+          - generic [ref=e136]:
+            - generic [ref=e137]:
+              - img [ref=e139]
+              - generic [ref=e141]: "04"
+            - heading "Charging Port Repair" [level=3] [ref=e142]
+            - paragraph [ref=e143]: Loose connection or won't charge at all? We clean, repair, or replace charging ports so your phone powers up reliably every time.
+          - generic [ref=e144]:
+            - generic [ref=e145]:
+              - img [ref=e147]
+              - generic [ref=e150]: "05"
+            - heading "Camera Repair" [level=3] [ref=e151]
+            - paragraph [ref=e152]: Blurry photos, cracked lens, or a camera that won't open — we fix front and rear cameras so you never miss a moment.
+          - generic [ref=e153]:
+            - generic [ref=e154]:
+              - img [ref=e156]
+              - generic [ref=e159]: "06"
+            - heading "Accessories & Cases" [level=3] [ref=e160]
+            - paragraph [ref=e161]: We carry a wide selection of phone cases, screen protectors, chargers, and accessories for all major devices — all in one stop.
+      - generic [ref=e164]:
+        - generic [ref=e165]:
+          - img "Phone repair technician at work" [ref=e166]
+          - generic [ref=e168]:
+            - generic [ref=e169]: 10K+
+            - generic [ref=e170]: Devices Fixed
+        - generic [ref=e171]:
+          - generic [ref=e174]: Why Choose Us
+          - heading "Why San Antonio Trusts 1 Stop Repair" [level=2] [ref=e175]
+          - generic [ref=e176]:
+            - generic [ref=e177]:
+              - img [ref=e178]
+              - generic [ref=e181]:
+                - heading "Fast Turnaround" [level=3] [ref=e182]
+                - paragraph [ref=e183]: Most repairs are completed same-day — often within the hour. We know you can't live without your phone, and we don't make you wait.
+            - generic [ref=e184]:
+              - img [ref=e185]
+              - generic [ref=e188]:
+                - heading "No Fix, No Fee" [level=3] [ref=e189]
+                - paragraph [ref=e190]: If we can't fix it, you don't pay. We diagnose your device for free and only charge when we deliver results.
+            - generic [ref=e191]:
+              - img [ref=e192]
+              - generic [ref=e195]:
+                - heading "All Major Brands" [level=3] [ref=e196]
+                - paragraph [ref=e197]: iPhone, Samsung, Google Pixel, LG, Motorola — if it has a screen, we can work on it. Bring in anything and we'll tell you what we can do.
+            - generic [ref=e198]:
+              - img [ref=e199]
+              - generic [ref=e202]:
+                - heading "Quality Parts" [level=3] [ref=e203]
+                - paragraph [ref=e204]: We use high-quality replacement parts that meet or exceed OEM standards. Your repaired device should feel just like it did out of the box.
+            - generic [ref=e205]:
+              - img [ref=e206]
+              - generic [ref=e209]:
+                - heading "Honest Pricing" [level=3] [ref=e210]
+                - paragraph [ref=e211]: No hidden fees, no surprises. We quote you upfront before we touch your device so you always know exactly what you're paying.
+            - generic [ref=e212]:
+              - img [ref=e213]
+              - generic [ref=e216]:
+                - heading "Local & Trustworthy" [level=3] [ref=e217]
+                - paragraph [ref=e218]: We're a San Antonio shop — not a franchise. Real people, real accountability, and a reputation built on thousands of satisfied customers right here in our community.
+          - generic [ref=e219]:
+            - link "Call Now" [ref=e220] [cursor=pointer]:
+              - /url: tel:2109469188
+              - img [ref=e221]
+              - text: Call Now
+            - generic [ref=e223]: (210) 946-9188
+      - generic [ref=e225]:
+        - generic [ref=e226]:
+          - generic [ref=e229]: Happy Customers
+          - heading "REAL PEOPLE, REAL RESULTS" [level=2] [ref=e230]:
+            - text: REAL PEOPLE,
+            - text: REAL RESULTS
+        - generic [ref=e231]:
+          - generic [ref=e232]:
+            - generic: "\""
+            - generic [ref=e233]:
+              - img [ref=e234]
+              - img [ref=e236]
+              - img [ref=e238]
+              - img [ref=e240]
+              - img [ref=e242]
+            - paragraph [ref=e244]: “Dropped my iPhone and completely shattered the screen. Brought it to 1 Stop Repair and they had it fixed in under an hour. Looks brand new and the price was very fair. Definitely my go-to spot from now on.”
+            - generic [ref=e245]:
+              - generic [ref=e246]: M
+              - generic [ref=e247]:
+                - paragraph [ref=e248]: Maria G.
+                - paragraph [ref=e249]: San Antonio, TX
+          - generic [ref=e250]:
+            - generic: "\""
+            - generic [ref=e251]:
+              - img [ref=e252]
+              - img [ref=e254]
+              - img [ref=e256]
+              - img [ref=e258]
+              - img [ref=e260]
+            - paragraph [ref=e262]: “My Samsung wouldn't charge at all. They diagnosed it for free and fixed the port while I waited. Super professional and honest — they told me exactly what was wrong before doing anything. Highly recommend.”
+            - generic [ref=e263]:
+              - generic [ref=e264]: D
+              - generic [ref=e265]:
+                - paragraph [ref=e266]: David R.
+                - paragraph [ref=e267]: Leon Valley, TX
+          - generic [ref=e268]:
+            - generic: "\""
+            - generic [ref=e269]:
+              - img [ref=e270]
+              - img [ref=e272]
+              - img [ref=e274]
+              - img [ref=e276]
+              - img [ref=e278]
+            - paragraph [ref=e280]: “I was stressed out about my water-damaged phone — had so many photos I didn't want to lose. They recovered it and repaired it for a great price. Amazing service and very friendly staff.”
+            - generic [ref=e281]:
+              - generic [ref=e282]: J
+              - generic [ref=e283]:
+                - paragraph [ref=e284]: Jessica M.
+                - paragraph [ref=e285]: San Antonio, TX
+      - generic [ref=e287]:
+        - generic [ref=e288]:
+          - paragraph [ref=e289]: Areas We Serve
+          - heading "Serving San Antonio & the West Side" [level=2] [ref=e290]
+        - generic [ref=e291]:
+          - generic [ref=e293]:
+            - img [ref=e294]
+            - generic [ref=e297]: San Antonio, TX
+          - generic [ref=e299]:
+            - img [ref=e300]
+            - generic [ref=e303]: Leon Valley, TX
+          - generic [ref=e305]:
+            - img [ref=e306]
+            - generic [ref=e309]: Helotes, TX
+          - generic [ref=e311]:
+            - img [ref=e312]
+            - generic [ref=e315]: Lackland AFB, TX
+          - generic [ref=e317]:
+            - img [ref=e318]
+            - generic [ref=e321]: Alamo Ranch, TX
+          - generic [ref=e323]:
+            - img [ref=e324]
+            - generic [ref=e327]: Castroville, TX
+          - generic [ref=e329]:
+            - img [ref=e330]
+            - generic [ref=e333]: Balcones Heights, TX
+          - generic [ref=e335]:
+            - img [ref=e336]
+            - generic [ref=e339]: Converse, TX
+          - generic [ref=e341]:
+            - img [ref=e342]
+            - generic [ref=e345]: Universal City, TX
+          - generic [ref=e347]:
+            - img [ref=e348]
+            - generic [ref=e351]: Schertz, TX
+          - generic [ref=e353]:
+            - img [ref=e354]
+            - generic [ref=e357]: Live Oak, TX
+          - generic [ref=e359]:
+            - img [ref=e360]
+            - generic [ref=e363]: Selma, TX
+          - generic [ref=e365]:
+            - img [ref=e366]
+            - generic [ref=e369]: New Braunfels, TX
+          - generic [ref=e371]:
+            - img [ref=e372]
+            - generic [ref=e375]: Seguin, TX
+          - generic [ref=e377]:
+            - img [ref=e378]
+            - generic [ref=e381]: Pleasanton, TX
+          - generic [ref=e383]:
+            - img [ref=e384]
+            - generic [ref=e387]: Floresville, TX
+      - generic [ref=e388]:
+        - generic:
+          - generic: FIXED
+        - generic [ref=e389]:
+          - heading "BROKEN TODAY. FIXED TODAY." [level=2] [ref=e390]:
+            - generic [ref=e391]: BROKEN TODAY.
+            - generic [ref=e392]: FIXED TODAY.
+          - paragraph [ref=e393]: Walk in or call us at (210) 946-9188. Located at 1618 Bandera Rd, San Antonio — most repairs done same-day, no appointment needed.
+          - generic [ref=e394]:
+            - link "(210) 946-9188" [ref=e395] [cursor=pointer]:
+              - /url: tel:2109469188
+              - img [ref=e396]
+              - text: (210) 946-9188
+            - generic [ref=e398]: 1618 Bandera Rd · San Antonio
+    - contentinfo [ref=e399]:
+      - generic [ref=e400]:
+        - generic [ref=e401]:
+          - generic [ref=e402]:
+            - generic [ref=e403]: "1"
+            - paragraph [ref=e404]: 1 Stop Repair
+          - paragraph [ref=e405]: 1 Stop Repair — 1618 Bandera Rd, San Antonio, TX 78228
+        - generic [ref=e406]:
+          - paragraph [ref=e407]: Services
+          - navigation [ref=e408]:
+            - link "Screen Replacement" [ref=e409] [cursor=pointer]:
+              - /url: "#services"
+            - link "Battery Replacement" [ref=e410] [cursor=pointer]:
+              - /url: "#services"
+            - link "Water Damage Repair" [ref=e411] [cursor=pointer]:
+              - /url: "#services"
+            - link "Charging Port Repair" [ref=e412] [cursor=pointer]:
+              - /url: "#services"
+            - link "Camera Repair" [ref=e413] [cursor=pointer]:
+              - /url: "#services"
+            - link "Accessories & Cases" [ref=e414] [cursor=pointer]:
+              - /url: "#services"
+        - generic [ref=e415]:
+          - paragraph [ref=e416]: Useful Links
+          - navigation [ref=e417]:
+            - link "Services" [ref=e418] [cursor=pointer]:
+              - /url: "#services"
+            - link "Why Us" [ref=e419] [cursor=pointer]:
+              - /url: "#why-us"
+            - link "How It Works" [ref=e420] [cursor=pointer]:
+              - /url: "#process"
+            - link "Reviews" [ref=e421] [cursor=pointer]:
+              - /url: "#testimonials"
+            - link "Contact" [ref=e422] [cursor=pointer]:
+              - /url: "#contact"
+          - generic [ref=e423]:
+            - link "(210) 946-9188" [ref=e424] [cursor=pointer]:
+              - /url: tel:2109469188
+            - link "1stoprepairsa@gmail.com" [ref=e425] [cursor=pointer]:
+              - /url: mailto:1stoprepairsa@gmail.com
+            - paragraph [ref=e426]: San Antonio, TX
+      - paragraph [ref=e428]: 1 Stop Repair 2026©
+  - alert [ref=e429]

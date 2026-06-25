@@ -17,7 +17,7 @@ export function MidCTA({ config }: MidCTAProps) {
     >
       <FadeUp className="mx-auto max-w-3xl px-4 md:px-8">
         <h2 className="font-heading text-2xl font-bold uppercase text-white md:text-3xl">
-          Highly Rated Roofers in {config.brand.city}
+          {config.brand.tagline}
         </h2>
         <a
           href="#contact"

@@ -1,0 +1,215 @@
+- generic [ref=e4]:
+  - navigation [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - link "Unsplash Home" [ref=e8] [cursor=pointer]:
+          - /url: /
+          - img "Unsplash Home" [ref=e9]
+        - link "Photos" [ref=e11] [cursor=pointer]:
+          - /url: /
+          - img [ref=e12]
+        - link "Illustrations" [ref=e14] [cursor=pointer]:
+          - /url: /illustrations
+          - img [ref=e15]
+      - generic [ref=e17]:
+        - button "Explore" [ref=e18] [cursor=pointer]:
+          - img [ref=e19]
+        - button "Collections" [ref=e21] [cursor=pointer]:
+          - img [ref=e22]
+        - button "Download History" [ref=e24] [cursor=pointer]:
+          - img [ref=e25]
+      - button "Bookmarks" [ref=e28] [cursor=pointer]:
+        - img [ref=e29]
+    - generic [ref=e31]:
+      - link "Log in / Sign up" [ref=e32] [cursor=pointer]:
+        - /url: /login?referrer=%2Fs%2Fphotos%2Fphone-repair-technician
+        - img [ref=e33]
+      - button "Language" [ref=e35] [cursor=pointer]:
+        - img [ref=e36]
+      - button "Menu" [ref=e38] [cursor=pointer]:
+        - img [ref=e39]
+  - generic [ref=e41]:
+    - generic [ref=e42]:
+      - navigation [ref=e43]:
+        - search "Find visuals sitewide" [ref=e45]:
+          - button "Search Unsplash" [ref=e46] [cursor=pointer]:
+            - img [ref=e47]
+          - combobox [ref=e49]:
+            - searchbox "Search Unsplash" [ref=e50]: phone repair technician
+            - listbox
+          - button "Clear" [ref=e51] [cursor=pointer]:
+            - img [ref=e52]
+          - button "Visual search" [ref=e56] [cursor=pointer]:
+            - img [ref=e57]
+        - generic [ref=e59]:
+          - link "Get Unsplash+" [ref=e60] [cursor=pointer]:
+            - /url: /plus
+          - link "Log in" [ref=e61] [cursor=pointer]:
+            - /url: /login?referrer=%2Fs%2Fphotos%2Fphone-repair-technician
+        - button "Submit an image" [ref=e63] [cursor=pointer]
+      - generic [ref=e64]:
+        - generic [ref=e70]:
+          - list [ref=e71]:
+            - listitem [ref=e72]:
+              - link "Photos 7.7k":
+                - /url: /s/photos/phone-repair-technician
+                - img
+                - text: Photos
+                - generic: 7.7k
+            - listitem [ref=e73]:
+              - link "Illustrations 418" [ref=e74] [cursor=pointer]:
+                - /url: /s/illustrations/phone-repair-technician
+                - img [ref=e75]
+                - text: Illustrations
+                - generic [ref=e77]: "418"
+            - listitem [ref=e78]:
+              - button "More" [ref=e79] [cursor=pointer]
+          - button "Filters" [ref=e81] [cursor=pointer]:
+            - img [ref=e83]
+            - text: Filters
+        - generic [ref=e85]:
+          - heading "Phone repair technician" [level=1] [ref=e87]
+          - generic [ref=e91]:
+            - link "repair" [ref=e93] [cursor=pointer]:
+              - /url: /s/photos/repair
+            - link "tool" [ref=e95] [cursor=pointer]:
+              - /url: /s/photos/tool
+            - link "technology" [ref=e97] [cursor=pointer]:
+              - /url: /s/photos/technology
+            - link "phone" [ref=e99] [cursor=pointer]:
+              - /url: /s/photos/phone
+            - link "electronic" [ref=e101] [cursor=pointer]:
+              - /url: /s/photos/electronic
+            - link "grey" [ref=e103] [cursor=pointer]:
+              - /url: /s/photos/grey
+            - link "precision" [ref=e105] [cursor=pointer]:
+              - /url: /s/photos/precision
+            - link "computer hardware" [ref=e107] [cursor=pointer]:
+              - /url: /s/photos/computer-hardware
+            - link "assembly" [ref=e109] [cursor=pointer]:
+              - /url: /s/photos/assembly
+            - link "hardware" [ref=e111] [cursor=pointer]:
+              - /url: /s/photos/hardware
+            - link "gadget repair" [ref=e113] [cursor=pointer]:
+              - /url: /s/photos/gadget-repair
+            - link "electronics repair" [ref=e115] [cursor=pointer]:
+              - /url: /s/photos/electronics-repair
+        - generic [ref=e117]:
+          - generic [ref=e121]:
+            - generic [ref=e122]:
+              - figure [ref=e123]:
+                - link "Hands of repairman over broken gadget using tweezers to fix tiny parts or bolts of demounted smartphone" [ref=e126]:
+                  - /url: /photos/hands-of-repairman-over-broken-gadget-using-tweezers-to-fix-tiny-parts-or-bolts-of-demounted-smartphone-ZCrKX_evC1k
+                  - img "Hands of repairman over broken gadget using tweezers to fix tiny parts or bolts of demounted smartphone" [ref=e127]
+              - generic [ref=e128]:
+                - heading "Sponsored images" [level=4] [ref=e129]:
+                  - generic [ref=e130]: Sponsored images
+                  - link [ref=e131] [cursor=pointer]:
+                    - /url: https://www.istockphoto.com/search/2/image?utm_source=unsplash&utm_medium=affiliate&utm_campaign=srp_photos_top&utm_content=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Fphone-repair-technician&utm_term=phone+repair+technician%3A%3A%3A%3A&phrase=phone+repair+technician&alloweduse=availableforalluses&excludenudity=true&sort=best&mediatype=photography
+                    - img [ref=e132]
+                - generic [ref=e134]:
+                  - link "Professional Repairman Working on Broken Cellphone at His Desk in Workshop" [ref=e135] [cursor=pointer]:
+                    - /url: https://www.istockphoto.com/photo/professional-repairman-working-on-broken-cellphone-at-his-desk-in-workshop-gm1994678302-559808667?utm_source=unsplash&utm_medium=affiliate&utm_campaign=srp_photos_top&utm_content=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Fphone-repair-technician&utm_term=phone+repair+technician%3A%3A%3A%3A
+                    - img "Professional Repairman Working on Broken Cellphone at His Desk in Workshop" [ref=e136]
+                  - link "Young worker of technical repair office" [ref=e137] [cursor=pointer]:
+                    - /url: https://www.istockphoto.com/photo/young-worker-of-technical-repair-office-gm2044196854-562871851?utm_source=unsplash&utm_medium=affiliate&utm_campaign=srp_photos_top&utm_content=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Fphone-repair-technician&utm_term=phone+repair+technician%3A%3A%3A%3A
+                    - img "Young worker of technical repair office" [ref=e138]
+                  - link "Technician repairing a smarphone" [ref=e139] [cursor=pointer]:
+                    - /url: https://www.istockphoto.com/photo/technician-repairing-a-smarphone-gm472354892-63341059?utm_source=unsplash&utm_medium=affiliate&utm_campaign=srp_photos_top&utm_content=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Fphone-repair-technician&utm_term=phone+repair+technician%3A%3A%3A%3A
+                    - img "Technician repairing a smarphone" [ref=e140]
+                  - 'link "Tech Repair Close-Up: Young Man at Work" [ref=e141] [cursor=pointer]':
+                    - /url: https://www.istockphoto.com/photo/young-man-at-work-gm2228589487-644366875?utm_source=unsplash&utm_medium=affiliate&utm_campaign=srp_photos_top&utm_content=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Fphone-repair-technician&utm_term=phone+repair+technician%3A%3A%3A%3A
+                    - 'img "Tech Repair Close-Up: Young Man at Work" [ref=e142]'
+                - link "Get 20% off with code UNSPLASH20" [ref=e143] [cursor=pointer]:
+                  - /url: https://www.istockphoto.com/search/2/image?utm_source=unsplash&utm_medium=affiliate&utm_campaign=srp_photos_top&utm_content=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Fphone-repair-technician&utm_term=phone+repair+technician%3A%3A%3A%3A&phrase=phone+repair+technician&alloweduse=availableforalluses&excludenudity=true&sort=best&mediatype=photography
+              - figure [ref=e144]:
+                - link "Tweezers in hands of professional repairman during work with tiny details of broken smartphone" [ref=e147]:
+                  - /url: /photos/tweezers-in-hands-of-professional-repairman-during-work-with-tiny-details-of-broken-smartphone-TMliqf-dWws
+                  - img "Tweezers in hands of professional repairman during work with tiny details of broken smartphone" [ref=e148]
+              - figure [ref=e149]:
+                - link "person fixing phone" [ref=e152]:
+                  - /url: /photos/person-fixing-phone-U46ib4fUniY
+                  - img "person fixing phone" [ref=e153]
+              - figure [ref=e154]:
+                - link "iPhone components are disassembled on a blue mat." [ref=e157]:
+                  - /url: /photos/iphone-components-are-disassembled-on-a-blue-mat-8MCqpmAtBs0
+                  - img "iPhone components are disassembled on a blue mat." [ref=e158]
+              - figure [ref=e159]:
+                - link "Hands of young African repairman photographing circuit board of electronic device while sitting by desk in workshop" [ref=e162]:
+                  - /url: /photos/hands-of-young-african-repairman-photographing-circuit-board-of-electronic-device-while-sitting-by-desk-in-workshop-2ugoamTM_wQ
+                  - img "Hands of young African repairman photographing circuit board of electronic device while sitting by desk in workshop" [ref=e163]
+              - figure [ref=e164]:
+                - link "black and silver iphone 6" [ref=e167]:
+                  - /url: /photos/black-and-silver-iphone-6-R2ljPFJju1s
+                  - img "black and silver iphone 6" [ref=e168]
+              - figure [ref=e169]:
+                - link "Damaged iphones and repair tools are displayed." [ref=e172]:
+                  - /url: /photos/damaged-iphones-and-repair-tools-are-displayed-B63gJWwdRYg
+                  - img "Damaged iphones and repair tools are displayed." [ref=e173]
+            - generic [ref=e174]:
+              - figure [ref=e175]:
+                - link "man repairing Android smartphone" [ref=e178]:
+                  - /url: /photos/man-repairing-android-smartphone-K7OUs6y_cm8
+                  - img "man repairing Android smartphone" [ref=e179]
+              - figure [ref=e180]:
+                - link "black and gold hard disk drive" [ref=e183]:
+                  - /url: /photos/black-and-gold-hard-disk-drive-MCL2xxjZJvs
+                  - img "black and gold hard disk drive" [ref=e184]
+              - figure [ref=e185]:
+                - link "a person in blue gloves holding a cell phone" [ref=e188]:
+                  - /url: /photos/a-person-in-blue-gloves-holding-a-cell-phone-y2QUqmEzjzA
+                  - img "a person in blue gloves holding a cell phone" [ref=e189]
+              - figure [ref=e190]:
+                - link "Hands of young repairperson fixing tiny details on motherboard with soldering iron" [ref=e193]:
+                  - /url: /photos/hands-of-young-repairperson-fixing-tiny-details-on-motherboard-with-soldering-iron-cgCb7DkpzAg
+                  - img "Hands of young repairperson fixing tiny details on motherboard with soldering iron" [ref=e194]
+              - figure [ref=e195]:
+                - link "black and silver click pen beside black and silver smartphone" [ref=e198]:
+                  - /url: /photos/black-and-silver-click-pen-beside-black-and-silver-smartphone-C1r9pODhfQ4
+                  - img "black and silver click pen beside black and silver smartphone" [ref=e199]
+              - figure [ref=e200]:
+                - link "a person using a touchscreen device" [ref=e203]:
+                  - /url: /photos/a-person-using-a-touchscreen-device-Zm0MFn6jWGo
+                  - img "a person using a touchscreen device" [ref=e204]
+              - figure [ref=e205]:
+                - link "a person in blue gloves is repairing a cell phone" [ref=e208]:
+                  - /url: /photos/a-person-in-blue-gloves-is-repairing-a-cell-phone-6E3oMj688Nk
+                  - img "a person in blue gloves is repairing a cell phone" [ref=e209]
+              - figure [ref=e210]:
+                - link "a person using a screwdriver to fix a cell phone" [ref=e213]:
+                  - /url: /photos/a-person-using-a-screwdriver-to-fix-a-cell-phone-Q_I49DIzHu8
+                  - img "a person using a screwdriver to fix a cell phone" [ref=e214]
+            - generic [ref=e215]:
+              - contentinfo [ref=e220]:
+                - generic [ref=e226]: –– ––– ––– –– ––– – ––– ––– –––– – – –– ––– – – ––– –– –– –––– ––
+              - figure [ref=e228]:
+                - link "black and white electronic devices" [ref=e231]:
+                  - /url: /photos/black-and-white-electronic-devices-dRUqU4RpeOE
+                  - img "black and white electronic devices" [ref=e232]
+              - figure [ref=e233]:
+                - link "black smartphone on brown wooden table" [ref=e236]:
+                  - /url: /photos/black-smartphone-on-brown-wooden-table-_fTihc8wRTw
+                  - img "black smartphone on brown wooden table" [ref=e237]
+              - figure [ref=e238]:
+                - link "A person using a mouse on a mouse pad" [ref=e241]:
+                  - /url: /photos/a-person-using-a-mouse-on-a-mouse-pad-J_tkqH61vHA
+                  - img "A person using a mouse on a mouse pad" [ref=e242]
+              - figure [ref=e243]:
+                - link "A disassembled iPhone and repair tools on a mat." [ref=e246]:
+                  - /url: /photos/a-disassembled-iphone-and-repair-tools-on-a-mat-A-EtdVkNSCA
+                  - img "A disassembled iPhone and repair tools on a mat." [ref=e247]
+              - figure [ref=e248]:
+                - link "Overview of gloved hands of professional repairman using equipment for gadget repair while carrying out his work" [ref=e251]:
+                  - /url: /photos/overview-of-gloved-hands-of-professional-repairman-using-equipment-for-gadget-repair-while-carrying-out-his-work-w7a_0ftXrzQ
+                  - img "Overview of gloved hands of professional repairman using equipment for gadget repair while carrying out his work" [ref=e252]
+          - heading "Browse premium images on iStock | Claim your discount now" [level=2] [ref=e256]:
+            - text: Browse premium images on iStock
+            - generic [ref=e257]: "| Claim your discount now"
+          - button "Load more" [ref=e271] [cursor=pointer]
+          - generic [ref=e272]:
+            - link [ref=e273] [cursor=pointer]:
+              - /url: /
+              - img [ref=e274]
+            - paragraph [ref=e276]: Make something awesome
+    - generic:
+      - region "Notifications"
