@@ -45,7 +45,7 @@ export function RepairTestimonials({ config }: { config: ThemeConfig }) {
             >
               {/* Giant quote mark */}
               <div className="font-heading pointer-events-none absolute right-6 top-3 select-none text-[6rem] font-bold leading-none text-[#D42B2B]/[0.06]">
-                "
+                &quot;
               </div>
 
               <StarRow count={t.rating} />

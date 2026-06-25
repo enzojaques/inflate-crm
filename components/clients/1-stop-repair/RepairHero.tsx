@@ -47,7 +47,7 @@ export function RepairHero({ config }: { config: ThemeConfig }) {
           >
             <div className="h-px w-8 bg-[#D42B2B]" />
             <span className="text-xs font-bold uppercase tracking-[0.22em] text-[#D42B2B]">
-              San Antonio's #1 Phone Repair Shop
+              San Antonio&apos;s #1 Phone Repair Shop
             </span>
           </motion.div>
 
