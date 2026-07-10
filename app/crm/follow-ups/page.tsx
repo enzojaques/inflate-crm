@@ -8,8 +8,10 @@ import {
   CheckCircle2,
   Clock,
   Copy,
+  Mail,
   MessageSquare,
   Phone,
+  Send,
   XCircle,
 } from "lucide-react";
 import { useCRM } from "@/lib/crm-store";
@@ -24,6 +26,7 @@ interface QueueDef {
   fromStatus: LeadStatus;
   nextStatus: LeadStatus;
   nextLabel: string;
+  emailType: "fu1" | "fu2" | "fu3" | null;
   color: string;
   bg: string;
   text: string;
@@ -38,6 +41,7 @@ const QUEUES: QueueDef[] = [
     fromStatus: "no-answer",
     nextStatus: "fu1",
     nextLabel: "FU 1 Sent",
+    emailType: "fu1",
     color: "#f59e0b",
     bg: "bg-amber-50",
     text: "text-amber-700",
@@ -50,6 +54,7 @@ const QUEUES: QueueDef[] = [
     fromStatus: "fu1",
     nextStatus: "fu2",
     nextLabel: "FU 2 Sent",
+    emailType: "fu2",
     color: "#f97316",
     bg: "bg-orange-50",
     text: "text-orange-700",
@@ -62,6 +67,7 @@ const QUEUES: QueueDef[] = [
     fromStatus: "fu2",
     nextStatus: "fu3",
     nextLabel: "FU 3 Sent",
+    emailType: "fu3",
     color: "#ef4444",
     bg: "bg-red-50",
     text: "text-red-700",
@@ -74,6 +80,7 @@ const QUEUES: QueueDef[] = [
     fromStatus: "fu3",
     nextStatus: "demo-sent",
     nextLabel: "Demo Sent",
+    emailType: null,
     color: "#6366f1",
     bg: "bg-indigo-50",
     text: "text-indigo-700",
@@ -89,10 +96,7 @@ function daysSince(iso: string) {
 
 function formatDate(iso?: string) {
   if (!iso) return "—";
-  return new Date(iso).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-  });
+  return new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric" });
 }
 
 function contactMethodLabel(m?: string) {
@@ -105,15 +109,87 @@ function contactMethodLabel(m?: string) {
   return m ? map[m] ?? m : null;
 }
 
+// ─── Send Emails Button ───────────────────────────────────────────────────────
+
+function SendEmailsButton({
+  leads,
+  emailType,
+  onSent,
+}: {
+  leads: Lead[];
+  emailType: "fu1" | "fu2" | "fu3";
+  onSent: () => void;
+}) {
+  const withEmail = leads.filter((l) => l.email);
+  const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
+  const [result, setResult] = useState<{ sent: number; skipped: number } | null>(null);
+
+  if (withEmail.length === 0) {
+    return (
+      <span className="text-xs text-gray-400 flex items-center gap-1.5">
+        <Mail className="w-3.5 h-3.5" />
+        No emails on file
+      </span>
+    );
+  }
+
+  async function sendAll() {
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/crm/send-followup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ leadIds: withEmail.map((l) => l.id), type: emailType }),
+      });
+      if (res.status === 503) {
+        setStatus("error");
+        setResult(null);
+        return;
+      }
+      const data = await res.json();
+      setResult({ sent: data.sent?.length ?? 0, skipped: data.skipped?.length ?? 0 });
+      setStatus("done");
+      setTimeout(() => { setStatus("idle"); onSent(); }, 3000);
+    } catch {
+      setStatus("error");
+    }
+  }
+
+  if (status === "done" && result) {
+    return (
+      <span className="text-xs text-emerald-600 font-medium flex items-center gap-1.5">
+        <CheckCircle2 className="w-3.5 h-3.5" />
+        {result.sent} email{result.sent !== 1 ? "s" : ""} sent!
+      </span>
+    );
+  }
+
+  if (status === "error") {
+    return (
+      <span className="text-xs text-red-500 flex items-center gap-1.5">
+        <XCircle className="w-3.5 h-3.5" />
+        Gmail not configured — add GMAIL_APP_PASSWORD in Vercel
+      </span>
+    );
+  }
+
+  return (
+    <button
+      onClick={sendAll}
+      disabled={status === "sending"}
+      className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-violet-600 hover:bg-violet-700 rounded-xl transition-colors disabled:opacity-60 shadow-sm"
+    >
+      <Send className="w-3.5 h-3.5" />
+      {status === "sending"
+        ? "Sending..."
+        : `Send ${emailType.toUpperCase()} to ${withEmail.length} lead${withEmail.length !== 1 ? "s" : ""}`}
+    </button>
+  );
+}
+
 // ─── Lead Card ────────────────────────────────────────────────────────────────
 
-function FULeadCard({
-  lead,
-  queue,
-}: {
-  lead: Lead;
-  queue: QueueDef;
-}) {
+function FULeadCard({ lead, queue }: { lead: Lead; queue: QueueDef }) {
   const { moveLead } = useCRM();
   const [acting, setActing] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -141,57 +217,37 @@ function FULeadCard({
   const isOverdue = days >= (queue.id === "q1" ? 3 : queue.id === "q2" ? 5 : 7);
 
   return (
-    <div
-      className={`bg-white rounded-2xl border shadow-sm overflow-hidden hover:shadow-md transition-all ${
-        isOverdue && queue.id !== "q4" ? "border-red-200" : "border-gray-100"
-      }`}
-    >
-      {/* Top accent bar */}
+    <div className={`bg-white rounded-2xl border shadow-sm overflow-hidden hover:shadow-md transition-all ${isOverdue && queue.id !== "q4" ? "border-red-200" : "border-gray-100"}`}>
       <div className="h-1" style={{ backgroundColor: queue.color }} />
-
       <div className="p-5">
-        {/* Header row */}
         <div className="flex items-start justify-between gap-3 mb-3">
           <div className="min-w-0">
-            <Link
-              href={`/crm/contacts/${lead.id}`}
-              className="text-base font-bold text-gray-900 hover:text-violet-600 transition-colors block leading-tight"
-            >
+            <Link href={`/crm/contacts/${lead.id}`} className="text-base font-bold text-gray-900 hover:text-violet-600 transition-colors block leading-tight">
               {lead.businessName}
             </Link>
             <p className="text-sm text-gray-500 mt-0.5">{lead.ownerName}</p>
           </div>
           <div className="shrink-0 text-right">
-            <span
-              className={`inline-block text-xs font-semibold px-2 py-0.5 rounded-full ${
-                isOverdue && queue.id !== "q4"
-                  ? "bg-red-100 text-red-600"
-                  : "bg-gray-100 text-gray-500"
-              }`}
-            >
+            <span className={`inline-block text-xs font-semibold px-2 py-0.5 rounded-full ${isOverdue && queue.id !== "q4" ? "bg-red-100 text-red-600" : "bg-gray-100 text-gray-500"}`}>
               {queue.urgencyLabel(days)}
             </span>
           </div>
         </div>
 
-        {/* Contact info */}
         <div className="space-y-1.5 mb-4">
           {lead.phone && (
             <div className="flex items-center gap-2">
               <Phone className="w-3.5 h-3.5 text-gray-300 shrink-0" />
-              <a href={`tel:${lead.phone}`} className="text-sm text-gray-700 hover:text-violet-600 transition-colors">
-                {lead.phone}
-              </a>
-              <button
-                onClick={copyPhone}
-                className="text-gray-300 hover:text-violet-400 transition-colors"
-              >
-                {copied ? (
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                ) : (
-                  <Copy className="w-3.5 h-3.5" />
-                )}
+              <a href={`tel:${lead.phone}`} className="text-sm text-gray-700 hover:text-violet-600 transition-colors">{lead.phone}</a>
+              <button onClick={copyPhone} className="text-gray-300 hover:text-violet-400 transition-colors">
+                {copied ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
               </button>
+            </div>
+          )}
+          {lead.email && (
+            <div className="flex items-center gap-2">
+              <Mail className="w-3.5 h-3.5 text-gray-300 shrink-0" />
+              <span className="text-xs text-gray-500 truncate">{lead.email}</span>
             </div>
           )}
           {lead.contactMethod && (
@@ -208,14 +264,12 @@ function FULeadCard({
           )}
         </div>
 
-        {/* Notes */}
         {lead.notes && (
           <div className="mb-4 px-3 py-2.5 bg-gray-50 rounded-lg">
             <p className="text-xs text-gray-600 leading-relaxed line-clamp-2">{lead.notes}</p>
           </div>
         )}
 
-        {/* Actions */}
         <div className="flex gap-2">
           <button
             onClick={advance}
@@ -252,19 +306,18 @@ function FULeadCard({
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function FollowUpsPage() {
-  const { data, loading } = useCRM();
+  const { data, loading, refresh } = useCRM();
   const [activeQueue, setActiveQueue] = useState(0);
 
   const queueLeads = QUEUES.map((q) =>
     data.leads
       .filter((l) => l.status === q.fromStatus)
-      .sort(
-        (a, b) =>
-          new Date(a.updatedAt).getTime() - new Date(b.updatedAt).getTime()
-      )
+      .sort((a, b) => new Date(a.updatedAt).getTime() - new Date(b.updatedAt).getTime())
   );
 
   const totalPending = queueLeads.reduce((sum, l) => sum + l.length, 0);
+  const active = QUEUES[activeQueue];
+  const activeLeads = queueLeads[activeQueue];
 
   if (loading) {
     return (
@@ -299,23 +352,11 @@ export default function FollowUpsPage() {
               <button
                 key={q.id}
                 onClick={() => setActiveQueue(i)}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                  isActive
-                    ? "text-white shadow-sm"
-                    : "bg-gray-100 text-gray-500 hover:bg-gray-200"
-                }`}
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${isActive ? "text-white shadow-sm" : "bg-gray-100 text-gray-500 hover:bg-gray-200"}`}
                 style={isActive ? { backgroundColor: q.color } : {}}
               >
                 {q.label}
-                <span
-                  className={`inline-flex items-center justify-center w-5 h-5 rounded-full text-xs font-bold ${
-                    isActive
-                      ? "bg-white/20 text-white"
-                      : count > 0
-                      ? "bg-white border border-gray-200 text-gray-700"
-                      : "bg-transparent text-gray-400"
-                  }`}
-                >
+                <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full text-xs font-bold ${isActive ? "bg-white/20 text-white" : count > 0 ? "bg-white border border-gray-200 text-gray-700" : "bg-transparent text-gray-400"}`}>
                   {count}
                 </span>
               </button>
@@ -326,32 +367,38 @@ export default function FollowUpsPage() {
 
       {/* Content */}
       <div className="flex-1 overflow-auto px-8 py-6">
-        {/* Queue description */}
-        <div className={`flex items-start gap-3 px-4 py-3 rounded-xl border mb-6 ${QUEUES[activeQueue].bg} ${QUEUES[activeQueue].text} border-current/20`}>
-          <ArrowRight className="w-4 h-4 mt-0.5 shrink-0" />
-          <p className="text-sm font-medium">{QUEUES[activeQueue].description}</p>
+        {/* Queue description + Send Emails button */}
+        <div className="flex items-center justify-between gap-4 mb-6">
+          <div className={`flex items-start gap-3 px-4 py-3 rounded-xl border flex-1 ${active.bg} ${active.text} border-current/20`}>
+            <ArrowRight className="w-4 h-4 mt-0.5 shrink-0" />
+            <p className="text-sm font-medium">{active.description}</p>
+          </div>
+          {active.emailType && activeLeads.length > 0 && (
+            <SendEmailsButton
+              leads={activeLeads}
+              emailType={active.emailType}
+              onSent={refresh}
+            />
+          )}
         </div>
 
-        {queueLeads[activeQueue].length === 0 ? (
+        {activeLeads.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-center">
             <CheckCircle2 className="w-12 h-12 text-emerald-400 mb-4" />
             <h3 className="text-base font-semibold text-gray-600 mb-1">All clear!</h3>
             <p className="text-sm text-gray-400">
-              No leads in the <strong>{QUEUES[activeQueue].label}</strong> queue right now.
+              No leads in the <strong>{active.label}</strong> queue right now.
             </p>
             {activeQueue < QUEUES.length - 1 && queueLeads[activeQueue + 1].length > 0 && (
-              <button
-                onClick={() => setActiveQueue(activeQueue + 1)}
-                className="mt-4 text-sm text-violet-500 hover:underline"
-              >
+              <button onClick={() => setActiveQueue(activeQueue + 1)} className="mt-4 text-sm text-violet-500 hover:underline">
                 View {QUEUES[activeQueue + 1].label} queue →
               </button>
             )}
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-            {queueLeads[activeQueue].map((lead) => (
-              <FULeadCard key={lead.id} lead={lead} queue={QUEUES[activeQueue]} />
+            {activeLeads.map((lead) => (
+              <FULeadCard key={lead.id} lead={lead} queue={active} />
             ))}
           </div>
         )}
