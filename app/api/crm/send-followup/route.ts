@@ -3,6 +3,22 @@ import nodemailer from "nodemailer";
 import { sql, mapLead } from "@/lib/db";
 
 const TEMPLATES = {
+  intro: {
+    subject: (biz: string) => `Free website for ${biz} — quick question`,
+    body: (owner: string, biz: string) => `Hey ${owner},
+
+My name is Enzo from RemodelerSites.com. I'm reaching out because we're running a promo right now where we build completely free websites for remodeling contractors — and all we ask in exchange is that you consider leaving us a Google review when it's done.
+
+No charge for us building it. The only thing you'd be paying for is your hosting fee to keep it live, which is only $60/mo. And even for that, there's no risk — if you're not happy within the first 30 days we have a full refund policy.
+
+Our team can put together a really quick preview for ${biz} — would you be opposed to us sending that over?
+
+Just reply with your city and I'll get my team on it right away.
+
+Best,
+Enzo
+remodelersites.com`,
+  },
   fu1: {
     subject: (biz: string) => `Free website for ${biz} — quick question`,
     body: (owner: string, biz: string) => `Hey ${owner},
@@ -50,13 +66,14 @@ remodelersites.com`,
 };
 
 const STATUS_AFTER: Record<string, string> = {
+  intro: "no-answer",
   fu1: "fu1",
   fu2: "fu2",
   fu3: "fu3",
 };
 
 export async function POST(req: Request) {
-  const { leadIds, type } = await req.json() as { leadIds: string[]; type: "fu1" | "fu2" | "fu3" };
+  const { leadIds, type } = await req.json() as { leadIds: string[]; type: "intro" | "fu1" | "fu2" | "fu3" };
 
   if (!leadIds?.length || !type) {
     return NextResponse.json({ error: "Missing leadIds or type" }, { status: 400 });
