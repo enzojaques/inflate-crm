@@ -129,7 +129,10 @@ function AddLeadModal({
 
 function KanbanCard({ lead }: { lead: Lead }) {
   const { moveLead } = useCRM();
+  const [showMenu, setShowMenu] = useState(false);
+  const current = LEAD_STATUSES.find((s) => s.id === lead.status)!;
   const statusIndex = LEAD_STATUSES.findIndex((s) => s.id === lead.status);
+  const next = LEAD_STATUSES[statusIndex + 1];
 
   return (
     <div className="bg-white rounded-xl border border-gray-100 p-3.5 shadow-sm hover:shadow-md transition-all">
@@ -146,20 +149,41 @@ function KanbanCard({ lead }: { lead: Lead }) {
       )}
 
       <div className="flex gap-1 pt-2.5 border-t border-gray-50">
-        {statusIndex > 0 && (
+        {/* Jump to any status */}
+        <div className="relative">
           <button
-            onClick={() => moveLead(lead.id, LEAD_STATUSES[statusIndex - 1].id)}
-            className="flex-1 text-xs text-gray-400 hover:text-gray-600 py-1 rounded hover:bg-gray-50 transition-colors text-center"
+            onClick={() => setShowMenu((v) => !v)}
+            className="flex items-center gap-1 text-xs text-gray-400 hover:text-gray-600 py-1 px-1.5 rounded hover:bg-gray-50 transition-colors"
           >
-            ← Back
+            <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: current.color }} />
+            Move
           </button>
-        )}
-        {statusIndex < LEAD_STATUSES.length - 1 && (
+          {showMenu && (
+            <>
+              <div className="fixed inset-0 z-20" onClick={() => setShowMenu(false)} />
+              <div className="absolute left-0 top-7 z-30 bg-white rounded-xl border border-gray-100 shadow-xl py-1 w-44">
+                {LEAD_STATUSES.map((s) => (
+                  <button
+                    key={s.id}
+                    onClick={() => { if (s.id !== lead.status) moveLead(lead.id, s.id); setShowMenu(false); }}
+                    className={`w-full flex items-center gap-2.5 px-3 py-2 text-xs hover:bg-gray-50 transition-colors text-left ${s.id === lead.status ? "font-semibold" : ""}`}
+                  >
+                    <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: s.color }} />
+                    {s.name}
+                    {s.id === lead.status && <span className="ml-auto text-gray-300">✓</span>}
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
+        {/* Quick advance */}
+        {next && (
           <button
-            onClick={() => moveLead(lead.id, LEAD_STATUSES[statusIndex + 1].id)}
+            onClick={() => moveLead(lead.id, next.id)}
             className="flex-1 text-xs font-medium text-violet-500 hover:text-violet-700 py-1 rounded hover:bg-violet-50 transition-colors flex items-center justify-center gap-0.5"
           >
-            Advance <ChevronRight className="w-3 h-3" />
+            {next.shortName} <ChevronRight className="w-3 h-3" />
           </button>
         )}
       </div>

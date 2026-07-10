@@ -298,6 +298,7 @@ function QuickStatusMenu({
 // ─── Lead Row ─────────────────────────────────────────────────────────────────
 
 function LeadRow({ lead }: { lead: Lead }) {
+  const { moveLead } = useCRM();
   const [showMenu, setShowMenu] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -355,15 +356,24 @@ function LeadRow({ lead }: { lead: Lead }) {
         <span className="text-sm text-gray-600">{formatDate(lead.dateContacted)}</span>
       </td>
 
-      {/* Status — click to open menu */}
+      {/* Status — click badge to open full menu, or hit Dead instantly */}
       <td className="px-4 py-3.5">
-        <div className="relative">
+        <div className="relative flex items-center gap-1.5">
           <button
             onClick={() => setShowMenu((v) => !v)}
             className="cursor-pointer hover:opacity-80 transition-opacity"
           >
             <StatusBadge status={lead.status} />
           </button>
+          {lead.status !== "dead" && (
+            <button
+              onClick={() => moveLead(lead.id, "dead")}
+              title="Mark as Dead"
+              className="opacity-0 group-hover:opacity-100 transition-opacity text-xs text-gray-300 hover:text-red-400 font-medium px-1.5 py-0.5 rounded hover:bg-red-50"
+            >
+              ✕ Dead
+            </button>
+          )}
           {showMenu && (
             <>
               <div
