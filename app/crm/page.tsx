@@ -417,7 +417,7 @@ function LeadRow({ lead }: { lead: Lead }) {
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function LeadsPage() {
-  const { data, loading, usingSupabase } = useCRM();
+  const { data, loading, usingDatabase } = useCRM();
   const [search, setSearch] = useState("");
   const [filterStatus, setFilterStatus] = useState<LeadStatus | "all">("all");
   const [showAdd, setShowAdd] = useState(false);
@@ -458,7 +458,7 @@ export default function LeadsPage() {
           <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Leads</h1>
           <div className="flex items-center gap-3 mt-1">
             <p className="text-sm text-gray-400">{data.leads.length} total leads</p>
-            {!usingSupabase && (
+            {!usingDatabase && (
               <span className="text-xs text-amber-600 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">
                 Local storage — set up Supabase to sync across devices
               </span>

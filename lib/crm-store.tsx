@@ -8,7 +8,6 @@ import React, {
   useState,
 } from "react";
 import { ActivityLog, Company, CRMData, Lead, LeadStatus } from "./crm-types";
-import { db, hasSupabase } from "./supabase";
 
 const LS_KEY = "inflate-ai-crm-v2";
 
@@ -38,32 +37,37 @@ function lsSave(data: CRMData) {
   localStorage.setItem(LS_KEY, JSON.stringify(data));
 }
 
+// ─── API helpers ─────────────────────────────────────────────────────────────
+
+async function apiFetch<T>(path: string, init?: RequestInit): Promise<T | null> {
+  try {
+    const res = await fetch(path, {
+      headers: { "Content-Type": "application/json" },
+      ...init,
+    });
+    if (res.status === 503) return null; // no database configured
+    if (!res.ok) throw new Error(`API ${res.status}`);
+    return res.json();
+  } catch {
+    return null;
+  }
+}
+
 // ─── Context ─────────────────────────────────────────────────────────────────
 
 interface CRMContextValue {
   data: CRMData;
   loading: boolean;
-  usingSupabase: boolean;
-  // Leads
+  usingDatabase: boolean;
   addLead: (lead: Omit<Lead, "id" | "createdAt" | "updatedAt">) => Promise<Lead>;
-  updateLead: (
-    id: string,
-    updates: Partial<Omit<Lead, "id" | "createdAt">>
-  ) => Promise<void>;
+  updateLead: (id: string, updates: Partial<Omit<Lead, "id" | "createdAt">>) => Promise<void>;
   deleteLead: (id: string) => Promise<void>;
   moveLead: (id: string, status: LeadStatus) => Promise<void>;
   getLead: (id: string) => Lead | undefined;
-  // Companies
-  addCompany: (
-    company: Omit<Company, "id" | "createdAt" | "updatedAt">
-  ) => Promise<Company>;
-  updateCompany: (
-    id: string,
-    updates: Partial<Omit<Company, "id" | "createdAt">>
-  ) => Promise<void>;
+  addCompany: (company: Omit<Company, "id" | "createdAt" | "updatedAt">) => Promise<Company>;
+  updateCompany: (id: string, updates: Partial<Omit<Company, "id" | "createdAt">>) => Promise<void>;
   deleteCompany: (id: string) => Promise<void>;
   getCompany: (id: string) => Company | undefined;
-  // Refresh from DB
   refresh: () => Promise<void>;
 }
 
@@ -72,137 +76,176 @@ const CRMContext = createContext<CRMContextValue | null>(null);
 export function CRMProvider({ children }: { children: React.ReactNode }) {
   const [data, setData] = useState<CRMData>({ leads: [], companies: [], activity: [] });
   const [loading, setLoading] = useState(true);
+  const [usingDatabase, setUsingDatabase] = useState(false);
 
   const loadData = useCallback(async () => {
     setLoading(true);
     try {
-      if (hasSupabase) {
-        const [leads, companies, activity] = await Promise.all([
-          db.getLeads(),
-          db.getCompanies(),
-          db.getActivity(),
-        ]);
-        const next = { leads, companies, activity };
+      const [leads, companies, activity] = await Promise.all([
+        apiFetch<Lead[]>("/api/crm/leads"),
+        apiFetch<Company[]>("/api/crm/companies"),
+        apiFetch<ActivityLog[]>("/api/crm/activity"),
+      ]);
+
+      if (leads !== null) {
+        const next = {
+          leads: leads ?? [],
+          companies: companies ?? [],
+          activity: activity ?? [],
+        };
         setData(next);
+        setUsingDatabase(true);
         lsSave(next);
       } else {
         setData(lsLoad());
+        setUsingDatabase(false);
       }
-    } catch (e) {
-      console.error("CRM load error:", e);
+    } catch {
       setData(lsLoad());
+      setUsingDatabase(false);
     } finally {
       setLoading(false);
     }
   }, []);
 
-  useEffect(() => {
-    loadData();
-  }, [loadData]);
+  useEffect(() => { loadData(); }, [loadData]);
 
   // ── Leads ──────────────────────────────────────────────────────────────────
 
   const addLead = useCallback(
     async (lead: Omit<Lead, "id" | "createdAt" | "updatedAt">): Promise<Lead> => {
-      let newLead: Lead;
-      if (hasSupabase) {
-        newLead = await db.insertLead(lead);
-        await db.insertActivity({
-          leadId: newLead.id,
-          type: "lead_created",
-          description: `New lead added: ${newLead.businessName} (${newLead.ownerName})`,
+      if (usingDatabase) {
+        const newLead = await apiFetch<Lead>("/api/crm/leads", {
+          method: "POST",
+          body: JSON.stringify(lead),
         });
-      } else {
-        newLead = {
-          ...lead,
-          id: genId(),
-          createdAt: nowIso(),
-          updatedAt: nowIso(),
-        };
+        if (newLead) {
+          await apiFetch("/api/crm/activity", {
+            method: "POST",
+            body: JSON.stringify({
+              leadId: newLead.id,
+              type: "lead_created",
+              description: `New lead: ${newLead.businessName} (${newLead.ownerName})`,
+            }),
+          });
+          const activity: ActivityLog = {
+            id: genId(),
+            leadId: newLead.id,
+            type: "lead_created",
+            description: `New lead: ${newLead.businessName} (${newLead.ownerName})`,
+            createdAt: nowIso(),
+          };
+          setData((prev) => ({
+            ...prev,
+            leads: [newLead, ...prev.leads],
+            activity: [activity, ...prev.activity].slice(0, 200),
+          }));
+          return newLead;
+        }
       }
+      // localStorage fallback
+      const newLead: Lead = { ...lead, id: genId(), createdAt: nowIso(), updatedAt: nowIso() };
+      const activity: ActivityLog = {
+        id: genId(),
+        leadId: newLead.id,
+        type: "lead_created",
+        description: `New lead: ${newLead.businessName} (${newLead.ownerName})`,
+        createdAt: nowIso(),
+      };
       setData((prev) => {
-        const activity: ActivityLog = {
-          id: genId(),
-          leadId: newLead.id,
-          type: "lead_created",
-          description: `New lead added: ${newLead.businessName} (${newLead.ownerName})`,
-          createdAt: nowIso(),
-        };
         const next = {
           ...prev,
           leads: [newLead, ...prev.leads],
           activity: [activity, ...prev.activity].slice(0, 200),
         };
-        if (!hasSupabase) lsSave(next);
+        lsSave(next);
         return next;
       });
       return newLead;
     },
-    []
+    [usingDatabase]
   );
 
   const updateLead = useCallback(
     async (id: string, updates: Partial<Omit<Lead, "id" | "createdAt">>) => {
-      if (hasSupabase) {
-        await db.updateLead(id, updates);
-      }
       setData((prev) => {
+        const current = prev.leads.find((l) => l.id === id);
+        if (!current) return prev;
+        const merged = { ...current, ...updates, updatedAt: nowIso() };
+
+        if (usingDatabase) {
+          apiFetch(`/api/crm/leads/${id}`, {
+            method: "PATCH",
+            body: JSON.stringify(merged),
+          });
+        }
+
         const next = {
           ...prev,
-          leads: prev.leads.map((l) =>
-            l.id === id ? { ...l, ...updates, updatedAt: nowIso() } : l
-          ),
+          leads: prev.leads.map((l) => (l.id === id ? merged : l)),
         };
-        if (!hasSupabase) lsSave(next);
+        if (!usingDatabase) lsSave(next);
         return next;
       });
     },
-    []
+    [usingDatabase]
   );
 
-  const deleteLead = useCallback(async (id: string) => {
-    if (hasSupabase) {
-      await db.deleteLead(id);
-    }
-    setData((prev) => {
-      const next = { ...prev, leads: prev.leads.filter((l) => l.id !== id) };
-      if (!hasSupabase) lsSave(next);
-      return next;
-    });
-  }, []);
+  const deleteLead = useCallback(
+    async (id: string) => {
+      if (usingDatabase) {
+        await apiFetch(`/api/crm/leads/${id}`, { method: "DELETE" });
+      }
+      setData((prev) => {
+        const next = { ...prev, leads: prev.leads.filter((l) => l.id !== id) };
+        if (!usingDatabase) lsSave(next);
+        return next;
+      });
+    },
+    [usingDatabase]
+  );
 
-  const moveLead = useCallback(async (id: string, status: LeadStatus) => {
-    if (hasSupabase) {
-      await db.updateLead(id, { status });
-      const lead = data.leads.find((l) => l.id === id);
-      if (lead) {
-        await db.insertActivity({
+  const moveLead = useCallback(
+    async (id: string, status: LeadStatus) => {
+      setData((prev) => {
+        const current = prev.leads.find((l) => l.id === id);
+        if (!current) return prev;
+        const merged = { ...current, status, updatedAt: nowIso() };
+
+        if (usingDatabase) {
+          apiFetch(`/api/crm/leads/${id}`, {
+            method: "PATCH",
+            body: JSON.stringify(merged),
+          });
+          apiFetch("/api/crm/activity", {
+            method: "POST",
+            body: JSON.stringify({
+              leadId: id,
+              type: "status_change",
+              description: `${current.businessName} → ${status.replace(/-/g, " ")}`,
+            }),
+          });
+        }
+
+        const activity: ActivityLog = {
+          id: genId(),
           leadId: id,
           type: "status_change",
-          description: `${lead.businessName} moved to ${status.replace(/-/g, " ")}`,
-        });
-      }
-    }
-    setData((prev) => {
-      const lead = prev.leads.find((l) => l.id === id);
-      const activity: ActivityLog = {
-        id: genId(),
-        leadId: id,
-        type: "status_change",
-        description: `${lead?.businessName ?? "Lead"} moved to ${status.replace(/-/g, " ")}`,
-        createdAt: nowIso(),
-      };
-      const next = {
-        ...prev,
-        leads: prev.leads.map((l) =>
-          l.id === id ? { ...l, status, updatedAt: nowIso() } : l
-        ),
-        activity: [activity, ...prev.activity].slice(0, 200),
-      };
-      if (!hasSupabase) lsSave(next);
-      return next;
-    });
-  }, [data.leads]);
+          description: `${current.businessName} → ${status.replace(/-/g, " ")}`,
+          createdAt: nowIso(),
+        };
+
+        const next = {
+          ...prev,
+          leads: prev.leads.map((l) => (l.id === id ? merged : l)),
+          activity: [activity, ...prev.activity].slice(0, 200),
+        };
+        if (!usingDatabase) lsSave(next);
+        return next;
+      });
+    },
+    [usingDatabase]
+  );
 
   const getLead = useCallback(
     (id: string) => data.leads.find((l) => l.id === id),
@@ -213,85 +256,87 @@ export function CRMProvider({ children }: { children: React.ReactNode }) {
 
   const addCompany = useCallback(
     async (company: Omit<Company, "id" | "createdAt" | "updatedAt">): Promise<Company> => {
-      let newCompany: Company;
-      if (hasSupabase) {
-        newCompany = await db.insertCompany(company);
-        await db.insertActivity({
-          type: "company_created",
-          description: `New company added: ${newCompany.name}`,
+      if (usingDatabase) {
+        const newCompany = await apiFetch<Company>("/api/crm/companies", {
+          method: "POST",
+          body: JSON.stringify(company),
         });
-      } else {
-        newCompany = {
-          ...company,
-          id: genId(),
-          createdAt: nowIso(),
-          updatedAt: nowIso(),
-        };
+        if (newCompany) {
+          setData((prev) => ({
+            ...prev,
+            companies: [newCompany, ...prev.companies],
+          }));
+          return newCompany;
+        }
       }
+      const newCompany: Company = {
+        ...company,
+        id: genId(),
+        createdAt: nowIso(),
+        updatedAt: nowIso(),
+      };
       setData((prev) => {
-        const activity: ActivityLog = {
-          id: genId(),
-          type: "company_created",
-          description: `New company added: ${newCompany.name}`,
-          createdAt: nowIso(),
-        };
-        const next = {
-          ...prev,
-          companies: [newCompany, ...prev.companies],
-          activity: [activity, ...prev.activity].slice(0, 200),
-        };
-        if (!hasSupabase) lsSave(next);
+        const next = { ...prev, companies: [newCompany, ...prev.companies] };
+        lsSave(next);
         return next;
       });
       return newCompany;
     },
-    []
+    [usingDatabase]
   );
 
   const updateCompany = useCallback(
     async (id: string, updates: Partial<Omit<Company, "id" | "createdAt">>) => {
-      if (hasSupabase) {
-        await db.updateCompany(id, updates);
-      }
       setData((prev) => {
+        const current = prev.companies.find((c) => c.id === id);
+        if (!current) return prev;
+        const merged = { ...current, ...updates, updatedAt: nowIso() };
+
+        if (usingDatabase) {
+          apiFetch(`/api/crm/companies/${id}`, {
+            method: "PATCH",
+            body: JSON.stringify(merged),
+          });
+        }
+
         const next = {
           ...prev,
-          companies: prev.companies.map((c) =>
-            c.id === id ? { ...c, ...updates, updatedAt: nowIso() } : c
-          ),
+          companies: prev.companies.map((c) => (c.id === id ? merged : c)),
         };
-        if (!hasSupabase) lsSave(next);
+        if (!usingDatabase) lsSave(next);
         return next;
       });
     },
-    []
+    [usingDatabase]
   );
 
-  const deleteCompany = useCallback(async (id: string) => {
-    if (hasSupabase) {
-      await db.deleteCompany(id);
-    }
-    setData((prev) => {
-      const next = {
-        ...prev,
-        companies: prev.companies.filter((c) => c.id !== id),
-      };
-      if (!hasSupabase) lsSave(next);
-      return next;
-    });
-  }, []);
+  const deleteCompany = useCallback(
+    async (id: string) => {
+      if (usingDatabase) {
+        await apiFetch(`/api/crm/companies/${id}`, { method: "DELETE" });
+      }
+      setData((prev) => {
+        const next = { ...prev, companies: prev.companies.filter((c) => c.id !== id) };
+        if (!usingDatabase) lsSave(next);
+        return next;
+      });
+    },
+    [usingDatabase]
+  );
 
   const getCompany = useCallback(
     (id: string) => data.companies.find((c) => c.id === id),
     [data.companies]
   );
 
+  if (loading) return null;
+
   return (
     <CRMContext.Provider
       value={{
         data,
         loading,
-        usingSupabase: hasSupabase,
+        usingDatabase,
         addLead,
         updateLead,
         deleteLead,
