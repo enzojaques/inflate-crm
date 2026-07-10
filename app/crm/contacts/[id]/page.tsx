@@ -220,7 +220,7 @@ export default function LeadDetailPage() {
                   <input value={editForm.businessName} onChange={(e) => ef("businessName", e.target.value)} className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-400" />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-gray-500 mb-1">Owner's Name</label>
+                  <label className="block text-xs font-medium text-gray-500 mb-1">Owner&apos;s Name</label>
                   <input value={editForm.ownerName} onChange={(e) => ef("ownerName", e.target.value)} className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-400" />
                 </div>
               </div>

@@ -13,7 +13,7 @@ import {
   XCircle,
 } from "lucide-react";
 import { useCRM } from "@/lib/crm-store";
-import { Lead, LEAD_STATUSES, LeadStatus } from "@/lib/crm-types";
+import { Lead, LeadStatus } from "@/lib/crm-types";
 
 // ─── Queue definitions ────────────────────────────────────────────────────────
 

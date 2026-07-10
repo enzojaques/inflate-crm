@@ -21,14 +21,6 @@ function formatCurrency(val?: number) {
   }).format(val);
 }
 
-function StatusBadge({ status }: { status: LeadStatus }) {
-  const s = LEAD_STATUSES.find((x) => x.id === status)!;
-  return (
-    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold ${s.bg} ${s.text}`}>
-      {s.shortName}
-    </span>
-  );
-}
 
 function AddLeadModal({
   initialStatus,
@@ -91,7 +83,7 @@ function AddLeadModal({
             <input required value={form.businessName} onChange={(e) => f("businessName", e.target.value)} className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-400" placeholder="Acme Corp" />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-600 mb-1">Owner's Name *</label>
+            <label className="block text-xs font-medium text-gray-600 mb-1">Owner&apos;s Name *</label>
             <input required value={form.ownerName} onChange={(e) => f("ownerName", e.target.value)} className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-400" placeholder="John Smith" />
           </div>
           <div className="grid grid-cols-2 gap-3">

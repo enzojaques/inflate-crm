@@ -8,7 +8,6 @@ import {
   Phone,
   Plus,
   Search,
-  SlidersHorizontal,
   X,
 } from "lucide-react";
 import { useCRM } from "@/lib/crm-store";
@@ -31,10 +30,6 @@ function formatDate(iso?: string) {
   });
 }
 
-function daysSince(iso: string) {
-  const diff = Date.now() - new Date(iso).getTime();
-  return Math.floor(diff / 86_400_000);
-}
 
 function StatusBadge({ status }: { status: LeadStatus }) {
   const s = LEAD_STATUSES.find((x) => x.id === status)!;
@@ -149,7 +144,7 @@ function AddLeadModal({ onClose }: { onClose: () => void }) {
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1.5">Owner's Name *</label>
+              <label className="block text-xs font-medium text-gray-600 mb-1.5">Owner&apos;s Name *</label>
               <input
                 required
                 value={form.ownerName}
