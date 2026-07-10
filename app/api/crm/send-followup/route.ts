@@ -7,7 +7,7 @@ const TEMPLATES = {
     subject: (biz: string) => `Free website for ${biz} — quick question`,
     body: (owner: string, biz: string) => `Hey ${owner},
 
-My name is Alex from RemodelerSites.com — I tried giving you a call earlier but couldn't get through.
+My name is Enzo from RemodelerSites.com — I tried giving you a call earlier but couldn't get through.
 
 I wanted to reach out because we're running a promo right now where we build completely free websites for remodeling contractors. No charge to build it — the only cost is $60/mo for hosting to keep it live, and there's a full 30-day refund policy, so there's zero risk.
 
@@ -15,8 +15,9 @@ Would you be opposed to us putting together a quick preview for ${biz}?
 
 Just reply with your city and I'll get my team on it right away.
 
-— Alex
-RemodelerSites.com`,
+Best,
+Enzo
+remodelersites.com`,
   },
   fu2: {
     subject: (biz: string) => `Re: Free website for ${biz}`,
@@ -28,8 +29,9 @@ We're still running the promo and I'd love to get a quick preview built for ${bi
 
 Worth a look?
 
-— Alex
-RemodelerSites.com`,
+Best,
+Enzo
+remodelersites.com`,
   },
   fu3: {
     subject: (biz: string) => `Last one from me — ${biz}`,
@@ -41,8 +43,9 @@ We're building free website previews for remodeling contractors and I didn't wan
 
 If the timing isn't right, no worries at all. If you ever want a free preview built for ${biz}, just reply anytime and we'll get it done.
 
-— Alex
-RemodelerSites.com`,
+Best,
+Enzo
+remodelersites.com`,
   },
 };
 
