@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ChevronRight, CircleDollarSign, Plus, X } from "lucide-react";
+import { CircleDollarSign, Phone, Plus, X } from "lucide-react";
 import { useCRM } from "@/lib/crm-store";
 import {
   CONTACT_METHODS,
@@ -131,8 +131,6 @@ function KanbanCard({ lead }: { lead: Lead }) {
   const { moveLead } = useCRM();
   const [showMenu, setShowMenu] = useState(false);
   const current = LEAD_STATUSES.find((s) => s.id === lead.status)!;
-  const statusIndex = LEAD_STATUSES.findIndex((s) => s.id === lead.status);
-  const next = LEAD_STATUSES[statusIndex + 1];
 
   return (
     <div className="bg-white rounded-xl border border-gray-100 p-3.5 shadow-sm hover:shadow-md transition-all">
@@ -148,12 +146,12 @@ function KanbanCard({ lead }: { lead: Lead }) {
         </div>
       )}
 
-      <div className="flex gap-1 pt-2.5 border-t border-gray-50">
-        {/* Jump to any status */}
+      <div className="flex gap-1.5 pt-2.5 border-t border-gray-50">
+        {/* Move to any status */}
         <div className="relative">
           <button
             onClick={() => setShowMenu((v) => !v)}
-            className="flex items-center gap-1 text-xs text-gray-400 hover:text-gray-600 py-1 px-1.5 rounded hover:bg-gray-50 transition-colors"
+            className="flex items-center gap-1 text-xs text-gray-400 hover:text-gray-600 py-1.5 px-2 rounded-lg hover:bg-gray-50 transition-colors border border-gray-100"
           >
             <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: current.color }} />
             Move
@@ -161,7 +159,7 @@ function KanbanCard({ lead }: { lead: Lead }) {
           {showMenu && (
             <>
               <div className="fixed inset-0 z-20" onClick={() => setShowMenu(false)} />
-              <div className="absolute left-0 top-7 z-30 bg-white rounded-xl border border-gray-100 shadow-xl py-1 w-44">
+              <div className="absolute left-0 top-8 z-30 bg-white rounded-xl border border-gray-100 shadow-xl py-1 w-44">
                 {LEAD_STATUSES.map((s) => (
                   <button
                     key={s.id}
@@ -177,14 +175,15 @@ function KanbanCard({ lead }: { lead: Lead }) {
             </>
           )}
         </div>
-        {/* Quick advance */}
-        {next && (
-          <button
-            onClick={() => moveLead(lead.id, next.id)}
-            className="flex-1 text-xs font-medium text-violet-500 hover:text-violet-700 py-1 rounded hover:bg-violet-50 transition-colors flex items-center justify-center gap-0.5"
-          >
-            {next.shortName} <ChevronRight className="w-3 h-3" />
-          </button>
+
+        {/* Call button */}
+        {lead.phone ? (
+          <a href={`tel:${lead.phone}`}
+            className="flex-1 flex items-center justify-center gap-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-lg hover:bg-emerald-100 transition-colors py-1.5">
+            <Phone className="w-3 h-3" /> Call
+          </a>
+        ) : (
+          <span className="flex-1 flex items-center justify-center text-xs text-gray-300 py-1.5">No phone</span>
         )}
       </div>
     </div>
