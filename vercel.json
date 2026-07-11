@@ -1,0 +1,5 @@
+{
+  "crons": [
+    { "path": "/api/cron/advance-leads", "schedule": "0 13 * * *" }
+  ]
+}

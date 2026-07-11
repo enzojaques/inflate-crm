@@ -19,6 +19,12 @@ function genId() {
   return `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
 }
 
+function autoContactFields(status: LeadStatus | undefined): Partial<Lead> {
+  return status === "contacted" || status === "engaged"
+    ? { lastContactedAt: nowIso() }
+    : {};
+}
+
 // ─── localStorage helpers ────────────────────────────────────────────────────
 
 function lsLoad(): CRMData {
@@ -171,7 +177,12 @@ export function CRMProvider({ children }: { children: React.ReactNode }) {
       setData((prev) => {
         const current = prev.leads.find((l) => l.id === id);
         if (!current) return prev;
-        const merged = { ...current, ...updates, updatedAt: nowIso() };
+        const merged = {
+          ...current,
+          ...updates,
+          ...autoContactFields(updates.status),
+          updatedAt: nowIso(),
+        };
 
         if (usingDatabase) {
           apiFetch(`/api/crm/leads/${id}`, {
@@ -210,7 +221,13 @@ export function CRMProvider({ children }: { children: React.ReactNode }) {
       setData((prev) => {
         const current = prev.leads.find((l) => l.id === id);
         if (!current) return prev;
-        const merged = { ...current, status, updatedAt: nowIso() };
+        const merged = {
+          ...current,
+          status,
+          followupSentAt: null,
+          ...autoContactFields(status),
+          updatedAt: nowIso(),
+        };
 
         if (usingDatabase) {
           apiFetch(`/api/crm/leads/${id}`, {

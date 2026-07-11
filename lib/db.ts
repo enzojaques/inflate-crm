@@ -15,6 +15,8 @@ export function mapLead(r: Record<string, unknown>): Lead {
     contactMethod: (r.contact_method as Lead["contactMethod"]) ?? undefined,
     dateContacted: (r.date_contacted as string | null) ?? undefined,
     status: r.status as Lead["status"],
+    lastContactedAt: (r.last_contacted_at as string | null) ?? undefined,
+    followupSentAt: (r.followup_sent_at as string | null) ?? undefined,
     notes: (r.notes as string | null) ?? undefined,
     dealValue: (r.deal_value as number | null) ?? undefined,
     source: (r.source as string | null) ?? undefined,

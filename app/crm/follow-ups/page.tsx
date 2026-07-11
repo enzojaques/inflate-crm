@@ -190,7 +190,7 @@ function SendEmailsButton({
 // ─── Lead Card ────────────────────────────────────────────────────────────────
 
 function FULeadCard({ lead, queue }: { lead: Lead; queue: QueueDef }) {
-  const { moveLead } = useCRM();
+  const { moveLead, updateLead } = useCRM();
   const [acting, setActing] = useState(false);
   const [copied, setCopied] = useState(false);
   const days = daysSince(lead.updatedAt);
@@ -268,6 +268,24 @@ function FULeadCard({ lead, queue }: { lead: Lead; queue: QueueDef }) {
           <div className="mb-4 px-3 py-2.5 bg-gray-50 rounded-lg">
             <p className="text-xs text-gray-600 leading-relaxed line-clamp-2">{lead.notes}</p>
           </div>
+        )}
+
+        {(queue.id === "q2" || queue.id === "q3") && (
+          <label className="flex items-center gap-2 mb-3 text-xs text-gray-500 cursor-pointer select-none">
+            <input
+              type="checkbox"
+              checked={!!lead.followupSentAt}
+              onChange={(e) =>
+                updateLead(lead.id, {
+                  followupSentAt: e.target.checked ? new Date().toISOString() : null,
+                })
+              }
+              className="rounded border-gray-300 text-violet-600 focus:ring-violet-400"
+            />
+            {lead.followupSentAt
+              ? `Marked sent ${formatDate(lead.followupSentAt)} — auto-advances in 3d`
+              : "Mark outreach as sent (starts 3-day timer)"}
+          </label>
         )}
 
         <div className="flex gap-2">

@@ -127,7 +127,7 @@ export default function AnalyticsPage() {
 
     // Follow-up queue sizes
     const fuPending =
-      leads.filter((l) => ["no-answer", "fu1", "fu2", "fu3"].includes(l.status)).length;
+      leads.filter((l) => ["no-answer", "contacted", "engaged", "fu1", "fu2", "fu3"].includes(l.status)).length;
 
     // Per-status counts + values
     const statusData: Record<string, { count: number; value: number }> = {};

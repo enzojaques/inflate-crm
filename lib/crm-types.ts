@@ -1,6 +1,8 @@
 export type LeadStatus =
   | "new"
   | "no-answer"
+  | "contacted"
+  | "engaged"
   | "fu1"
   | "fu2"
   | "fu3"
@@ -39,6 +41,24 @@ export const LEAD_STATUSES: LeadStatusDef[] = [
     bg: "bg-slate-100",
     text: "text-slate-600",
     border: "border-slate-200",
+  },
+  {
+    id: "contacted",
+    name: "Contacted",
+    shortName: "Contacted",
+    color: "#0ea5e9",
+    bg: "bg-sky-50",
+    text: "text-sky-700",
+    border: "border-sky-200",
+  },
+  {
+    id: "engaged",
+    name: "Engaged",
+    shortName: "Engaged",
+    color: "#14b8a6",
+    bg: "bg-teal-50",
+    text: "text-teal-700",
+    border: "border-teal-200",
   },
   {
     id: "fu1",
@@ -121,6 +141,8 @@ export interface Lead {
   contactMethod?: ContactMethod;
   dateContacted?: string;
   status: LeadStatus;
+  lastContactedAt?: string | null;
+  followupSentAt?: string | null;
   notes?: string;
   dealValue?: number;
   source?: string;
