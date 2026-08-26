@@ -11,8 +11,8 @@ create table if not exists leads (
   contact_method  text,        -- 'phone-call' | 'facebook' | 'email' | 'cold-call'
   date_contacted  date,
   status          text not null default 'new',
-  -- 'new' | 'no-answer' | 'contacted' | 'engaged' | 'fu1' | 'fu2' | 'fu3' | 'demo-sent' | 'meeting' | 'closed' | 'dead'
-  last_contacted_at timestamptz, -- set whenever status changes to 'contacted' or 'engaged'
+  -- 'new' | 'no-answer' | 'engaged' | 'fu1' | 'fu2' | 'fu3' | 'meeting' | 'no-show' | 'meeting-had' | 'awaiting-payment' | 'closed' | 'dead'
+  last_contacted_at timestamptz, -- set whenever status changes to 'engaged'
   followup_sent_at  timestamptz, -- set when user marks fu1/fu2 outreach as sent; drives auto-advance timer
   notes           text,
   deal_value      numeric,
@@ -71,3 +71,9 @@ alter table activity_log  disable row level security;
 -- Run this against the existing live DB (fresh installs already get these from the CREATE TABLE above).
 alter table leads add column if not exists last_contacted_at timestamptz;
 alter table leads add column if not exists followup_sent_at   timestamptz;
+
+-- Migration: pipeline restructure — retire 'contacted' and 'demo-sent' statuses,
+-- add 'no-show' / 'meeting-had' / 'awaiting-payment'. Remaps existing leads so
+-- none are left on a status no longer in the pipeline.
+update leads set status = 'engaged' where status = 'contacted';
+update leads set status = 'meeting' where status = 'demo-sent';

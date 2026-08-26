@@ -20,9 +20,7 @@ function genId() {
 }
 
 function autoContactFields(status: LeadStatus | undefined): Partial<Lead> {
-  return status === "contacted" || status === "engaged"
-    ? { lastContactedAt: nowIso() }
-    : {};
+  return status === "engaged" ? { lastContactedAt: nowIso() } : {};
 }
 
 // ─── localStorage helpers ────────────────────────────────────────────────────

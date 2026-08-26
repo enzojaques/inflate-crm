@@ -8,25 +8,9 @@ export async function GET(req: Request) {
   }
   if (!sql) return NextResponse.json({ error: "no database" }, { status: 503 });
 
-  const results = { contactedToFu1: 0, engagedToFu1: 0, fu1ToFu2: 0, fu2ToFu3: 0 };
+  const results = { engagedToFu1: 0, fu1ToFu2: 0, fu2ToFu3: 0 };
 
-  // Rule 1: contacted, no reply for 3 days -> fu1
-  {
-    const rows = await sql`
-      UPDATE leads SET status = 'fu1', updated_at = now()
-      WHERE status = 'contacted' AND last_contacted_at <= now() - interval '3 days'
-      RETURNING id, business_name
-    `;
-    for (const r of rows) {
-      await sql`
-        INSERT INTO activity_log (lead_id, type, description)
-        VALUES (${r.id}, 'status_change', ${`${r.business_name} → fu1 (auto: no reply 3d after contacted)`})
-      `;
-    }
-    results.contactedToFu1 = rows.length;
-  }
-
-  // Rule 2: engaged, went quiet for 2 days -> fu1, with a note prepended
+  // Rule 1: engaged, went quiet for 2 days -> fu1, with a note prepended
   // (needs each row's own notes/last_contacted_at, so select then update per row)
   {
     const rows = await sql`
@@ -53,7 +37,7 @@ export async function GET(req: Request) {
     results.engagedToFu1 = rows.length;
   }
 
-  // Rule 3: fu1, marked sent 3+ days ago -> fu2
+  // Rule 2: fu1, marked sent 3+ days ago -> fu2
   {
     const rows = await sql`
       UPDATE leads SET status = 'fu2', followup_sent_at = NULL, updated_at = now()
@@ -69,7 +53,7 @@ export async function GET(req: Request) {
     results.fu1ToFu2 = rows.length;
   }
 
-  // Rule 4: fu2, marked sent 3+ days ago -> fu3
+  // Rule 3: fu2, marked sent 3+ days ago -> fu3
   {
     const rows = await sql`
       UPDATE leads SET status = 'fu3', followup_sent_at = NULL, updated_at = now()

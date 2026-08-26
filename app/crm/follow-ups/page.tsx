@@ -76,10 +76,10 @@ const QUEUES: QueueDef[] = [
   {
     id: "q4",
     label: "After FU 3",
-    description: "All three follow-ups sent. Mark as Demo Sent or Dead.",
+    description: "All three follow-ups sent. Mark as Meeting Scheduled or Dead.",
     fromStatus: "fu3",
-    nextStatus: "demo-sent",
-    nextLabel: "Demo Sent",
+    nextStatus: "meeting",
+    nextLabel: "Meeting Scheduled",
     emailType: null,
     color: "#6366f1",
     bg: "bg-indigo-50",

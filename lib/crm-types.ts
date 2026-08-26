@@ -1,13 +1,14 @@
 export type LeadStatus =
   | "new"
   | "no-answer"
-  | "contacted"
   | "engaged"
   | "fu1"
   | "fu2"
   | "fu3"
-  | "demo-sent"
   | "meeting"
+  | "no-show"
+  | "meeting-had"
+  | "awaiting-payment"
   | "closed"
   | "dead";
 
@@ -41,15 +42,6 @@ export const LEAD_STATUSES: LeadStatusDef[] = [
     bg: "bg-slate-100",
     text: "text-slate-600",
     border: "border-slate-200",
-  },
-  {
-    id: "contacted",
-    name: "Contacted",
-    shortName: "Contacted",
-    color: "#0ea5e9",
-    bg: "bg-sky-50",
-    text: "text-sky-700",
-    border: "border-sky-200",
   },
   {
     id: "engaged",
@@ -88,15 +80,6 @@ export const LEAD_STATUSES: LeadStatusDef[] = [
     border: "border-red-200",
   },
   {
-    id: "demo-sent",
-    name: "Demo Sent",
-    shortName: "Demo",
-    color: "#8b5cf6",
-    bg: "bg-violet-50",
-    text: "text-violet-700",
-    border: "border-violet-200",
-  },
-  {
     id: "meeting",
     name: "Meeting Scheduled",
     shortName: "Meeting",
@@ -104,6 +87,33 @@ export const LEAD_STATUSES: LeadStatusDef[] = [
     bg: "bg-blue-50",
     text: "text-blue-700",
     border: "border-blue-200",
+  },
+  {
+    id: "no-show",
+    name: "No Show",
+    shortName: "No Show",
+    color: "#f43f5e",
+    bg: "bg-rose-50",
+    text: "text-rose-700",
+    border: "border-rose-200",
+  },
+  {
+    id: "meeting-had",
+    name: "Meeting Had",
+    shortName: "Meeting Had",
+    color: "#06b6d4",
+    bg: "bg-cyan-50",
+    text: "text-cyan-700",
+    border: "border-cyan-200",
+  },
+  {
+    id: "awaiting-payment",
+    name: "Awaiting Payment",
+    shortName: "Awaiting Pmt",
+    color: "#eab308",
+    bg: "bg-yellow-50",
+    text: "text-yellow-700",
+    border: "border-yellow-200",
   },
   {
     id: "closed",
