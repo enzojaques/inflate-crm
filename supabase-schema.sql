@@ -11,7 +11,7 @@ create table if not exists leads (
   contact_method  text,        -- 'phone-call' | 'facebook' | 'email' | 'cold-call'
   date_contacted  date,
   status          text not null default 'new',
-  -- 'new' | 'no-answer' | 'engaged' | 'fu1' | 'fu2' | 'fu3' | 'meeting' | 'no-show' | 'meeting-had' | 'awaiting-payment' | 'closed' | 'dead'
+  -- 'new' | 'no-answer' | 'engaged' | 'demo-sent' | 'fu1' | 'fu2' | 'fu3' | 'meeting' | 'no-show' | 'meeting-had' | 'awaiting-payment' | 'closed' | 'dead'
   last_contacted_at timestamptz, -- set whenever status changes to 'engaged'
   followup_sent_at  timestamptz, -- set when user marks fu1/fu2 outreach as sent; drives auto-advance timer
   notes           text,
