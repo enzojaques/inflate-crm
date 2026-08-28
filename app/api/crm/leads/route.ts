@@ -13,11 +13,11 @@ export async function POST(req: Request) {
   const [row] = await sql`
     INSERT INTO leads
       (business_name, owner_name, phone, email, contact_method, date_contacted,
-       status, notes, deal_value, source)
+       status, website_status, notes, deal_value, source)
     VALUES
-      (${b.businessName}, ${b.ownerName}, ${b.phone ?? null}, ${b.email ?? null},
+      (${b.businessName}, ${b.ownerName ?? ""}, ${b.phone ?? null}, ${b.email ?? null},
        ${b.contactMethod ?? null}, ${b.dateContacted ?? null},
-       ${b.status ?? "new"}, ${b.notes ?? null}, ${b.dealValue ?? null}, ${b.source ?? null})
+       ${b.status ?? "new"}, ${b.websiteStatus ?? null}, ${b.notes ?? null}, ${b.dealValue ?? null}, ${b.source ?? null})
     RETURNING *
   `;
   return NextResponse.json(mapLead(row));

@@ -205,7 +205,7 @@ function SendEmailsButton({
 // ─── Lead Card ────────────────────────────────────────────────────────────────
 
 function FULeadCard({ lead, queue }: { lead: Lead; queue: QueueDef }) {
-  const { moveLead, updateLead } = useCRM();
+  const { moveLead, updateLead, logActivity } = useCRM();
   const [acting, setActing] = useState(false);
   const [copied, setCopied] = useState(false);
   const days = daysSince(lead.updatedAt);
@@ -253,7 +253,7 @@ function FULeadCard({ lead, queue }: { lead: Lead; queue: QueueDef }) {
           {lead.phone && (
             <div className="flex items-center gap-2">
               <Phone className="w-3.5 h-3.5 text-gray-300 shrink-0" />
-              <a href={`tel:${lead.phone}`} className="text-sm text-gray-700 hover:text-violet-600 transition-colors">{lead.phone}</a>
+              <a href={`tel:${lead.phone}`} onClick={() => logActivity(lead.id, "call_logged", `Called ${lead.businessName}`)} className="text-sm text-gray-700 hover:text-violet-600 transition-colors">{lead.phone}</a>
               <button onClick={copyPhone} className="text-gray-300 hover:text-violet-400 transition-colors">
                 {copied ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
               </button>

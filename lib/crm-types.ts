@@ -16,6 +16,57 @@ export type LeadStatus =
 
 export type ContactMethod = "phone-call" | "facebook" | "email" | "cold-call";
 
+export type WebsiteStatus = "none" | "bad" | "average" | "good";
+
+export interface WebsiteStatusDef {
+  id: WebsiteStatus;
+  label: string;
+  emoji: string;
+  color: string;
+  bg: string;
+  text: string;
+  border: string;
+}
+
+export const WEBSITE_STATUSES: WebsiteStatusDef[] = [
+  {
+    id: "none",
+    label: "No Website",
+    emoji: "❌",
+    color: "#ef4444",
+    bg: "bg-red-50",
+    text: "text-red-700",
+    border: "border-red-200",
+  },
+  {
+    id: "bad",
+    label: "Bad Website",
+    emoji: "⚠️",
+    color: "#f59e0b",
+    bg: "bg-amber-50",
+    text: "text-amber-700",
+    border: "border-amber-200",
+  },
+  {
+    id: "average",
+    label: "Average Website",
+    emoji: "🟡",
+    color: "#eab308",
+    bg: "bg-yellow-50",
+    text: "text-yellow-700",
+    border: "border-yellow-200",
+  },
+  {
+    id: "good",
+    label: "Good Website",
+    emoji: "🟢",
+    color: "#10b981",
+    bg: "bg-emerald-50",
+    text: "text-emerald-700",
+    border: "border-emerald-200",
+  },
+];
+
 export interface LeadStatusDef {
   id: LeadStatus;
   name: string;
@@ -171,6 +222,7 @@ export interface Lead {
   contactMethod?: ContactMethod;
   dateContacted?: string;
   status: LeadStatus;
+  websiteStatus?: WebsiteStatus | null;
   lastContactedAt?: string | null;
   followupSentAt?: string | null;
   notes?: string;
@@ -196,7 +248,16 @@ export interface Company {
 export interface ActivityLog {
   id: string;
   leadId?: string;
-  type: "status_change" | "note_added" | "lead_created" | "company_created";
+  type:
+    | "status_change"
+    | "note_added"
+    | "lead_created"
+    | "company_created"
+    | "email_sent"
+    | "call_logged"
+    | "call_answered"
+    | "marked_interested"
+    | "callback_logged";
   description: string;
   createdAt: string;
 }

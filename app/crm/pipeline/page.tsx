@@ -10,6 +10,8 @@ import {
   Lead,
   LEAD_STATUSES,
   LeadStatus,
+  WEBSITE_STATUSES,
+  WebsiteStatus,
 } from "@/lib/crm-types";
 import { daysSince, FOLLOWUP_GAP_DAYS } from "@/lib/followup-cadence";
 
@@ -39,6 +41,7 @@ function AddLeadModal({
     contactMethod: "" as ContactMethod | "",
     dateContacted: new Date().toISOString().slice(0, 10),
     status: initialStatus,
+    websiteStatus: "" as WebsiteStatus | "",
     notes: "",
     dealValue: "",
   });
@@ -46,7 +49,7 @@ function AddLeadModal({
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!form.businessName || !form.ownerName) return;
+    if (!form.businessName) return;
     setSaving(true);
     try {
       await addLead({
@@ -57,6 +60,7 @@ function AddLeadModal({
         contactMethod: (form.contactMethod as ContactMethod) || undefined,
         dateContacted: form.dateContacted || undefined,
         status: form.status,
+        websiteStatus: form.websiteStatus || undefined,
         notes: form.notes || undefined,
         dealValue: form.dealValue ? parseFloat(form.dealValue) : undefined,
       });
@@ -84,8 +88,8 @@ function AddLeadModal({
             <input required value={form.businessName} onChange={(e) => f("businessName", e.target.value)} className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-400" placeholder="Acme Corp" />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-600 mb-1">Owner&apos;s Name *</label>
-            <input required value={form.ownerName} onChange={(e) => f("ownerName", e.target.value)} className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-400" placeholder="John Smith" />
+            <label className="block text-xs font-medium text-gray-600 mb-1">Owner&apos;s Name</label>
+            <input value={form.ownerName} onChange={(e) => f("ownerName", e.target.value)} className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-400" placeholder="John Smith" />
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
@@ -110,6 +114,24 @@ function AddLeadModal({
               <select value={form.status} onChange={(e) => f("status", e.target.value)} className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-400 bg-white">
                 {LEAD_STATUSES.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}
               </select>
+            </div>
+          </div>
+          <div>
+            <label className="block text-xs font-medium text-gray-600 mb-1">Website Status</label>
+            <div className="grid grid-cols-4 gap-2">
+              {WEBSITE_STATUSES.map((s) => (
+                <button
+                  key={s.id}
+                  type="button"
+                  onClick={() => f("websiteStatus", form.websiteStatus === s.id ? "" : s.id)}
+                  className={`flex flex-col items-center gap-1 px-2 py-2 rounded-lg border text-[11px] font-medium transition-colors ${
+                    form.websiteStatus === s.id ? `${s.bg} ${s.text} ${s.border}` : "border-gray-200 text-gray-500 hover:bg-gray-50"
+                  }`}
+                >
+                  <span className="text-sm leading-none">{s.emoji}</span>
+                  {s.label}
+                </button>
+              ))}
             </div>
           </div>
           <div>
@@ -147,13 +169,18 @@ function FollowUpTimer({ status, updatedAt }: { status: LeadStatus; updatedAt: s
 }
 
 function KanbanCard({ lead }: { lead: Lead }) {
-  const { moveLead } = useCRM();
+  const { moveLead, logActivity } = useCRM();
   const [showMenu, setShowMenu] = useState(false);
   const current = LEAD_STATUSES.find((s) => s.id === lead.status)!;
 
   return (
     <div className="bg-white rounded-xl border border-gray-100 p-3.5 shadow-sm hover:shadow-md transition-all">
-      <Link href={`/crm/contacts/${lead.id}`} className="text-sm font-semibold text-gray-900 hover:text-violet-600 transition-colors block leading-snug mb-0.5">
+      <Link href={`/crm/contacts/${lead.id}`} className="text-sm font-semibold text-gray-900 hover:text-violet-600 transition-colors flex items-center gap-1.5 leading-snug mb-0.5">
+        {lead.websiteStatus && (
+          <span title={WEBSITE_STATUSES.find((s) => s.id === lead.websiteStatus)?.label}>
+            {WEBSITE_STATUSES.find((s) => s.id === lead.websiteStatus)?.emoji}
+          </span>
+        )}
         {lead.businessName}
       </Link>
       <p className="text-xs text-gray-400 mb-2.5">{lead.ownerName}</p>
@@ -200,6 +227,7 @@ function KanbanCard({ lead }: { lead: Lead }) {
         {/* Call button */}
         {lead.phone ? (
           <a href={`tel:${lead.phone}`}
+            onClick={() => logActivity(lead.id, "call_logged", `Called ${lead.businessName}`)}
             className="flex-1 flex items-center justify-center gap-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-lg hover:bg-emerald-100 transition-colors py-1.5">
             <Phone className="w-3 h-3" /> Call
           </a>

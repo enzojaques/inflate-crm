@@ -23,6 +23,12 @@ function autoContactFields(status: LeadStatus | undefined): Partial<Lead> {
   return status === "engaged" ? { lastContactedAt: nowIso() } : {};
 }
 
+function leadCreatedDescription(lead: Pick<Lead, "businessName" | "ownerName">) {
+  return lead.ownerName
+    ? `New lead: ${lead.businessName} (${lead.ownerName})`
+    : `New lead: ${lead.businessName}`;
+}
+
 // ─── localStorage helpers ────────────────────────────────────────────────────
 
 function lsLoad(): CRMData {
@@ -68,6 +74,7 @@ interface CRMContextValue {
   deleteLead: (id: string) => Promise<void>;
   moveLead: (id: string, status: LeadStatus) => Promise<void>;
   getLead: (id: string) => Lead | undefined;
+  logActivity: (leadId: string, type: ActivityLog["type"], description: string) => Promise<void>;
   addCompany: (company: Omit<Company, "id" | "createdAt" | "updatedAt">) => Promise<Company>;
   updateCompany: (id: string, updates: Partial<Omit<Company, "id" | "createdAt">>) => Promise<void>;
   deleteCompany: (id: string) => Promise<void>;
@@ -129,14 +136,14 @@ export function CRMProvider({ children }: { children: React.ReactNode }) {
             body: JSON.stringify({
               leadId: newLead.id,
               type: "lead_created",
-              description: `New lead: ${newLead.businessName} (${newLead.ownerName})`,
+              description: leadCreatedDescription(newLead),
             }),
           });
           const activity: ActivityLog = {
             id: genId(),
             leadId: newLead.id,
             type: "lead_created",
-            description: `New lead: ${newLead.businessName} (${newLead.ownerName})`,
+            description: leadCreatedDescription(newLead),
             createdAt: nowIso(),
           };
           setData((prev) => ({
@@ -153,7 +160,7 @@ export function CRMProvider({ children }: { children: React.ReactNode }) {
         id: genId(),
         leadId: newLead.id,
         type: "lead_created",
-        description: `New lead: ${newLead.businessName} (${newLead.ownerName})`,
+        description: leadCreatedDescription(newLead),
         createdAt: nowIso(),
       };
       setData((prev) => {
@@ -267,6 +274,30 @@ export function CRMProvider({ children }: { children: React.ReactNode }) {
     [data.leads]
   );
 
+  const logActivity = useCallback(
+    async (leadId: string, type: ActivityLog["type"], description: string) => {
+      if (usingDatabase) {
+        apiFetch("/api/crm/activity", {
+          method: "POST",
+          body: JSON.stringify({ leadId, type, description }),
+        });
+      }
+      const activity: ActivityLog = {
+        id: genId(),
+        leadId,
+        type,
+        description,
+        createdAt: nowIso(),
+      };
+      setData((prev) => {
+        const next = { ...prev, activity: [activity, ...prev.activity].slice(0, 200) };
+        if (!usingDatabase) lsSave(next);
+        return next;
+      });
+    },
+    [usingDatabase]
+  );
+
   // ── Companies ──────────────────────────────────────────────────────────────
 
   const addCompany = useCallback(
@@ -357,6 +388,7 @@ export function CRMProvider({ children }: { children: React.ReactNode }) {
         deleteLead,
         moveLead,
         getLead,
+        logActivity,
         addCompany,
         updateCompany,
         deleteCompany,

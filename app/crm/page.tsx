@@ -1,15 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import {
+  CalendarCheck,
+  CalendarClock,
+  CheckCircle2,
   ChevronRight,
   Copy,
+  Flame,
   Mail,
   Phone,
   Plus,
   Search,
   Send,
+  Target,
+  Trophy,
   X,
 } from "lucide-react";
 import { useCRM } from "@/lib/crm-store";
@@ -19,10 +25,26 @@ import {
   Lead,
   LEAD_STATUSES,
   LeadStatus,
+  WEBSITE_STATUSES,
+  WebsiteStatus,
 } from "@/lib/crm-types";
 import { phoneMatches } from "@/lib/phone";
+import { getDailyGoal, setDailyGoal, startOfTodayIso } from "@/lib/daily-goal";
 
 type FilterMode = LeadStatus | "all" | "email-only";
+
+interface TodayStats {
+  calls: number;
+  answered: number;
+  interested: number;
+  callbacks: number;
+  appointments: number;
+  websitesSold: number;
+}
+
+const EMPTY_TODAY_STATS: TodayStats = {
+  calls: 0, answered: 0, interested: 0, callbacks: 0, appointments: 0, websitesSold: 0,
+};
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -36,6 +58,17 @@ function StatusBadge({ status }: { status: LeadStatus }) {
   return (
     <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold ${s.bg} ${s.text}`}>
       {s.shortName}
+    </span>
+  );
+}
+
+function WebsiteStatusBadge({ status }: { status?: WebsiteStatus | null }) {
+  if (!status) return null;
+  const s = WEBSITE_STATUSES.find((x) => x.id === status);
+  if (!s) return null;
+  return (
+    <span title={s.label} className="text-sm shrink-0">
+      {s.emoji}
     </span>
   );
 }
@@ -56,13 +89,13 @@ function ContactMethodBadge({ method }: { method?: ContactMethod }) {
 interface LeadForm {
   businessName: string; ownerName: string; phone: string; email: string;
   contactMethod: ContactMethod | ""; dateContacted: string;
-  status: LeadStatus; notes: string; dealValue: string; source: string;
+  status: LeadStatus; websiteStatus: WebsiteStatus | ""; notes: string; dealValue: string; source: string;
 }
 
 const emptyForm: LeadForm = {
   businessName: "", ownerName: "", phone: "", email: "", contactMethod: "",
   dateContacted: new Date().toISOString().slice(0, 10),
-  status: "new", notes: "", dealValue: "", source: "",
+  status: "new", websiteStatus: "", notes: "", dealValue: "", source: "",
 };
 
 function AddLeadModal({ onClose }: { onClose: () => void }) {
@@ -73,7 +106,7 @@ function AddLeadModal({ onClose }: { onClose: () => void }) {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!form.businessName || !form.ownerName) return;
+    if (!form.businessName) return;
     setSaving(true);
     try {
       await addLead({
@@ -81,6 +114,7 @@ function AddLeadModal({ onClose }: { onClose: () => void }) {
         phone: form.phone || undefined, email: form.email || undefined,
         contactMethod: (form.contactMethod as ContactMethod) || undefined,
         dateContacted: form.dateContacted || undefined, status: form.status,
+        websiteStatus: (form.websiteStatus as WebsiteStatus) || undefined,
         notes: form.notes || undefined,
         dealValue: form.dealValue ? parseFloat(form.dealValue) : undefined,
         source: form.source || undefined,
@@ -104,8 +138,8 @@ function AddLeadModal({ onClose }: { onClose: () => void }) {
               <input required value={form.businessName} onChange={(e) => f("businessName", e.target.value)} className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-400" placeholder="Acme Roofing Co." />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1.5">Owner&apos;s Name *</label>
-              <input required value={form.ownerName} onChange={(e) => f("ownerName", e.target.value)} className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-400" placeholder="John Smith" />
+              <label className="block text-xs font-medium text-gray-600 mb-1.5">Owner&apos;s Name</label>
+              <input value={form.ownerName} onChange={(e) => f("ownerName", e.target.value)} className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-400" placeholder="John Smith" />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-3">
@@ -141,6 +175,24 @@ function AddLeadModal({ onClose }: { onClose: () => void }) {
             <div>
               <label className="block text-xs font-medium text-gray-600 mb-1.5">Deal Value ($)</label>
               <input type="number" min="0" value={form.dealValue} onChange={(e) => f("dealValue", e.target.value)} className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-400" placeholder="2500" />
+            </div>
+          </div>
+          <div>
+            <label className="block text-xs font-medium text-gray-600 mb-1.5">Website Status</label>
+            <div className="grid grid-cols-4 gap-2">
+              {WEBSITE_STATUSES.map((s) => (
+                <button
+                  key={s.id}
+                  type="button"
+                  onClick={() => f("websiteStatus", form.websiteStatus === s.id ? "" : s.id)}
+                  className={`flex flex-col items-center gap-1 px-2 py-2.5 rounded-lg border text-xs font-medium transition-colors ${
+                    form.websiteStatus === s.id ? `${s.bg} ${s.text} ${s.border}` : "border-gray-200 text-gray-500 hover:bg-gray-50"
+                  }`}
+                >
+                  <span className="text-base leading-none">{s.emoji}</span>
+                  {s.label}
+                </button>
+              ))}
             </div>
           </div>
           <div>
@@ -210,10 +262,47 @@ function SendIntroButton({ lead, onSent }: { lead: Lead; onSent: () => void }) {
 
 // ─── Lead Row ─────────────────────────────────────────────────────────────────
 
-function LeadRow({ lead, emailOnly, onRefresh }: { lead: Lead; emailOnly: boolean; onRefresh: () => void }) {
-  const { moveLead } = useCRM();
+function LogButton({
+  title,
+  active,
+  activeClass,
+  onClick,
+  children,
+}: {
+  title: string;
+  active: boolean;
+  activeClass: string;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      title={title}
+      className={`flex items-center justify-center w-6 h-6 rounded-md border transition-colors ${
+        active ? activeClass : "border-gray-200 text-gray-300 hover:text-gray-500 hover:bg-gray-50"
+      }`}
+    >
+      {children}
+    </button>
+  );
+}
+
+function LeadRow({
+  lead,
+  emailOnly,
+  onRefresh,
+  onLogged,
+}: {
+  lead: Lead;
+  emailOnly: boolean;
+  onRefresh: () => void;
+  onLogged: (key: keyof TodayStats) => void;
+}) {
+  const { moveLead, logActivity } = useCRM();
   const [showMenu, setShowMenu] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [flash, setFlash] = useState<string | null>(null);
 
   function copyPhone() {
     if (!lead.phone) return;
@@ -222,28 +311,53 @@ function LeadRow({ lead, emailOnly, onRefresh }: { lead: Lead; emailOnly: boolea
     setTimeout(() => setCopied(false), 1500);
   }
 
+  function logCall() {
+    logActivity(lead.id, "call_logged", `Called ${lead.businessName}`);
+    onLogged("calls");
+  }
+
+  function logOutcome(type: "call_answered" | "marked_interested" | "callback_logged", key: keyof TodayStats, description: string, flashKey: string) {
+    logActivity(lead.id, type, description);
+    onLogged(key);
+    setFlash(flashKey);
+    setTimeout(() => setFlash(null), 1200);
+  }
+
   return (
     <tr className="hover:bg-gray-50/70 transition-colors group">
       {/* Business / Owner */}
       <td className="px-4 py-3.5">
-        <Link href={`/crm/contacts/${lead.id}`} className="text-sm font-semibold text-gray-900 hover:text-violet-600 transition-colors block">
+        <Link href={`/crm/contacts/${lead.id}`} className="flex items-center gap-1.5 text-sm font-semibold text-gray-900 hover:text-violet-600 transition-colors">
+          <WebsiteStatusBadge status={lead.websiteStatus} />
           {lead.businessName}
         </Link>
         <p className="text-xs text-gray-400 mt-0.5">{lead.ownerName}</p>
       </td>
 
-      {/* Phone — Call button */}
+      {/* Phone — Call button + quick-log */}
       <td className="px-4 py-3.5">
         {lead.phone ? (
-          <div className="flex items-center gap-1.5">
-            <a href={`tel:${lead.phone}`}
+          <div className="flex items-center gap-1">
+            <a href={`tel:${lead.phone}`} onClick={logCall}
               className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-lg hover:bg-emerald-100 transition-colors">
               <Phone className="w-3 h-3" /> Call
             </a>
-            <button onClick={copyPhone} className="opacity-0 group-hover:opacity-100 transition-opacity text-gray-300 hover:text-violet-400" title="Copy number">
+            <LogButton title="Answered" active={flash === "answered"} activeClass="border-blue-200 bg-blue-50 text-blue-600"
+              onClick={() => logOutcome("call_answered", "answered", `${lead.businessName}: call answered`, "answered")}>
+              <CheckCircle2 className="w-3.5 h-3.5" />
+            </LogButton>
+            <LogButton title="Interested" active={flash === "interested"} activeClass="border-orange-200 bg-orange-50 text-orange-600"
+              onClick={() => logOutcome("marked_interested", "interested", `${lead.businessName}: marked interested`, "interested")}>
+              <Flame className="w-3.5 h-3.5" />
+            </LogButton>
+            <LogButton title="Callback requested" active={flash === "callback"} activeClass="border-amber-200 bg-amber-50 text-amber-600"
+              onClick={() => logOutcome("callback_logged", "callbacks", `${lead.businessName}: callback requested`, "callback")}>
+              <CalendarClock className="w-3.5 h-3.5" />
+            </LogButton>
+            <button onClick={copyPhone} className="opacity-0 group-hover:opacity-100 transition-opacity text-gray-300 hover:text-violet-400 shrink-0" title="Copy number">
               <Copy className="w-3 h-3" />
             </button>
-            {copied && <span className="text-xs text-emerald-500">Copied!</span>}
+            {copied && <span className="text-xs text-emerald-500 whitespace-nowrap">Copied!</span>}
           </div>
         ) : (
           <span className="text-gray-300 text-sm">—</span>
@@ -319,13 +433,112 @@ function LeadRow({ lead, emailOnly, onRefresh }: { lead: Lead; emailOnly: boolea
   );
 }
 
+// ─── Today's Numbers + Calling Goal ────────────────────────────────────────────
+
+function StatTile({ label, value, icon: Icon, color }: { label: string; value: number; icon: React.ElementType; color: string }) {
+  return (
+    <div className="flex items-center gap-2.5 bg-gray-50 rounded-xl px-3 py-2.5 min-w-0">
+      <Icon className={`w-4 h-4 shrink-0 ${color}`} />
+      <div className="min-w-0">
+        <p className="text-lg font-bold text-gray-900 leading-none">{value}</p>
+        <p className="text-[10px] text-gray-400 mt-1 truncate">{label}</p>
+      </div>
+    </div>
+  );
+}
+
+function TodayBanner({ stats, goal, onGoalChange }: { stats: TodayStats; goal: number; onGoalChange: (n: number) => void }) {
+  const [editing, setEditing] = useState(false);
+  const [input, setInput] = useState(String(goal));
+
+  function save() {
+    const n = parseInt(input, 10);
+    if (Number.isFinite(n) && n > 0) onGoalChange(n);
+    setEditing(false);
+  }
+
+  const pct = goal > 0 ? Math.min(100, Math.round((stats.calls / goal) * 100)) : 0;
+
+  return (
+    <div className="px-8 pt-5 pb-4 bg-white border-b border-gray-100 shrink-0">
+      <div className="flex items-center justify-between mb-3">
+        <h2 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Today</h2>
+        <div className="flex items-center gap-1.5 text-xs text-gray-400">
+          <Target className="w-3.5 h-3.5" />
+          {editing ? (
+            <input
+              autoFocus
+              type="number"
+              min={1}
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onBlur={save}
+              onKeyDown={(e) => e.key === "Enter" && save()}
+              className="w-16 px-1.5 py-0.5 text-xs border border-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-400"
+            />
+          ) : (
+            <button
+              onClick={() => { setInput(String(goal)); setEditing(true); }}
+              className="hover:text-violet-600 underline decoration-dotted underline-offset-2"
+            >
+              Goal: {goal} calls/day
+            </button>
+          )}
+        </div>
+      </div>
+
+      <div className="grid grid-cols-3 sm:grid-cols-6 gap-2.5 mb-4">
+        <StatTile label="Calls" value={stats.calls} icon={Phone} color="text-gray-500" />
+        <StatTile label="Answered" value={stats.answered} icon={CheckCircle2} color="text-blue-500" />
+        <StatTile label="Interested" value={stats.interested} icon={Flame} color="text-orange-500" />
+        <StatTile label="Callbacks" value={stats.callbacks} icon={CalendarClock} color="text-amber-500" />
+        <StatTile label="Appointments" value={stats.appointments} icon={CalendarCheck} color="text-violet-500" />
+        <StatTile label="Websites Sold" value={stats.websitesSold} icon={Trophy} color="text-emerald-500" />
+      </div>
+
+      <div className="flex items-center gap-3">
+        <div className="flex-1 h-3 bg-gray-100 rounded-full overflow-hidden">
+          <div
+            className="h-full bg-gradient-to-r from-violet-600 to-blue-600 rounded-full transition-all duration-500"
+            style={{ width: `${Math.max(pct, stats.calls > 0 ? 4 : 0)}%` }}
+          />
+        </div>
+        <span className="text-xs font-semibold text-gray-600 whitespace-nowrap">{stats.calls} / {goal} calls</span>
+      </div>
+    </div>
+  );
+}
+
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function LeadsPage() {
   const { data, loading, usingDatabase, refresh } = useCRM();
   const [search, setSearch] = useState("");
   const [filterStatus, setFilterStatus] = useState<FilterMode>("all");
+  const [websiteFilter, setWebsiteFilter] = useState<WebsiteStatus | "all">("all");
   const [showAdd, setShowAdd] = useState(false);
+  const [todayStats, setTodayStats] = useState<TodayStats>(EMPTY_TODAY_STATS);
+  const [dailyGoal, setDailyGoalState] = useState(50);
+
+  useEffect(() => { setDailyGoalState(getDailyGoal()); }, []);
+
+  const fetchTodayStats = useCallback(async () => {
+    try {
+      const res = await fetch(`/api/crm/today-stats?since=${encodeURIComponent(startOfTodayIso())}`);
+      if (res.ok) setTodayStats(await res.json());
+    } catch { /* ignore — banner just stays at its last known values */ }
+  }, []);
+
+  useEffect(() => { fetchTodayStats(); }, [fetchTodayStats]);
+
+  function bumpToday(key: keyof TodayStats) {
+    setTodayStats((s) => ({ ...s, [key]: s[key] + 1 }));
+  }
+
+  function changeGoal(n: number) {
+    setDailyGoal(n);
+    setDailyGoalState(n);
+  }
 
   const emailOnlyLeads = data.leads.filter((l) => l.email && !l.phone);
 
@@ -337,9 +550,10 @@ export default function LeadsPage() {
       phoneMatches(l.phone, search) ||
       (l.email ?? "").toLowerCase().includes(q) ||
       (l.notes ?? "").toLowerCase().includes(q);
-    if (filterStatus === "email-only") return matchSearch && !!l.email && !l.phone;
+    const matchWebsite = websiteFilter === "all" || l.websiteStatus === websiteFilter;
+    if (filterStatus === "email-only") return matchSearch && matchWebsite && !!l.email && !l.phone;
     const matchStatus = filterStatus === "all" || l.status === filterStatus;
-    return matchSearch && matchStatus;
+    return matchSearch && matchWebsite && matchStatus;
   });
 
   const counts = LEAD_STATUSES.map((s) => ({
@@ -362,6 +576,8 @@ export default function LeadsPage() {
 
   return (
     <div className="flex flex-col h-full">
+      <TodayBanner stats={todayStats} goal={dailyGoal} onGoalChange={changeGoal} />
+
       {/* Header */}
       <div className="flex items-center justify-between px-8 pt-8 pb-5 bg-white border-b border-gray-100 shrink-0">
         <div>
@@ -410,8 +626,18 @@ export default function LeadsPage() {
             placeholder="Search by business, owner, phone, email..."
             className="w-full pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-400" />
         </div>
-        {(search || filterStatus !== "all") && (
-          <button onClick={() => { setSearch(""); setFilterStatus("all"); }} className="flex items-center gap-1 text-xs text-gray-400 hover:text-gray-600">
+        <select
+          value={websiteFilter}
+          onChange={(e) => setWebsiteFilter(e.target.value as WebsiteStatus | "all")}
+          className="px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-400 bg-white text-gray-600"
+        >
+          <option value="all">All Websites</option>
+          {WEBSITE_STATUSES.map((s) => (
+            <option key={s.id} value={s.id}>{s.emoji} {s.label}</option>
+          ))}
+        </select>
+        {(search || filterStatus !== "all" || websiteFilter !== "all") && (
+          <button onClick={() => { setSearch(""); setFilterStatus("all"); setWebsiteFilter("all"); }} className="flex items-center gap-1 text-xs text-gray-400 hover:text-gray-600">
             <X className="w-3.5 h-3.5" /> Clear
           </button>
         )}
@@ -460,7 +686,7 @@ export default function LeadsPage() {
               </thead>
               <tbody className="divide-y divide-gray-50">
                 {filtered.map((lead) => (
-                  <LeadRow key={lead.id} lead={lead} emailOnly={isEmailOnly} onRefresh={refresh} />
+                  <LeadRow key={lead.id} lead={lead} emailOnly={isEmailOnly} onRefresh={refresh} onLogged={bumpToday} />
                 ))}
               </tbody>
             </table>

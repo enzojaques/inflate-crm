@@ -12,6 +12,7 @@ create table if not exists leads (
   date_contacted  date,
   status          text not null default 'new',
   -- 'new' | 'no-answer' | 'engaged' | 'demo-sent' | 'fu1' | 'fu2' | 'fu3' | 'fu4' | 'meeting' | 'no-show' | 'meeting-had' | 'awaiting-payment' | 'closed' | 'dead'
+  website_status  text, -- 'none' | 'bad' | 'average' | 'good' — whether the business already has a website, and how good it is
   last_contacted_at timestamptz, -- set whenever status changes to 'engaged'
   followup_sent_at  timestamptz, -- set when user marks fu1/fu2 outreach as sent; drives auto-advance timer
   notes           text,
@@ -77,3 +78,6 @@ alter table leads add column if not exists followup_sent_at   timestamptz;
 -- none are left on a status no longer in the pipeline.
 update leads set status = 'engaged' where status = 'contacted';
 update leads set status = 'meeting' where status = 'demo-sent';
+
+-- Migration: website status field ('none' | 'bad' | 'average' | 'good')
+alter table leads add column if not exists website_status text;

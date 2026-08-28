@@ -21,6 +21,8 @@ import {
   ContactMethod,
   LEAD_STATUSES,
   LeadStatus,
+  WEBSITE_STATUSES,
+  WebsiteStatus,
 } from "@/lib/crm-types";
 
 function formatCurrency(val?: number) {
@@ -81,6 +83,7 @@ interface EditForm {
   contactMethod: ContactMethod | "";
   dateContacted: string;
   status: LeadStatus;
+  websiteStatus: WebsiteStatus | "";
   notes: string;
   dealValue: string;
   source: string;
@@ -89,7 +92,7 @@ interface EditForm {
 export default function LeadDetailPage() {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
-  const { getLead, updateLead, deleteLead } = useCRM();
+  const { getLead, updateLead, deleteLead, logActivity } = useCRM();
 
   const lead = getLead(id);
   const [editing, setEditing] = useState(false);
@@ -103,6 +106,7 @@ export default function LeadDetailPage() {
     contactMethod: "",
     dateContacted: "",
     status: "new",
+    websiteStatus: "",
     notes: "",
     dealValue: "",
     source: "",
@@ -129,6 +133,7 @@ export default function LeadDetailPage() {
       contactMethod: lead!.contactMethod ?? "",
       dateContacted: formatDateInput(lead!.dateContacted),
       status: lead!.status,
+      websiteStatus: lead!.websiteStatus ?? "",
       notes: lead!.notes ?? "",
       dealValue: lead!.dealValue?.toString() ?? "",
       source: lead!.source ?? "",
@@ -147,6 +152,7 @@ export default function LeadDetailPage() {
         contactMethod: (editForm.contactMethod as ContactMethod) || undefined,
         dateContacted: editForm.dateContacted || undefined,
         status: editForm.status,
+        websiteStatus: (editForm.websiteStatus as WebsiteStatus) || undefined,
         notes: editForm.notes || undefined,
         dealValue: editForm.dealValue ? parseFloat(editForm.dealValue) : undefined,
         source: editForm.source || undefined,
@@ -260,6 +266,24 @@ export default function LeadDetailPage() {
                 </div>
               </div>
               <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1">Website Status</label>
+                <div className="grid grid-cols-4 gap-2">
+                  {WEBSITE_STATUSES.map((s) => (
+                    <button
+                      key={s.id}
+                      type="button"
+                      onClick={() => ef("websiteStatus", editForm.websiteStatus === s.id ? "" : s.id)}
+                      className={`flex flex-col items-center gap-1 px-2 py-2 rounded-lg border text-[11px] font-medium transition-colors ${
+                        editForm.websiteStatus === s.id ? `${s.bg} ${s.text} ${s.border}` : "border-gray-200 text-gray-500 hover:bg-gray-50"
+                      }`}
+                    >
+                      <span className="text-sm leading-none">{s.emoji}</span>
+                      {s.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div>
                 <label className="block text-xs font-medium text-gray-500 mb-1">Notes</label>
                 <textarea rows={4} value={editForm.notes} onChange={(e) => ef("notes", e.target.value)} className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-400 resize-none" />
               </div>
@@ -270,6 +294,11 @@ export default function LeadDetailPage() {
               <p className="text-gray-500 mt-0.5">{lead.ownerName}</p>
               <div className="flex items-center gap-3 mt-3 flex-wrap">
                 <StageBadge status={lead.status} />
+                {lead.websiteStatus && (
+                  <span className={`inline-flex items-center gap-1 text-xs font-medium px-2.5 py-1 rounded-full ${WEBSITE_STATUSES.find((s) => s.id === lead.websiteStatus)?.bg} ${WEBSITE_STATUSES.find((s) => s.id === lead.websiteStatus)?.text}`}>
+                    {WEBSITE_STATUSES.find((s) => s.id === lead.websiteStatus)?.emoji} {WEBSITE_STATUSES.find((s) => s.id === lead.websiteStatus)?.label}
+                  </span>
+                )}
                 {lead.dealValue && (
                   <span className="inline-flex items-center gap-1 text-sm font-semibold text-emerald-600">
                     <CircleDollarSign className="w-4 h-4" />
@@ -298,7 +327,7 @@ export default function LeadDetailPage() {
                 {lead.phone && (
                   <div className="flex items-center gap-3">
                     <Phone className="w-4 h-4 text-gray-300 shrink-0" />
-                    <a href={`tel:${lead.phone}`} className="text-sm text-violet-600 hover:underline">{lead.phone}</a>
+                    <a href={`tel:${lead.phone}`} onClick={() => logActivity(lead.id, "call_logged", `Called ${lead.businessName}`)} className="text-sm text-violet-600 hover:underline">{lead.phone}</a>
                   </div>
                 )}
                 {lead.email && (

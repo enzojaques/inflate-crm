@@ -16,6 +16,7 @@ export async function PATCH(
       contact_method  = ${b.contactMethod ?? null},
       date_contacted  = ${b.dateContacted ?? null},
       status          = ${b.status},
+      website_status  = ${b.websiteStatus ?? null},
       last_contacted_at = ${b.lastContactedAt ?? null},
       followup_sent_at  = ${b.followupSentAt ?? null},
       notes           = ${b.notes ?? null},
