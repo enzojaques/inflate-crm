@@ -14,6 +14,8 @@ import {
   WebsiteStatus,
 } from "@/lib/crm-types";
 import { daysSince, FOLLOWUP_GAP_DAYS } from "@/lib/followup-cadence";
+import { useTodayStats } from "@/lib/use-today-stats";
+import { TodayBanner } from "@/components/crm/TodayBanner";
 
 function formatCurrency(val?: number) {
   if (!val) return null;
@@ -168,7 +170,7 @@ function FollowUpTimer({ status, updatedAt }: { status: LeadStatus; updatedAt: s
   );
 }
 
-function KanbanCard({ lead }: { lead: Lead }) {
+function KanbanCard({ lead, onCall }: { lead: Lead; onCall: () => void }) {
   const { moveLead, logActivity } = useCRM();
   const [showMenu, setShowMenu] = useState(false);
   const current = LEAD_STATUSES.find((s) => s.id === lead.status)!;
@@ -227,7 +229,7 @@ function KanbanCard({ lead }: { lead: Lead }) {
         {/* Call button */}
         {lead.phone ? (
           <a href={`tel:${lead.phone}`}
-            onClick={() => logActivity(lead.id, "call_logged", `Called ${lead.businessName}`)}
+            onClick={() => { logActivity(lead.id, "call_logged", `Called ${lead.businessName}`); onCall(); }}
             className="flex-1 flex items-center justify-center gap-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-lg hover:bg-emerald-100 transition-colors py-1.5">
             <Phone className="w-3 h-3" /> Call
           </a>
@@ -243,10 +245,12 @@ function KanbanColumn({
   status,
   leads,
   onAdd,
+  onCall,
 }: {
   status: (typeof LEAD_STATUSES)[number];
   leads: Lead[];
   onAdd: () => void;
+  onCall: () => void;
 }) {
   const total = leads.reduce((s, l) => s + (l.dealValue ?? 0), 0);
 
@@ -261,7 +265,7 @@ function KanbanColumn({
         {total > 0 && <span className="text-xs text-gray-400">{formatCurrency(total)}</span>}
       </div>
       <div className="flex flex-col gap-2 min-h-12">
-        {leads.map((l) => <KanbanCard key={l.id} lead={l} />)}
+        {leads.map((l) => <KanbanCard key={l.id} lead={l} onCall={onCall} />)}
       </div>
       <button
         onClick={onAdd}
@@ -276,6 +280,7 @@ function KanbanColumn({
 export default function PipelinePage() {
   const { data, loading } = useCRM();
   const [addingToStatus, setAddingToStatus] = useState<LeadStatus | null>(null);
+  const { stats, goal, bump, changeGoal } = useTodayStats();
 
   if (loading) {
     return (
@@ -287,6 +292,8 @@ export default function PipelinePage() {
 
   return (
     <div className="flex flex-col h-full">
+      <TodayBanner stats={stats} goal={goal} onGoalChange={changeGoal} />
+
       <div className="flex items-center justify-between px-8 pt-8 pb-6 bg-white border-b border-gray-100 shrink-0">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Pipeline</h1>
@@ -308,6 +315,7 @@ export default function PipelinePage() {
               status={status}
               leads={data.leads.filter((l) => l.status === status.id)}
               onAdd={() => setAddingToStatus(status.id)}
+              onCall={() => bump("calls")}
             />
           ))}
         </div>
