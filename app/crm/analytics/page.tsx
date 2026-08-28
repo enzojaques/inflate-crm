@@ -1,19 +1,22 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
   ArrowUpRight,
   BarChart3,
   Bell,
+  CalendarRange,
+  CheckCircle2,
   CircleDollarSign,
   Clock,
-  TrendingUp,
   Trophy,
+  TrendingUp,
   Users,
 } from "lucide-react";
 import { useCRM } from "@/lib/crm-store";
 import { LEAD_STATUSES } from "@/lib/crm-types";
+import { getDailyGoal } from "@/lib/daily-goal";
 
 function formatCurrency(val: number) {
   if (val >= 1_000_000) return `$${(val / 1_000_000).toFixed(1)}M`;
@@ -105,6 +108,164 @@ function MonthBar({ label, count, max }: { label: string; count: number; max: nu
         />
       </div>
       <span className="text-xs text-gray-400">{label}</span>
+    </div>
+  );
+}
+
+// ─── Daily Performance History ─────────────────────────────────────────────────
+
+interface DailyStat {
+  date: string; // YYYY-MM-DD
+  calls: number;
+  answered: number;
+  interested: number;
+  callbacks: number;
+  appointments: number;
+  websitesSold: number;
+}
+
+function formatDayLabel(dateStr: string) {
+  return new Date(`${dateStr}T00:00:00`).toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+}
+
+function DayBar({ stat, max, goal }: { stat: DailyStat; max: number; goal: number }) {
+  const pct = max === 0 ? 0 : (stat.calls / max) * 100;
+  const metGoal = stat.calls >= goal && goal > 0;
+  return (
+    <div className="flex flex-col items-center gap-1.5 flex-1 min-w-0">
+      <span className={`text-xs font-semibold ${metGoal ? "text-emerald-600" : "text-gray-600"}`}>
+        {stat.calls > 0 ? stat.calls : ""}
+      </span>
+      <div className="w-full max-w-[26px] bg-gray-100 rounded-t-lg overflow-hidden relative" style={{ height: 96 }}>
+        <div
+          className={`w-full rounded-t-lg transition-all duration-500 absolute bottom-0 ${
+            metGoal ? "bg-gradient-to-t from-emerald-600 to-emerald-400" : "bg-gradient-to-t from-gray-400 to-gray-300"
+          }`}
+          style={{ height: `${Math.max(pct, stat.calls > 0 ? 6 : 0)}%` }}
+        />
+      </div>
+      <span className="text-[10px] text-gray-400 whitespace-nowrap">
+        {new Date(`${stat.date}T00:00:00`).toLocaleDateString("en-US", { month: "numeric", day: "numeric" })}
+      </span>
+    </div>
+  );
+}
+
+function DailyHistory() {
+  const [range, setRange] = useState(14);
+  const [history, setHistory] = useState<DailyStat[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [goal, setGoal] = useState(50);
+
+  useEffect(() => { setGoal(getDailyGoal()); }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    const tzOffset = new Date().getTimezoneOffset();
+    fetch(`/api/crm/daily-history?days=${range}&tzOffset=${tzOffset}`)
+      .then((res) => (res.ok ? res.json() : []))
+      .then((rows: DailyStat[]) => { if (!cancelled) setHistory(rows); })
+      .finally(() => { if (!cancelled) setLoading(false); });
+    return () => { cancelled = true; };
+  }, [range]);
+
+  const chronological = [...history].reverse();
+  const maxCalls = Math.max(...history.map((h) => h.calls), 1);
+  const daysWithCalls = history.filter((h) => h.calls > 0);
+  const bestDay = daysWithCalls.length ? daysWithCalls.reduce((a, b) => (b.calls > a.calls ? b : a)) : null;
+  const worstDay = daysWithCalls.length > 1
+    ? daysWithCalls.filter((d) => d.date !== bestDay?.date).reduce((a, b) => (b.calls < a.calls ? b : a))
+    : null;
+
+  return (
+    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+      <div className="flex items-center justify-between mb-1">
+        <div className="flex items-center gap-2">
+          <CalendarRange className="w-4 h-4 text-gray-400" />
+          <h2 className="text-sm font-semibold text-gray-800">Daily Performance</h2>
+        </div>
+        <select
+          value={range}
+          onChange={(e) => setRange(Number(e.target.value))}
+          className="text-xs border border-gray-200 rounded-lg px-2 py-1 text-gray-500 focus:outline-none focus:ring-2 focus:ring-violet-500/20 bg-white"
+        >
+          <option value={7}>Last 7 days</option>
+          <option value={14}>Last 14 days</option>
+          <option value={30}>Last 30 days</option>
+        </select>
+      </div>
+      <p className="text-xs text-gray-400 mb-5">
+        Calls per day vs. your {goal}-call goal — green bars hit it, gray ones didn&apos;t.
+      </p>
+
+      {loading ? (
+        <div className="flex items-center justify-center py-12">
+          <div className="w-6 h-6 border-2 border-violet-500 border-t-transparent rounded-full animate-spin" />
+        </div>
+      ) : history.length === 0 ? (
+        <p className="text-sm text-gray-400 text-center py-10">
+          No activity logged yet — numbers show up here once you start using the Call/Answered/Interested buttons on the Leads page.
+        </p>
+      ) : (
+        <>
+          {(bestDay || worstDay) && (
+            <div className="flex flex-wrap items-center gap-2 mb-5">
+              {bestDay && (
+                <span className="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-full">
+                  <Trophy className="w-3 h-3" /> Best: {formatDayLabel(bestDay.date)} — {bestDay.calls} calls
+                </span>
+              )}
+              {worstDay && (
+                <span className="inline-flex items-center gap-1.5 text-xs font-medium text-gray-500 bg-gray-50 border border-gray-200 px-2.5 py-1 rounded-full">
+                  Slowest: {formatDayLabel(worstDay.date)} — {worstDay.calls} calls
+                </span>
+              )}
+            </div>
+          )}
+
+          <div className="flex items-end justify-between gap-1 mb-6 overflow-x-auto">
+            {chronological.map((h) => (
+              <DayBar key={h.date} stat={h} max={maxCalls} goal={goal} />
+            ))}
+          </div>
+
+          <div className="overflow-x-auto -mx-2">
+            <table className="w-full min-w-[560px]">
+              <thead>
+                <tr className="border-b border-gray-100">
+                  <th className="text-left px-2 py-2 text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Day</th>
+                  <th className="text-right px-2 py-2 text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Calls</th>
+                  <th className="text-right px-2 py-2 text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Answered</th>
+                  <th className="text-right px-2 py-2 text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Interested</th>
+                  <th className="text-right px-2 py-2 text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Callbacks</th>
+                  <th className="text-right px-2 py-2 text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Appts</th>
+                  <th className="text-right px-2 py-2 text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Sold</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-50">
+                {history.map((h) => (
+                  <tr key={h.date} className={bestDay?.date === h.date ? "bg-emerald-50/50" : ""}>
+                    <td className="px-2 py-2 text-xs text-gray-700 whitespace-nowrap flex items-center gap-1.5">
+                      {bestDay?.date === h.date && <Trophy className="w-3 h-3 text-emerald-500 shrink-0" />}
+                      {formatDayLabel(h.date)}
+                    </td>
+                    <td className="px-2 py-2 text-xs text-right font-semibold">
+                      <span className={h.calls >= goal && goal > 0 ? "text-emerald-600" : "text-gray-700"}>{h.calls}</span>
+                      {h.calls >= goal && goal > 0 && <CheckCircle2 className="w-3 h-3 text-emerald-500 inline ml-1 -mt-0.5" />}
+                    </td>
+                    <td className="px-2 py-2 text-xs text-right text-gray-600">{h.answered}</td>
+                    <td className="px-2 py-2 text-xs text-right text-gray-600">{h.interested}</td>
+                    <td className="px-2 py-2 text-xs text-right text-gray-600">{h.callbacks}</td>
+                    <td className="px-2 py-2 text-xs text-right text-gray-600">{h.appointments}</td>
+                    <td className="px-2 py-2 text-xs text-right text-gray-600">{h.websitesSold}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </>
+      )}
     </div>
   );
 }
@@ -228,6 +389,8 @@ export default function AnalyticsPage() {
             accent="bg-gradient-to-br from-blue-500 to-sky-500"
           />
         </div>
+
+        <DailyHistory />
 
         <div className="grid grid-cols-3 gap-6">
           {/* Status breakdown */}
