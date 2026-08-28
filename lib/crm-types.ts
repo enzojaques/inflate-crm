@@ -6,6 +6,7 @@ export type LeadStatus =
   | "fu1"
   | "fu2"
   | "fu3"
+  | "fu4"
   | "meeting"
   | "no-show"
   | "meeting-had"
@@ -88,6 +89,15 @@ export const LEAD_STATUSES: LeadStatusDef[] = [
     bg: "bg-red-50",
     text: "text-red-700",
     border: "border-red-200",
+  },
+  {
+    id: "fu4",
+    name: "Follow Up 4 (Last Day)",
+    shortName: "FU4",
+    color: "#db2777",
+    bg: "bg-pink-50",
+    text: "text-pink-700",
+    border: "border-pink-200",
   },
   {
     id: "meeting",

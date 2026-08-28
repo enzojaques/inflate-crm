@@ -20,44 +20,48 @@ Enzo
 remodelersites.com`,
   },
   fu1: {
-    subject: (biz: string) => `Free website for ${biz} — quick question`,
+    subject: (biz: string) => `Your free website preview for ${biz}`,
     body: (owner: string, biz: string) => `Hey ${owner},
 
-My name is Enzo from RemodelerSites.com — I tried giving you a call earlier but couldn't get through.
+Sent over your free website preview for ${biz} — did you get a chance to check it out?
 
-I wanted to reach out because we're running a promo right now where we build completely free websites for remodeling contractors. No charge to build it — the only cost is $60/mo for hosting to keep it live, and there's a full 30-day refund policy, so there's zero risk.
-
-Would you be opposed to us putting together a quick preview for ${biz}?
-
-Just reply with your city and I'll get my team on it right away.
+Let me know what you think, happy to tweak anything you want changed.
 
 Best,
 Enzo
 remodelersites.com`,
   },
   fu2: {
-    subject: (biz: string) => `Re: Free website for ${biz}`,
+    subject: (biz: string) => `Re: Your free website preview for ${biz}`,
     body: (owner: string, biz: string) => `Hey ${owner},
 
-Following up on my last message about the free website. I know things get busy — just wanted to make sure this didn't slip through the cracks.
+Following up on the preview I sent for ${biz} — just want to make sure it didn't get buried.
 
-We're still running the promo and I'd love to get a quick preview built for ${biz}. Takes my team less than a day and it's completely free to see — no commitment at all.
-
-Worth a look?
+Take a look when you get a sec, I'd love to hear what you think.
 
 Best,
 Enzo
 remodelersites.com`,
   },
   fu3: {
-    subject: (biz: string) => `Last one from me — ${biz}`,
+    subject: (biz: string) => `Still there? — ${biz}`,
     body: (owner: string, biz: string) => `Hey ${owner},
 
-I'll keep this short — last follow-up from me.
+Haven't heard back on the free preview I built for ${biz}. No pressure at all — just don't want to let it go stale on you.
 
-We're building free website previews for remodeling contractors and I didn't want to close your file without giving you one last shot.
+Let me know if you want to move forward, or if now just isn't the right time.
 
-If the timing isn't right, no worries at all. If you ever want a free preview built for ${biz}, just reply anytime and we'll get it done.
+Best,
+Enzo
+remodelersites.com`,
+  },
+  fu4: {
+    subject: (biz: string) => `Last day — ${biz}'s preview comes down today`,
+    body: (owner: string, biz: string) => `Hey ${owner},
+
+Quick heads up — the free preview we built for ${biz} is set to come down today since it's been about a week.
+
+If you'd like to keep it live and move forward, just reply and I'll get it locked in for you. Otherwise no worries at all — thanks for taking a look!
 
 Best,
 Enzo
@@ -70,10 +74,11 @@ const STATUS_AFTER: Record<string, string> = {
   fu1: "fu1",
   fu2: "fu2",
   fu3: "fu3",
+  fu4: "fu4",
 };
 
 export async function POST(req: Request) {
-  const { leadIds, type } = await req.json() as { leadIds: string[]; type: "intro" | "fu1" | "fu2" | "fu3" };
+  const { leadIds, type } = await req.json() as { leadIds: string[]; type: "intro" | "fu1" | "fu2" | "fu3" | "fu4" };
 
   if (!leadIds?.length || !type) {
     return NextResponse.json({ error: "Missing leadIds or type" }, { status: 400 });

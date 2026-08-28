@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { useCRM } from "@/lib/crm-store";
 import { Lead, LeadStatus } from "@/lib/crm-types";
+import { daysSince, FOLLOWUP_GAP_DAYS } from "@/lib/followup-cadence";
 
 // ─── Queue definitions ────────────────────────────────────────────────────────
 
@@ -26,26 +27,31 @@ interface QueueDef {
   fromStatus: LeadStatus;
   nextStatus: LeadStatus;
   nextLabel: string;
-  emailType: "fu1" | "fu2" | "fu3" | null;
+  emailType: "fu1" | "fu2" | "fu3" | "fu4" | null;
+  gapDays: number | null;
   color: string;
   bg: string;
   text: string;
-  urgencyLabel: (days: number) => string;
+}
+
+function urgencyLabel(days: number, gapDays: number | null) {
+  if (gapDays === null) return `${days}d since last contact`;
+  return days >= gapDays ? `${days}d — send now!` : `${days}d ago (due in ${gapDays - days}d)`;
 }
 
 const QUEUES: QueueDef[] = [
   {
     id: "q1",
     label: "Need FU 1",
-    description: "These leads got no answer — time to send the first follow-up.",
-    fromStatus: "no-answer",
+    description: "Demo was sent — check in within a day while it's still fresh.",
+    fromStatus: "demo-sent",
     nextStatus: "fu1",
     nextLabel: "FU 1 Sent",
     emailType: "fu1",
+    gapDays: FOLLOWUP_GAP_DAYS["demo-sent"]!,
     color: "#f59e0b",
     bg: "bg-amber-50",
     text: "text-amber-700",
-    urgencyLabel: (d) => (d >= 3 ? `${d}d — send now!` : `${d}d ago`),
   },
   {
     id: "q2",
@@ -55,44 +61,53 @@ const QUEUES: QueueDef[] = [
     nextStatus: "fu2",
     nextLabel: "FU 2 Sent",
     emailType: "fu2",
+    gapDays: FOLLOWUP_GAP_DAYS.fu1!,
     color: "#f97316",
     bg: "bg-orange-50",
     text: "text-orange-700",
-    urgencyLabel: (d) => (d >= 5 ? `${d}d — overdue!` : `${d}d ago`),
   },
   {
     id: "q3",
     label: "Need FU 3",
-    description: "FU 2 sent with no response — this is the final follow-up.",
+    description: "FU 2 sent with no response — time for the third follow-up.",
     fromStatus: "fu2",
     nextStatus: "fu3",
     nextLabel: "FU 3 Sent",
     emailType: "fu3",
+    gapDays: FOLLOWUP_GAP_DAYS.fu2!,
     color: "#ef4444",
     bg: "bg-red-50",
     text: "text-red-700",
-    urgencyLabel: (d) => (d >= 7 ? `${d}d — final attempt!` : `${d}d ago`),
   },
   {
     id: "q4",
-    label: "After FU 3",
-    description: "All three follow-ups sent. Mark as Meeting Scheduled or Dead.",
+    label: "Need FU 4 — Last Day",
+    description: "FU 3 sent with no response — the demo preview comes down today. Send the last-day alert.",
     fromStatus: "fu3",
+    nextStatus: "fu4",
+    nextLabel: "FU 4 Sent",
+    emailType: "fu4",
+    gapDays: FOLLOWUP_GAP_DAYS.fu3!,
+    color: "#db2777",
+    bg: "bg-pink-50",
+    text: "text-pink-700",
+  },
+  {
+    id: "q5",
+    label: "After FU 4",
+    description: "All four follow-ups sent. Mark as Meeting Scheduled or Dead.",
+    fromStatus: "fu4",
     nextStatus: "meeting",
     nextLabel: "Meeting Scheduled",
     emailType: null,
+    gapDays: null,
     color: "#6366f1",
     bg: "bg-indigo-50",
     text: "text-indigo-700",
-    urgencyLabel: (d) => `${d}d since last contact`,
   },
 ];
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
-
-function daysSince(iso: string) {
-  return Math.floor((Date.now() - new Date(iso).getTime()) / 86_400_000);
-}
 
 function formatDate(iso?: string) {
   if (!iso) return "—";
@@ -117,7 +132,7 @@ function SendEmailsButton({
   onSent,
 }: {
   leads: Lead[];
-  emailType: "fu1" | "fu2" | "fu3";
+  emailType: "fu1" | "fu2" | "fu3" | "fu4";
   onSent: () => void;
 }) {
   const withEmail = leads.filter((l) => l.email);
@@ -214,10 +229,10 @@ function FULeadCard({ lead, queue }: { lead: Lead; queue: QueueDef }) {
     setTimeout(() => setCopied(false), 1500);
   }
 
-  const isOverdue = days >= (queue.id === "q1" ? 3 : queue.id === "q2" ? 5 : 7);
+  const isOverdue = queue.gapDays !== null && days >= queue.gapDays;
 
   return (
-    <div className={`bg-white rounded-2xl border shadow-sm overflow-hidden hover:shadow-md transition-all ${isOverdue && queue.id !== "q4" ? "border-red-200" : "border-gray-100"}`}>
+    <div className={`bg-white rounded-2xl border shadow-sm overflow-hidden hover:shadow-md transition-all ${isOverdue ? "border-red-200" : "border-gray-100"}`}>
       <div className="h-1" style={{ backgroundColor: queue.color }} />
       <div className="p-5">
         <div className="flex items-start justify-between gap-3 mb-3">
@@ -228,8 +243,8 @@ function FULeadCard({ lead, queue }: { lead: Lead; queue: QueueDef }) {
             <p className="text-sm text-gray-500 mt-0.5">{lead.ownerName}</p>
           </div>
           <div className="shrink-0 text-right">
-            <span className={`inline-block text-xs font-semibold px-2 py-0.5 rounded-full ${isOverdue && queue.id !== "q4" ? "bg-red-100 text-red-600" : "bg-gray-100 text-gray-500"}`}>
-              {queue.urgencyLabel(days)}
+            <span className={`inline-block text-xs font-semibold px-2 py-0.5 rounded-full ${isOverdue ? "bg-red-100 text-red-600" : "bg-gray-100 text-gray-500"}`}>
+              {urgencyLabel(days, queue.gapDays)}
             </span>
           </div>
         </div>
@@ -270,7 +285,7 @@ function FULeadCard({ lead, queue }: { lead: Lead; queue: QueueDef }) {
           </div>
         )}
 
-        {(queue.id === "q2" || queue.id === "q3") && (
+        {queue.id !== "q1" && queue.gapDays !== null && (
           <label className="flex items-center gap-2 mb-3 text-xs text-gray-500 cursor-pointer select-none">
             <input
               type="checkbox"
@@ -283,8 +298,8 @@ function FULeadCard({ lead, queue }: { lead: Lead; queue: QueueDef }) {
               className="rounded border-gray-300 text-violet-600 focus:ring-violet-400"
             />
             {lead.followupSentAt
-              ? `Marked sent ${formatDate(lead.followupSentAt)} — auto-advances in 3d`
-              : "Mark outreach as sent (starts 3-day timer)"}
+              ? `Marked sent ${formatDate(lead.followupSentAt)} — auto-advances in ${queue.gapDays}d`
+              : `Mark outreach as sent (starts ${queue.gapDays}-day timer)`}
           </label>
         )}
 
@@ -298,7 +313,7 @@ function FULeadCard({ lead, queue }: { lead: Lead; queue: QueueDef }) {
             <CheckCircle2 className="w-4 h-4" />
             {queue.nextLabel}
           </button>
-          {queue.id === "q4" && (
+          {queue.id === "q5" && (
             <button
               onClick={() => moveLead(lead.id, "meeting")}
               disabled={acting}

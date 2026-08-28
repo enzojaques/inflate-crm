@@ -8,40 +8,19 @@ export async function GET(req: Request) {
   }
   if (!sql) return NextResponse.json({ error: "no database" }, { status: 503 });
 
-  const results = { engagedToFu1: 0, fu1ToFu2: 0, fu2ToFu3: 0 };
+  const results = { fu1ToFu2: 0, fu2ToFu3: 0, fu3ToFu4: 0 };
 
-  // Rule 1: engaged, went quiet for 2 days -> fu1, with a note prepended
-  // (needs each row's own notes/last_contacted_at, so select then update per row)
-  {
-    const rows = await sql`
-      SELECT id, business_name, notes, last_contacted_at FROM leads
-      WHERE status = 'engaged' AND last_contacted_at <= now() - interval '2 days'
-    `;
-    for (const r of rows) {
-      const dateStr = new Date(r.last_contacted_at as string).toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-      });
-      const prefix = `[Previously engaged on ${dateStr}, went quiet — follow up should reference prior conversation, not a cold touch]\n\n`;
-      const newNotes = prefix + ((r.notes as string | null) ?? "");
-      await sql`
-        UPDATE leads SET status = 'fu1', notes = ${newNotes}, updated_at = now()
-        WHERE id = ${r.id}
-      `;
-      await sql`
-        INSERT INTO activity_log (lead_id, type, description)
-        VALUES (${r.id}, 'status_change', ${`${r.business_name} → fu1 (auto: engaged lead went quiet 2d)`})
-      `;
-    }
-    results.engagedToFu1 = rows.length;
-  }
+  // Note: there is no auto-advance into demo-sent or out of engaged here —
+  // sending a demo is a deliberate manual action, not something a cron job
+  // can do on a timer. Quiet "engaged" leads just sit until a human moves
+  // them to demo-sent (kanban Move menu), which is what kicks off the FU1-4
+  // cadence tracked in the Follow-Ups queue and on the Pipeline board.
 
-  // Rule 2: fu1, marked sent 3+ days ago -> fu2
+  // Rule 1: fu1, marked sent 2+ days ago -> fu2
   {
     const rows = await sql`
       UPDATE leads SET status = 'fu2', followup_sent_at = NULL, updated_at = now()
-      WHERE status = 'fu1' AND followup_sent_at IS NOT NULL AND followup_sent_at <= now() - interval '3 days'
+      WHERE status = 'fu1' AND followup_sent_at IS NOT NULL AND followup_sent_at <= now() - interval '2 days'
       RETURNING id, business_name
     `;
     for (const r of rows) {
@@ -53,11 +32,11 @@ export async function GET(req: Request) {
     results.fu1ToFu2 = rows.length;
   }
 
-  // Rule 3: fu2, marked sent 3+ days ago -> fu3
+  // Rule 2: fu2, marked sent 2+ days ago -> fu3
   {
     const rows = await sql`
       UPDATE leads SET status = 'fu3', followup_sent_at = NULL, updated_at = now()
-      WHERE status = 'fu2' AND followup_sent_at IS NOT NULL AND followup_sent_at <= now() - interval '3 days'
+      WHERE status = 'fu2' AND followup_sent_at IS NOT NULL AND followup_sent_at <= now() - interval '2 days'
       RETURNING id, business_name
     `;
     for (const r of rows) {
@@ -67,6 +46,22 @@ export async function GET(req: Request) {
       `;
     }
     results.fu2ToFu3 = rows.length;
+  }
+
+  // Rule 3: fu3, marked sent 2+ days ago -> fu4 (last-day alert)
+  {
+    const rows = await sql`
+      UPDATE leads SET status = 'fu4', followup_sent_at = NULL, updated_at = now()
+      WHERE status = 'fu3' AND followup_sent_at IS NOT NULL AND followup_sent_at <= now() - interval '2 days'
+      RETURNING id, business_name
+    `;
+    for (const r of rows) {
+      await sql`
+        INSERT INTO activity_log (lead_id, type, description)
+        VALUES (${r.id}, 'status_change', ${`${r.business_name} → fu4 (auto: FU3 timer elapsed)`})
+      `;
+    }
+    results.fu3ToFu4 = rows.length;
   }
 
   return NextResponse.json(results);

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { CircleDollarSign, Phone, Plus, X } from "lucide-react";
+import { CircleDollarSign, Clock, Phone, Plus, X } from "lucide-react";
 import { useCRM } from "@/lib/crm-store";
 import {
   CONTACT_METHODS,
@@ -11,6 +11,7 @@ import {
   LEAD_STATUSES,
   LeadStatus,
 } from "@/lib/crm-types";
+import { daysSince, FOLLOWUP_GAP_DAYS } from "@/lib/followup-cadence";
 
 function formatCurrency(val?: number) {
   if (!val) return null;
@@ -127,6 +128,24 @@ function AddLeadModal({
   );
 }
 
+function FollowUpTimer({ status, updatedAt }: { status: LeadStatus; updatedAt: string }) {
+  const gapDays = FOLLOWUP_GAP_DAYS[status];
+  if (gapDays === undefined) return null;
+  const days = daysSince(updatedAt);
+  const isOverdue = days >= gapDays;
+  return (
+    <div
+      className={`flex items-center gap-1 mb-2.5 text-xs font-semibold ${
+        isOverdue ? "text-red-600" : "text-gray-400"
+      }`}
+      title={isOverdue ? "Follow-up is due" : `Follow-up due in ${gapDays - days}d`}
+    >
+      <Clock className="w-3 h-3" />
+      {days}d{isOverdue ? " — due" : ""}
+    </div>
+  );
+}
+
 function KanbanCard({ lead }: { lead: Lead }) {
   const { moveLead } = useCRM();
   const [showMenu, setShowMenu] = useState(false);
@@ -138,6 +157,8 @@ function KanbanCard({ lead }: { lead: Lead }) {
         {lead.businessName}
       </Link>
       <p className="text-xs text-gray-400 mb-2.5">{lead.ownerName}</p>
+
+      <FollowUpTimer status={lead.status} updatedAt={lead.updatedAt} />
 
       {lead.dealValue && (
         <div className="flex items-center gap-1 mb-2.5">
