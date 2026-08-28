@@ -9,12 +9,14 @@ import {
   ChevronRight,
   Kanban,
   LayoutDashboard,
+  PhoneIncoming,
   Users,
 } from "lucide-react";
 import { CRMProvider } from "@/lib/crm-store";
 
 const NAV = [
   { href: "/crm", label: "Leads", icon: Users, exact: true },
+  { href: "/crm/lookup", label: "Caller Lookup", icon: PhoneIncoming, exact: false },
   { href: "/crm/follow-ups", label: "Follow-Ups", icon: Bell, exact: false },
   { href: "/crm/pipeline", label: "Pipeline", icon: Kanban, exact: false },
   { href: "/crm/companies", label: "Companies", icon: Building2, exact: false },

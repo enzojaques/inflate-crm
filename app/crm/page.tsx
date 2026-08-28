@@ -20,6 +20,7 @@ import {
   LEAD_STATUSES,
   LeadStatus,
 } from "@/lib/crm-types";
+import { phoneMatches } from "@/lib/phone";
 
 type FilterMode = LeadStatus | "all" | "email-only";
 
@@ -333,7 +334,7 @@ export default function LeadsPage() {
     const matchSearch = !q ||
       l.businessName.toLowerCase().includes(q) ||
       l.ownerName.toLowerCase().includes(q) ||
-      (l.phone ?? "").includes(q) ||
+      phoneMatches(l.phone, search) ||
       (l.email ?? "").toLowerCase().includes(q) ||
       (l.notes ?? "").toLowerCase().includes(q);
     if (filterStatus === "email-only") return matchSearch && !!l.email && !l.phone;
