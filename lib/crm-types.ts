@@ -2,6 +2,7 @@ export type LeadStatus =
   | "new"
   | "no-answer"
   | "engaged"
+  | "send-demo"
   | "demo-sent"
   | "fu1"
   | "fu2"
@@ -104,6 +105,15 @@ export const LEAD_STATUSES: LeadStatusDef[] = [
     bg: "bg-teal-50",
     text: "text-teal-700",
     border: "border-teal-200",
+  },
+  {
+    id: "send-demo",
+    name: "Send Demo",
+    shortName: "Send Demo",
+    color: "#d946ef",
+    bg: "bg-fuchsia-50",
+    text: "text-fuchsia-700",
+    border: "border-fuchsia-200",
   },
   {
     id: "demo-sent",
